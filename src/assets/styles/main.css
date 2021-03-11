@@ -1,0 +1,23 @@
+html{
+  height: 100%;
+}
+
+h1,h2,h3,h4,h5,h6,p,a,button,span,div{
+	font-family: 'Raleway', sans-serif;
+}
+
+.text-pink{
+  color: #f7c3c1;
+}
+
+.bg-pink{
+  background-color: #f7c3c1;
+}
+
+.border-pink{
+  border-color: #f7c3c1;
+}
+
+.hoverpointer:hover{
+	cursor: pointer;
+}
