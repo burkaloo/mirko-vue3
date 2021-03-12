@@ -1,26 +1,25 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="bg-light" id="app">
+    <navBar spacer="56"/>
+    <div class="container">
+      <sizeChart/>
+    </div>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import sizeChart from './components/sizeChart.vue'
+import navBar from './components/navBar.vue'
+
+import 'bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css'
+
+require('./assets/styles/main.css')
 
 export default {
-  name: 'App',
+  name: 'app',
   components: {
-    HelloWorld
+    sizeChart, navBar
   }
 }
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>

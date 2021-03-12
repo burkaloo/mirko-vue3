@@ -36,7 +36,7 @@ export default {
     opennav(){
       this.open = !this.open
     },
-    close(msg){
+    close(){
       this.open = false
     }
   },
