@@ -16,6 +16,7 @@
       @add="addqtycart"
       @page="nextpage"
       @back="backpage"
+      @shipcost="changeshipcost"
     />
 
     <homePage v-show="page == 'home'" @page="nextpage"/>
@@ -27,6 +28,9 @@
     <prodPage v-show="page == 'prod'" class="mt-5" @cartinput="addtocart" @page="nextpage"/>
 
     <helpPage v-show="page == 'help'" class="mt-5"/>
+
+
+    <checkout v-show="page == 'checkout'" class="mt-5" :total="carttotal" :shipping="shipcost"/>
 
     <v-footer class="pt-5" @page="nextpage"/>
 
@@ -44,6 +48,7 @@ import prodPage from './components/prodPage.vue'
 import homePage from './components/homePage.vue'
 import cartPage from './components/cartPage.vue'
 import helpPage from './components/helpPage.vue'
+import checkout from './components/checkout.vue'
 
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -54,13 +59,14 @@ require('./assets/styles/main.css')
 
 export default {
   name: 'app',
-  components:{navBar, prodPage, vFooter, contactUs, aboutMirko, homePage, cartPage, helpPage},
+  components:{navBar, prodPage, vFooter, contactUs, aboutMirko, homePage, cartPage, helpPage, checkout},
   data(){
     return{
       docscroll:0,
       cart:[],
       page: "home",
-      lastpage: "home"
+      lastpage: "home",
+      shipcost: 100
     }
   },
   mounted() {
@@ -147,6 +153,9 @@ export default {
     },
     backpage(){
       this.page = this.lastpage
+    },
+    changeshipcost(amt){
+      this.shipcost = amt
     }
   },
   computed:{
