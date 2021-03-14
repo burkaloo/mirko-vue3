@@ -24,7 +24,6 @@
       <h2 class="header-font my-3">Bulk Orders.</h2>
       <p>Orders exceeding a maximum of 10 packs are considered bulk orders. Please message us on our social media accounts so we can facilitate your request smoothly.
       </p>
-
     </div>
 
 </template>

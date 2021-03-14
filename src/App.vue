@@ -2,7 +2,7 @@
   <div class="bg-grey pb-5" id="app">
     <div class="container d-flex">
       <div class="p-2 w-100 bd-highlight">Nationwide Shipping</div>
-      <div class="p-2 flex-shrink-1" @click="nextpage(help)">help</div>
+      <div class="p-2 flex-shrink-1 hoverpointer" @click="nextpage('help')">help</div>
     </div>
 
     <navBar :docscroll="docscroll" topmargin="40" spacer="71" logo="./photos/mirko-logo.png" logoh="45" :cartcount="cartcount" @page="nextpage"/>
@@ -20,7 +20,7 @@
 
     <homePage v-show="page == 'home'" @page="nextpage"/>
 
-    <contactUs v-show="page == 'contact'" class="container" @page="nextpage"/>
+    <contactUs v-show="page == 'contact'" class="container mt-5" @page="nextpage"/>
 
     <aboutMirko v-show="page == 'about'" class="container mx-auto" @page="nextpage"/>
 

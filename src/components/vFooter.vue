@@ -23,9 +23,9 @@
       </div>
       <div class="col-6 col-md-3 mt-4 order-md-2">
         <h5 class="header-font mb-4">Quick Links</h5>
-        <p class="hoverpointer" @page="$emit('page', 'about')">About Mirko</p>
-        <p class="hoverpointer" @page="$emit('page', 'help')">Help</p>
-        <p class="hoverpointer" @page="$emit('page', 'contact')">Contact Us</p>
+        <p class="hoverpointer" @click="$emit('page', 'about')">About Mirko</p>
+        <p class="hoverpointer" @click="$emit('page', 'help')">Help</p>
+        <p class="hoverpointer" @click="$emit('page', 'contact')">Contact Us</p>
       </div>
     </div>
   </div>

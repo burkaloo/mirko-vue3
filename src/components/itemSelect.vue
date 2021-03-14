@@ -35,7 +35,7 @@ export default {
   },
   data(){
     return {
-      baseprice: 250,
+      baseprice: 275,
       qty:1,
       variations:{
         Size:{
@@ -47,7 +47,7 @@ export default {
         "Pack Assortment":{
           selected:0,
           options:["Singles", "Pack of 3"],
-          pricediff:[0, 425],
+          pricediff:[0, 475],
           stock:[6,10]
         }
       }
