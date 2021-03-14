@@ -59,7 +59,7 @@ export default {
     return{
       docscroll:0,
       cart:[],
-      page: "help",
+      page: "home",
       lastpage: "home"
     }
   },
