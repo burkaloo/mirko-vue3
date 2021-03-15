@@ -1,23 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap');
+
 html{
   height: 100%;
 }
 
-h1,h2,h3,h4,h5,h6,p,a,button,span,div{
-	font-family: 'Raleway', sans-serif;
+h1,h2,h3,h4, h5,h6,p,a,button,span,div{
+	font-family: 'Nunito Sans', sans-serif;
+}
+
+.header-font{
+	font-family: 'Playfair Display', serif !important;
 }
 
 .text-pink{
-  color: #f7c3c1;
+  color: #eec6c3;
 }
 
 .bg-pink{
-  background-color: #f7c3c1;
+  background-color: #eec6c3;
 }
 
 .border-pink{
-  border-color: #f7c3c1;
+  border-color: #eec6c3 !important;
+}
+
+.text-black{
+  color: #231d1f;
+}
+
+.bg-black{
+  background-color: #231d1f;
+}
+
+.border-black{
+  border-color: #231d1f !important;
+}
+
+.bg-grey{
+  background-color: #ededed;
 }
 
 .hoverpointer:hover{
 	cursor: pointer;
+}
+
+s, .pesosign::before{
+	content: '₱';
+	text-decoration: none;
+	font-family: monospace;
+}
+
+.text-justify{
+  text-align: justify;
+}
+
+.thumb-sm{
+  max-width: 50px;
+  width: 100%;
+  height: auto;
 }

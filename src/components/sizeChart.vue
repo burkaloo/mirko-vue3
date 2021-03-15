@@ -1,7 +1,7 @@
 <template>
   <div class="text-center">
     <h1 class="text-center">Size Chart</h1>
-    <table class="table mt-3">
+    <table class="table mt-3 table-bordered border-black">
       <thead>
         <tr>
           <th>Size</th>
@@ -32,8 +32,8 @@
         </tr>
       </tbody>
     </table>
-    <div class="text-left">
-      <small>*measurements in inches</small>
+    <div class="d-flex">
+      <small class="m-3">*measurements in inches</small>
     </div>
   </div>
 </template>
