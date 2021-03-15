@@ -18,7 +18,7 @@ export default {
   },
   computed:{
     url(){
-      return "https://form.jotform.com/210724674863057?total=" + this.total + "&shipping=" + this.shipping
+      return "https://form.jotform.com/210724674863057?total=" + this.total
     }
   }
 }

@@ -11,12 +11,11 @@
     <cartPage v-show="page == 'cart'"
       class="container pt-5"
       :cart="cart"
-      :carttotal="carttotal"
       @remove="removefromcart"
       @add="addqtycart"
       @page="nextpage"
       @back="backpage"
-      @shipcost="changeshipcost"
+      @updatetotal="updatetotal"
     />
 
     <homePage v-show="page == 'home'" @page="nextpage"/>
@@ -30,7 +29,7 @@
     <helpPage v-show="page == 'help'" class="mt-5"/>
 
 
-    <checkout v-show="page == 'checkout'" class="mt-5" :total="carttotal" :shipping="shipcost"/>
+    <checkout v-show="page == 'checkout'" class="mt-5" :total="totalprice"/>
 
     <v-footer class="pt-5" @page="nextpage"/>
 
@@ -66,7 +65,7 @@ export default {
       cart:[],
       page: "home",
       lastpage: "home",
-      shipcost: 100
+      totalprice: 0
     }
   },
   mounted() {
@@ -114,16 +113,6 @@ export default {
         this.cart.push(newcartitem)
       }
 
-
-      //for (var y = 0; y < keys.length; y++) {
-        //var indexes = searchProp(keys[y], opts[keys[y]], searchArr)
-        //var filtered = []
-        //for (var z = 0; z < indexes.length; z++) {
-        //  filtered.push(searchArr[indexes[z]])
-        //}
-        //searchArr = filtered
-      //}
-
       console.log(this.cart)
       //open cart here
     },
@@ -154,8 +143,8 @@ export default {
     backpage(){
       this.page = this.lastpage
     },
-    changeshipcost(amt){
-      this.shipcost = amt
+    updatetotal(amt){
+      this.totalprice = amt
     }
   },
   computed:{
@@ -163,13 +152,6 @@ export default {
       var total = 0
       for (var i = 0; i < this.cart.length; i++) {
         total += this.cart[i].qty
-      }
-      return total
-    },
-    carttotal(){
-      var total = 0
-      for (var i = 0; i < this.cart.length; i++) {
-        total += (this.cart[i].qty * this.cart[i].price)
       }
       return total
     }
