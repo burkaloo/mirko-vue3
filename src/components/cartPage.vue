@@ -39,100 +39,19 @@
               <div style="max-width:400px; width:100%;" class="m-2">
                 <label class="form-label">Shpping to Province:</label>
                 <select class="form-select" v-model="province">
-                  <option value="1">Metro Manila</option>
-                  <option value="2">Abra</option>
-                  <option value="3">Agusan del Norte</option>
-                  <option value="3">Agusan del Sur</option>
-                  <option value="3">Aklan</option>
-                  <option value="2">Albay</option>
-                  <option value="3">Antique</option>
-                  <option value="2">Apayao</option>
-                  <option value="2">Aurora</option>
-                  <option value="3">Basilan</option>
-                  <option value="2">Bataan</option>
-                  <option value="2">Batanes</option>
-                  <option value="2">Batangas</option>
-                  <option value="2">Benguet</option>
-                  <option value="3">Biliran</option>
-                  <option value="3">Bohol</option>
-                  <option value="3">Bukidnon</option>
-                  <option value="2">Bulacan</option>
-                  <option value="2">Cagayan</option>
-                  <option value="2">Camarines Norte</option>
-                  <option value="2">Camarines Sur</option>
-                  <option value="3">Camiguin</option>
-                  <option value="3">Capiz</option>
-                  <option value="2">Catanduanes</option>
-                  <option value="2">Cavite</option>
-                  <option value="2">Cebu</option>
-                  <option value="3">Cotabato</option>
-                  <option value="3">Davao de Oro</option>
-                  <option value="3">Davao del Norte</option>
-                  <option value="3">Davao del Sur</option>
-                  <option value="3">Davao Occidental</option>
-                  <option value="3">Davao Oriental</option>
-                  <option value="3">Dinagat Islands</option>
-                  <option value="3">Eastern Samar</option>
-                  <option value="3">Guimaras</option>
-                  <option value="2">Ifugao</option>
-                  <option value="2">Ilocos Norte</option>
-                  <option value="2">Ilocos Sur</option>
-                  <option value="3">Iloilo</option>
-                  <option value="2">Isabela</option>
-                  <option value="2">Kalinga</option>
-                  <option value="2">La Union</option>
-                  <option value="2">Laguna</option>
-                  <option value="3">Lanao del Norte</option>
-                  <option value="3">Lanao del Sur</option>
-                  <option value="3">Leyte</option>
-                  <option value="3">Maguindanao</option>
-                  <option value="2">Marinduque</option>
-                  <option value="2">Masbate</option>
-                  <option value="3">Misamis Occidental</option>
-                  <option value="3">Misamis Oriental</option>
-                  <option value="2">Mountain Province</option>
-                  <option value="3">Negros Occidental</option>
-                  <option value="3">Negros Oriental</option>
-                  <option value="3">Northern Samar</option>
-                  <option value="2">Nueva Ecija</option>
-                  <option value="2">Nueva Vizcaya</option>
-                  <option value="2">Occidental Mindoro</option>
-                  <option value="2">Oriental Mindoro</option>
-                  <option value="2">Palawan</option>
-                  <option value="2">Pampanga</option>
-                  <option value="2">Pangasinan</option>
-                  <option value="2">Quezon</option>
-                  <option value="2">Quirino</option>
-                  <option value="2">Rizal</option>
-                  <option value="2">Romblon</option>
-                  <option value="3">Samar</option>
-                  <option value="3">Sarangani</option>
-                  <option value="3">Siquijor</option>
-                  <option value="2">Sorsogon</option>
-                  <option value="3">South Cotabato</option>
-                  <option value="3">Southern Leyte</option>
-                  <option value="3">Sultan Kudarat</option>
-                  <option value="3">Sulu</option>
-                  <option value="3">Surigao del Norte</option>
-                  <option value="3">Surigao del Sur</option>
-                  <option value="2">Tarlac</option>
-                  <option value="3">Tawi-Tawi</option>
-                  <option value="2">Zambales</option>
-                  <option value="3">Zamboanga del Norte</option>
-                  <option value="3">Zamboanga del Sur</option>
-                  <option value="3">Zamboanga Sibugay</option>
+                  <option v-for="(option, index) in provinceOptions" :key="index" :value="option">{{option.text}}</option>
                 </select>
               </div>
               <div style="max-width:400px; width:100%;" class="m-2">
                 <label class="form-label">Shipping Method</label>
                 <div class="">
-                  <select class="form-select" v-model="shipmeth" :disabled="province > 1">
-                    <option value="standard">Standard
-                      <span v-if="province == 1">(3-5</span>
+                  <select class="form-select" v-model="shipmeth" :disabled="province.score > 1">
+                    <option value="Standard">Standard
+                      <span v-if="province.score == 1">(3-5</span>
                       <span v-else>(5-7</span>
                       Days)
                     </option>
-                    <option v-if="province == 1" value="sameday">Same Day (Grab/Lalamove)</option>
+                    <option v-if="province.score == 1" value="Same Day">Same Day (Grab/Lalamove)</option>
                   </select>
                 </div>
               </div>
@@ -152,7 +71,12 @@
         </tr>
       </table>
       <div class=" text-end">
-          <button class="btn btn-lg text-light bg-pink fw-bold mt-4" @click="$emit('page', 'checkout')">Checkout</button>
+          <button class="btn btn-lg text-light bg-pink fw-bold mt-4" @click="checkout" :disabled="btnspin">
+            <div v-if="btnspin" class="spinner-border mx-4" role="status" >
+              <span class="visually-hidden">Loading...</span>
+            </div>
+            <div v-else class="pt-1">Checkout</div>
+          </button>
       </div>
 
     </div>
@@ -168,25 +92,126 @@ export default {
   },
   data(){
     return {
-      province: 1,
+      province: {score: 1, text:"Metro Manila"},
       shipmeth: "standard",
+      provinceOptions: [
+        {score: 1, text: "Metro Manila"},
+        {score: 2, text: "Abra"},
+        {score: 3, text: "Agusan del Norte"},
+        {score: 3, text: "Agusan del Sur"},
+        {score: 3, text: "Aklan"},
+        {score: 2, text: "Albay"},
+        {score: 3, text: "Antique"},
+        {score: 2, text: "Apayao"},
+        {score: 2, text: "Aurora"},
+        {score: 3, text: "Basilan"},
+        {score: 2, text: "Bataan"},
+        {score: 2, text: "Batanes"},
+        {score: 2, text: "Batangas"},
+        {score: 2, text: "Benguet"},
+        {score: 3, text: "Biliran"},
+        {score: 3, text: "Bohol"},
+        {score: 3, text: "Bukidnon"},
+        {score: 2, text: "Bulacan"},
+        {score: 2, text: "Cagayan"},
+        {score: 2, text: "Camarines Norte"},
+        {score: 2, text: "Camarines Sur"},
+        {score: 3, text: "Camiguin"},
+        {score: 3, text: "Capiz"},
+        {score: 2, text: "Catanduanes"},
+        {score: 2, text: "Cavite"},
+        {score: 2, text: "Cebu"},
+        {score: 3, text: "Cotabato"},
+        {score: 3, text: "Davao de Oro"},
+        {score: 3, text: "Davao del Norte"},
+        {score: 3, text: "Davao del Sur"},
+        {score: 3, text: "Davao Occidental"},
+        {score: 3, text: "Davao Oriental"},
+        {score: 3, text: "Dinagat Islands"},
+        {score: 3, text: "Eastern Samar"},
+        {score: 3, text: "Guimaras"},
+        {score: 2, text: "Ifugao"},
+        {score: 2, text: "Ilocos Norte"},
+        {score: 2, text: "Ilocos Sur"},
+        {score: 3, text: "Iloilo"},
+        {score: 2, text: "Isabela"},
+        {score: 2, text: "Kalinga"},
+        {score: 2, text: "La Union"},
+        {score: 2, text: "Laguna"},
+        {score: 3, text: "Lanao del Norte"},
+        {score: 3, text: "Lanao del Sur"},
+        {score: 3, text: "Leyte"},
+        {score: 3, text: "Maguindanao"},
+        {score: 2, text: "Marinduque"},
+        {score: 2, text: "Masbate"},
+        {score: 3, text: "Misamis Occidental"},
+        {score: 3, text: "Misamis Oriental"},
+        {score: 2, text: "Mountain Province"},
+        {score: 3, text: "Negros Occidental"},
+        {score: 3, text: "Negros Oriental"},
+        {score: 3, text: "Northern Samar"},
+        {score: 2, text: "Nueva Ecija"},
+        {score: 2, text: "Nueva Vizcaya"},
+        {score: 2, text: "Occidental Mindoro"},
+        {score: 2, text: "Oriental Mindoro"},
+        {score: 2, text: "Palawan"},
+        {score: 2, text: "Pampanga"},
+        {score: 2, text: "Pangasinan"},
+        {score: 2, text: "Quezon"},
+        {score: 2, text: "Quirino"},
+        {score: 2, text: "Rizal"},
+        {score: 2, text: "Romblon"},
+        {score: 3, text: "Samar"},
+        {score: 3, text: "Sarangani"},
+        {score: 3, text: "Siquijor"},
+        {score: 2, text: "Sorsogon"},
+        {score: 3, text: "South Cotabato"},
+        {score: 3, text: "Southern Leyte"},
+        {score: 3, text: "Sultan Kudarat"},
+        {score: 3, text: "Sulu"},
+        {score: 3, text: "Surigao del Norte"},
+        {score: 3, text: "Surigao del Sur"},
+        {score: 2, text: "Tarlac"},
+        {score: 3, text: "Tawi-Tawi"},
+        {score: 2, text: "Zambales"},
+        {score: 3, text: "Zamboanga del Norte"},
+        {score: 3, text: "Zamboanga del Sur"},
+        {score: 3, text: "Zamboanga Sibugay"}
+      ],
+      btnspin: false
     }
   },
   methods:{
-
+    checkout(){
+      this.btnspin = true
+      var datastring = ""
+      for (var i = 0; i < this.cart.length; i++) {
+        var qtystring = this.cart[i].qty < 10 ? "0" + this.cart[i].qty.toString() : this.cart[i].qty.toString()
+        var itemtotal = this.cart[i].qty * this.cart[i].price
+        datastring += `${qtystring} | ${this.cart[i].title} ${this.cart[i].variations} - ₱${itemtotal}\n`
+      }
+      var data =  {
+        products: datastring.replace(/^\s+|\s+$/g, ''),
+        province:this.province.text,
+        total: this.withshipping,
+        shipping : this.shipmeth
+      }
+      this.$emit('checkout', data)
+      this.btnspin = false
+    }
   },
   watch:{
     shipcost: function(newval){
       this.$emit('shipcost', newval)
     },
     province: function(newval){
-      if(newval > 1){
+      if(newval.score > 1){
           this.shipmeth = "standard"
       }
     },
     withshipping: function(newval){
       this.$emit('updatetotal', newval)
-    }
+    },
   },
   computed:{
     withshipping(){
@@ -199,7 +224,7 @@ export default {
 
     },
     shipcost(){
-      if(this.province == 1){
+      if(this.province.score == 1){
         if(this.shipmeth == "standard"){
             return 100
         } else if(this.shipmeth == "sameday"){
@@ -208,10 +233,10 @@ export default {
           return 0
         }
       }
-      else if(this.province == 2){
+      else if(this.province.score == 2){
         return 150
       }
-      else if(this.province == 3){
+      else if(this.province.score == 3){
         return 200
 
       } else{
@@ -224,7 +249,7 @@ export default {
         total += (this.cart[i].qty * this.cart[i].price)
       }
       return total
-    }
+    },
   }
 }
 </script>

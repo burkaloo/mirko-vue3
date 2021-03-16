@@ -13,12 +13,11 @@ export default {
     }
   },
   props:{
-    shipping:String,
-    total:String
+    params: String
   },
   computed:{
     url(){
-      return "https://form.jotform.com/210724674863057?total=" + this.total
+      return "https://form.jotform.com/210733949937064" + this.params
     }
   }
 }

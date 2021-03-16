@@ -9,11 +9,11 @@
 
 
     <cartPage v-show="page == 'cart'"
-      class="container pt-5"
+      class="container pt-5 pb-3"
       :cart="cart"
       @remove="removefromcart"
       @add="addqtycart"
-      @page="nextpage"
+      @checkout="checkout"
       @back="backpage"
       @updatetotal="updatetotal"
     />
@@ -29,7 +29,7 @@
     <helpPage v-show="page == 'help'" class="mt-5"/>
 
 
-    <checkout v-show="page == 'checkout'" class="mt-5" :total="totalprice"/>
+    <checkout v-show="page == 'checkout'" class="mt-5" :params="params"/>
 
     <v-footer class="pt-5" @page="nextpage"/>
 
@@ -65,7 +65,7 @@ export default {
       cart:[],
       page: "home",
       lastpage: "home",
-      totalprice: 0
+      params : ""
     }
   },
   mounted() {
@@ -143,8 +143,19 @@ export default {
     backpage(){
       this.page = this.lastpage
     },
-    updatetotal(amt){
-      this.totalprice = amt
+    checkout(data){
+      var params = ""
+      var keys = Object.keys(data)
+      keys.forEach(( key, i) => {
+        if(i > 0 ){
+         params += "&"
+       }else{
+         params += "?"
+       }
+        params += encodeURI(key) + "=" + encodeURI(data[key])
+      });
+      this.params = params
+      this.page = "checkout"
     }
   },
   computed:{
@@ -154,7 +165,7 @@ export default {
         total += this.cart[i].qty
       }
       return total
-    }
+    },
   }
 }
 
