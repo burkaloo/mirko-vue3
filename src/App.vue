@@ -111,6 +111,7 @@ export default {
         }
 
         this.cart.push(newcartitem)
+        this.nextpage('cart')
       }
 
       console.log(this.cart)
