@@ -93,7 +93,7 @@ export default {
   data(){
     return {
       province: {score: 1, text:"Metro Manila"},
-      shipmeth: "standard",
+      shipmeth: "Standard",
       provinceOptions: [
         {score: 1, text: "Metro Manila"},
         {score: 2, text: "Abra"},
@@ -206,7 +206,7 @@ export default {
     },
     province: function(newval){
       if(newval.score > 1){
-          this.shipmeth = "standard"
+          this.shipmeth = "Standard"
       }
     },
     withshipping: function(newval){
@@ -225,9 +225,9 @@ export default {
     },
     shipcost(){
       if(this.province.score == 1){
-        if(this.shipmeth == "standard"){
+        if(this.shipmeth == "Standard"){
             return 100
-        } else if(this.shipmeth == "sameday"){
+        } else if(this.shipmeth == "Sameday"){
           return "Based on App booking"
         } else{
           return 0
