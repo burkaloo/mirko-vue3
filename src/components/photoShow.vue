@@ -1,14 +1,14 @@
 <template>
   <div class="">
     <div class="d-flex">
-      <div class="d-none d-sm-block">
+      <div class="d-none d-sm-block me-3">
         <img v-for="(img, index) in imgs"
         :key="index"
-        :class="imgfocus == index ? 'image-select border border-pink border-2 d-block' : 'image-select border border-grey d-block'"
+        :class="imgfocus == index ? 'image-select border border-pink border-2 ' : 'image-select border border-grey'"
         :src="img" alt=""
         @click="jumpimg(index)">
       </div>
-      <div class="flex-grow-1 ms-3">
+      <div class="flex-grow-1">
           <img class="img-fluid" :src="imgs[imgfocus]" alt="">
       </div>
     </div>

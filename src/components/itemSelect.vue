@@ -1,18 +1,21 @@
 <template>
 <div class="">
-  <h1 class="mt-4 text-green header-font font-weight-bold"><s class="pesosign"></s>{{scPrice}}</h1>
-  <div v-for="(vObj, vTitle) in variations" class="my-4" :key="vTitle">
-    <h5 class="text-green">{{vTitle}}</h5>
-    <div>
-      <button v-for="(opt, optInd) in vObj.options"
-        :class="vObj.selected == optInd ? 'btn border border-pink bg-pink mx-2' : 'btn border mx-2'"
-        @click="optselect(vTitle, optInd)"
-        :key="optInd"
-      >
-        {{opt}}
-      </button>
+  <h1 class="mt-4 text-green font-weight-bold"><s class="pesosign"></s><span class="header-font ms-2">{{scPrice}}</span></h1>
+  <div class="d-flex align-content-around flex-wrap">
+    <div v-for="(vObj, vTitle) in variations" class="my-4 ms-3 d-inline-block" :key="vTitle" style="max-width: 250px">
+      <h5 class="text-green">{{vTitle}}:</h5>
+      <div>
+        <button v-for="(opt, optInd) in vObj.options"
+          :class="vObj.selected == optInd ? 'btn border border-pink bg-pink mx-2 my-1' : 'btn border mx-2 my-1'"
+          @click="optselect(vTitle, optInd)"
+          :key="optInd"
+        >
+          {{opt}}
+        </button>
+      </div>
     </div>
   </div>
+
   <div>
     <h5 class="d-inline-block">Quanty:</h5>
     <div class="d-inline-block">
@@ -22,7 +25,7 @@
     </div>
   </div>
   <div class="pt-5">
-    <button class="btn btn-lg btn-block bg-pink" @click="$emit('addtocart', [getScOptions, qty, scItemPrice])">Add to Cart</button>
+    <button class="btn btn-lg btn-block bg-pink header-font" @click="$emit('addtocart', [getScOptions, qty, scItemPrice])">Add to Cart</button>
   </div>
 </div>
 </template>

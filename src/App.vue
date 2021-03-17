@@ -1,8 +1,10 @@
 <template>
-  <div class="bg-grey pb-5" id="app">
-    <div class="container d-flex ">
-      <div class="p-2">Nationwide Shipping</div>
-      <div class="p-2 hoverpointer ms-auto" @click="nextpage('prod')"><p class="d-inline-block">Shop Now</p></div>
+  <div class="bg-grey" id="app">
+    <div class="container">
+      <div class="d-flex py-2">
+        <div class="">Nationwide Shipping</div>
+      </div>
+
     </div>
 
     <navBar :docscroll="docscroll" topmargin="40" spacer="71" logo="./photos/mirko-logo.png" logoh="45" :cartcount="cartcount"
@@ -21,13 +23,13 @@
 
     <homePage v-show="page == 'home'" @page="nextpage"/>
 
-    <contactUs v-show="page == 'contact'" class="container mt-5" @page="nextpage"/>
+    <contactUs v-show="page == 'contact'" class="container mt-5 px-3" @page="nextpage"/>
 
     <aboutMirko v-show="page == 'about'" class="container mx-auto" @page="nextpage"/>
 
     <prodPage v-show="page == 'prod'" class="mt-5" @cartinput="addtocart" @page="nextpage"/>
 
-    <helpPage v-show="page == 'help'" class="mt-5"/>
+    <helpPage v-show="page == 'help'" class="mt-5 px-3"/>
 
 
     <checkout v-show="page == 'checkout'" class="mt-5" :params="params"/>

@@ -13,12 +13,12 @@
         </p>
       </div>
       <div class="col-6 col-md-3 mt-4 order-md-1">
-        <p class="header-font">
+        <h5 class="header-font">
           Mirko Social Accounts
-        </p>
-        <div class="flex">
-          <a href="https://www.facebook.com/MirkoPH/"><img class="thumb-sm d-inline me-3" src="./photos/fb-icon.png" alt=""></a>
-          <a href="https://instagram.com/mirko_ph?igshid=1ec8afvt815sh"><img class="thumb-sm d-inline" src="./photos/ig-icon.png" alt=""></a>
+        </h5>
+        <div class="d-flex mt-4">
+          <a href="https://www.facebook.com/MirkoPH/" target="_blank" class="d-block m-1"><img class="thumb-sm d-inline me-3" src="./photos/fb-icon.png" alt=""></a>
+          <a href="https://instagram.com/mirko_ph?igshid=1ec8afvt815sh" target="_blank" class="d-block m-1"><img class="thumb-sm d-inline" src="./photos/ig-icon.png" alt=""></a>
         </div>
       </div>
       <div class="col-6 col-md-3 mt-4 order-md-2">
