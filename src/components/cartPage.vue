@@ -4,67 +4,64 @@
       <i class="lnr lnr-cross fs-1" @click="$emit('back')"></i>
     </div>
     <h3 class="mt-2 text-center header-font">My Cart</h3>
-    <div v-if="cart.length > 0" class="table-responsive">
-      <table  class="table">
-        <tr v-for="(item, ind) in cart" :key="ind">
-          <td>
-            <h5>{{item.title}}</h5>
-            <p class="mb-1">{{item.variations}}</p>
-            <p class="mb-0 font-weight-bold text-danger"><s class="pesosign"></s>{{item.price * item.qty}}</p>
-          </td>
-          <td>{{item.price}}</td>
-          <td style="min-width: 131px;" class="text-end">
-            <div class="d-block">
-              <button class="btn" @click="$emit('add',[ind, 1, true])"> <i class="lnr lnr-circle-minus"></i> </button>
-              <p class="mb-0 mx-2 d-inline-block" style="width: 22px">{{cart[ind].qty}}</p>
-              <button class="btn" @click="$emit('add',[ind, 1, false])"> <i class="lnr lnr-plus-circle"></i> </button>
-            </div>
-            <div class="text-right mt-3">
-              <button class="btn" @click="$emit('remove',ind)"><i class="lnr lnr-trash"></i></button>
-            </div>
-          </td>
-        </tr>
-      </table>
-      <table class="table">
-        <tr class="border-top border-black">
-          <td><h5 class="header-font">Cart Total:</h5></td>
-          <td><h5 class="text-end"><s class="pesosign"></s>{{carttotal }}</h5></td>
-        </tr>
-      </table>
+    <div v-if="cart.length > 0">
+      <div class="row border-bottom py-3" v-for="(item, ind) in cart" :key="ind">
+        <div class="col-12 col-md-8 col-lg-9 col-xl-10">
+          <h5>{{item.title}}</h5>
+          <p class="mb-1">{{item.variations}}</p>
+          <p>{{item.price}}</p>
+        </div>
+        <div class="col-12 col-md-4 col-lg-3 col-xl-2 d-flex flex-sm-wrap mt-4 mt-sm-0">
+          <div class="">
+            <button class="btn" @click="$emit('add',[ind, 1, true])"> <i class="lnr lnr-circle-minus"></i> </button>
+            <p class="mb-0 mx-2 d-inline-block" style="width: 22px">{{cart[ind].qty}}</p>
+            <button class="btn" @click="$emit('add',[ind, 1, false])"> <i class="lnr lnr-plus-circle"></i> </button>
+          </div>
+          <div class="ms-auto">
+            <button class="btn" @click="$emit('remove',ind)"><i class="lnr lnr-trash"></i></button>
+          </div>
+        </div>
+        <div class="col-12 mt-4">
+          <p class="mb-0 text-end font-weight-bold text-danger"><s class="pesosign"></s>{{item.price * item.qty}}</p>
+        </div>
+      </div>
 
-      <table class="table mt-5">
-        <tr>
-          <td>
-            <div class="d-flex flex-row">
-              <div style="max-width:400px; width:100%;" class="m-2">
-                <label class="form-label">Shpping to Province:</label>
-                <select class="form-select" v-model="province">
-                  <option v-for="(option, index) in provinceOptions" :key="index" :value="option">{{option.text}}</option>
+
+      <div class="row">
+        <div class="col-12 d-flex border-top border-black py-3 px-2">
+          <h5 class="header-font">Cart Total:</h5>
+          <h5 class="ms-auto text-danger"><s class="pesosign"></s>{{carttotal }}</h5>
+        </div>
+        <div class="col-12 col-md-9">
+          <div class="d-sm-flex flex-sm-row">
+            <div style="max-width:230px; width:100%;" class="m-2">
+              <label class="form-label">Shpping to Province:</label>
+              <select class="form-select" v-model="province">
+                <option v-for="(option, index) in provinceOptions" :key="index" :value="option">{{option.text}}</option>
+              </select>
+            </div>
+            <div style="max-width:260px; width:100%;" class="m-2">
+              <label class="form-label">Shipping Method</label>
+              <div class="">
+                <select class="form-select" v-model="shipmeth" :disabled="province.score > 1">
+                  <option value="Standard">Standard
+                    <span v-if="province.score == 1">(3-5</span>
+                    <span v-else>(5-7</span>
+                    Days)
+                  </option>
+                  <option v-if="province.score == 1" value="Same Day">Same Day (Grab/Lalamove)</option>
                 </select>
               </div>
-              <div style="max-width:400px; width:100%;" class="m-2">
-                <label class="form-label">Shipping Method</label>
-                <div class="">
-                  <select class="form-select" v-model="shipmeth" :disabled="province.score > 1">
-                    <option value="Standard">Standard
-                      <span v-if="province.score == 1">(3-5</span>
-                      <span v-else>(5-7</span>
-                      Days)
-                    </option>
-                    <option v-if="province.score == 1" value="Same Day">Same Day (Grab/Lalamove)</option>
-                  </select>
-                </div>
-              </div>
             </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-3 d-flex flex-sm-wrap d-md-block text-sm-end pt-3 px-3">
+            <p class="mb-0 d-block">+shipping fee</p>
+            <p class="mb-0 font-weight-bold ms-auto mt-md-3">{{shipcost}}</p>
+        </div>
+      </div>
 
-          </td>
-          <td class="text-end">
-            <small class="mb-0">+shipping fee</small>
-            <p class="mb-0 font-weight-bold">{{shipcost}}</p>
-
-          </td>
-        </tr>
-
+      <table class="table mt-5">
         <tr class="border-top border-black">
           <td><h3 class="header-font">Total:</h3></td>
           <td><h3 class="text-end"><s class="pesosign"></s>{{withshipping }}</h3></td>
