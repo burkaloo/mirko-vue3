@@ -68,13 +68,14 @@ h1,h2,h3,h4, h5,h6,p,a,button,span,div{
 	cursor: pointer;
 }
 
+
 s, .pesosign::before{
 	content: '₱';
 	text-decoration: none;
 	font-family: monospace;
 }
 
-.text-justify{
+.text-just{
   text-align: justify;
 }
 
