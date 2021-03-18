@@ -149,7 +149,7 @@ export default {
           document.body.scrollTop = 0; // For Safari
           document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         },
-        200
+        130
       );
     },
     backpage(){
