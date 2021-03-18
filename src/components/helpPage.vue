@@ -1,7 +1,7 @@
 <template>
     <div style="max-width: 800px" class="text-left mx-auto">
       <div class="text-center py-5">
-        <img src="./photos/mirko-logo.png" class="w-25 border border-1 border-black p-3" alt="">
+        <img src="./photos/mirko-logo.png" class="p-3" alt="">
       </div>
       <h2 class="header-font my-3">Return Policy.</h2>
       <p>
@@ -26,7 +26,7 @@
       </p>
       <br><br>
       <h2 class="header-font my-3">Payment Portals.</h2>
-      <p>Payment Portals.
+      <p>
       We currently accept payments through BDO, BPI, GCash, cash-on-delivery, and Paypal. Feel free to message us on our social media accounts about your options!
       </p>
       <br><br>
@@ -46,5 +46,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+  img{
+    max-width: 120px;
+    height: auto;
+  }
 </style>

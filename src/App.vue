@@ -34,7 +34,10 @@
 
     <checkout v-show="page == 'checkout'" class="mt-5" :params="params"/>
 
-    <v-footer class="pt-5" @page="nextpage"/>
+    <div style="padding-bottom: 70px;">
+        <v-footer class="pt-5" @page="nextpage"/>
+    </div>
+
 
   </div>
 </template>

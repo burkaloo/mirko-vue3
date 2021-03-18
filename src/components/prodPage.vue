@@ -8,7 +8,7 @@
             </div>
             <div class="col-12 col-lg-6 mt-5 mt-lg-0">
               <h1 class="header-font d-none d-lg-block">Flow Underwear</h1>
-              <p class="fw-bold mt-2">Designed to be your last layer of protection against leaks during flow days.</p>
+              <p class="avenir-black mt-2">Designed to be your last layer of protection against leaks during flow days.</p>
               <p class="mb-1">- Smooth polyester spandex</p>
               <p class="mb-1">- Leak-proof lining (absorbs up to 8-10ml)</p>
               <p class="mb-1">- Machine-washable (note: avoid heat)</p>

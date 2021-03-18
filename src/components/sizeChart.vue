@@ -1,6 +1,6 @@
 <template>
   <div class="text-center">
-    <h1 class="text-center">Size Chart</h1>
+    <h1 class="text-center header-font">Size Chart</h1>
     <table class="table mt-3 table-bordered border-black">
       <thead>
         <tr>

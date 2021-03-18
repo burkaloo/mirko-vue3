@@ -6,7 +6,7 @@
   <div class="container">
     <div class="row row-cols-xl-3">
       <div class="col-12 col-md-6 order-md-3">
-        <img src="./photos/b-mnl.png" class="w-50" alt="">
+        <img src="./photos/b-mnl.png"  alt="">
         <h4>★★★★★</h4>
         <p class="fw-bold mt-4">
           “Mirko’s period underwear is such a great find! The fit is perfect, snug, with good support, but it doesn’t feel tight nor restrictive. The design is like a bodysuit, it hugs the hips, keeps the sanitary napkin in place, and so is ideal to prevent leakage. It’s very comfortable!”
@@ -42,4 +42,16 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
+p{
+  font-size: 13px;
+}
+
+h5{
+  font-size: 16px;
+}
+
+img{
+  width: 40%;
+  height: auto;
+}
 </style>

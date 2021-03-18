@@ -5,6 +5,9 @@
     <p>info@mirkoessentials.com</p>
     <h5 class="header-font">Phone:</h5>
     <p>09205663896</p>
+    <h5 class="header-font">For live chat support, message us in our social media accounts:</h5>
+    <p>facebook.com/MirkoPH</p>
+    <p>@mirko.ph</p>
   </div>
 </template>
 
