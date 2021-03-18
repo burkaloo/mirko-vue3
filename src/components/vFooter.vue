@@ -50,8 +50,8 @@ h5{
   font-size: 16px;
 }
 
-b-mnl{
-  width: 40%;
+.b-mnl{
+  width: 45%;
   height: auto;
 }
 </style>
