@@ -32,7 +32,7 @@
     <helpPage v-show="page == 'help'" class="mt-5 px-3"/>
 
 
-    <checkout v-show="page == 'checkout'" class="mt-5" :params="params"/>
+    <checkout v-show="page == 'checkout'"  :params="params"/>
 
     <div style="padding-bottom: 70px;">
         <v-footer class="pt-5" @page="nextpage"/>

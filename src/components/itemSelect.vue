@@ -17,7 +17,8 @@
   </div>
 
   <div>
-    <h5 class="d-inline-block">Quanty:</h5>
+    <p class="text-danger">{{notes}}</p>
+    <h5 class="d-inline-block">Quantity:</h5>
     <div class="d-inline-block">
       <button class="btn" @click="addqty(1, true)"> <i class="lnr lnr-circle-minus"></i> </button>
       <p class="mb-0 mx-2 d-inline-block" style="width: 22px">{{qty}}</p>
@@ -45,13 +46,13 @@ export default {
           selected:0,
           options:['S', 'M', 'L', 'XL'],
           pricediff:[0, 0, 0, 0],
-          stock:[7,7,7,7]
+          notes:["", "", "", ""]
         },
         "Pack Assortment":{
           selected:0,
-          options:["Singles", "Pack of 3"],
-          pricediff:[0, 475],
-          stock:[6,10]
+          options:["Singles", "Pack of 3", "Assorted Pack of 3"],
+          pricediff:[0, 475, 475],
+          notes:["", "", "Please indicate your assorted pack sizes on checkout"]
         }
       }
     }
@@ -76,6 +77,17 @@ export default {
         retObj[key] = this.variations[key].options[this.variations[key].selected]
       }
       return retObj
+    },
+    notes(){
+      var keys = Object.keys(this.variations)
+      var notestr = ""
+      for (var i = 0; i < keys.length; i++) {
+        var key = keys[i]
+        var note = this.variations[key].notes[this.variations[key].selected]
+        notestr += key > 0 ? "\n" : ""
+        notestr += note == "" ? "" : `📄 ${note}`
+      }
+      return notestr
     }
   },
   methods:{

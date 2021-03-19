@@ -59,6 +59,9 @@
             <p class="mb-0 d-block">+shipping fee</p>
             <p class="mb-0 font-weight-bold ms-auto mt-md-3">{{shipcost}}</p>
         </div>
+        <div v-show="shipmeth == 'Same Day'" class="col-12">
+          We will contact you for the exact delivery fee after check out. Kindly note that shipping will come from Manila.
+        </div>
       </div>
 
       <table class="table mt-5">
