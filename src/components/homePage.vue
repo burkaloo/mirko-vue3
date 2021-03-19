@@ -10,7 +10,7 @@
           </div>
         </div>
       </div>
-  
+
 
       <div class="container">
         <div class="d-flex justify-content-center mt-5 mb-5">
@@ -18,10 +18,10 @@
         </div>
         <div class="text-center">
           <h6 class="d-md-none px-3 mx-auto">
-            Inspired by characteristics of Japanese minimalism, <span class="avenir-black">mirko</span> is all about going back to the bare essentials. In every woman lives the spirit of the sea - there is grace but also such depth and mystery. Through <span class="avenir-black">mirko</span>, we believe every modern woman can boldly express her own deep truth and highlight what it means to be beautiful in the rawest form. Our icon of the woman in kimono hereby represents every enigmatic woman to whom this brand is dedicated.
+            Inspired by characteristics of Japanese minimalism, <span class="avenir-black">mirko</span> is all about going back to the bare essentials. In every woman lives the spirit of the sea - there is grace but also such depth and mystery. Through <span class="avenir-black">mirko</span>, we believe everyone can boldly express her own deep truth and highlight what it means to be beautiful in the rawest form. Our icon of the woman in kimono hereby represents every enigmatic spirit to whom this brand is dedicated.
           </h6>
           <h6 class="d-none d-md-block w-75 mx-auto">
-            Inspired by characteristics of Japanese minimalism, <span class="avenir-black">mirko</span> is all about going back to the bare essentials. In every woman lives the spirit of the sea - there is grace but also such depth and mystery. Through <span class="avenir-black">mirko</span>, we believe every modern woman can boldly express her own deep truth and highlight what it means to be beautiful in the rawest form. Our icon of the woman in kimono hereby represents every enigmatic woman to whom this brand is dedicated.
+            Inspired by characteristics of Japanese minimalism, <span class="avenir-black">mirko</span> is all about going back to the bare essentials. In every woman lives the spirit of the sea - there is grace but also such depth and mystery. Through <span class="avenir-black">mirko</span>, we believe everyone can boldly express her own deep truth and highlight what it means to be beautiful in the rawest form. Our icon of the woman in kimono hereby represents every enigmatic spirit to whom this brand is dedicated.
           </h6>
         </div>
         <div class="d-flex justify-content-center my-5">

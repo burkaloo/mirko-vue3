@@ -12,19 +12,19 @@
       <br><br><br>
       <h2 class="header-font my-5"> Our Commitment</h2>
       <p class="d-md-none">
-        Inspired by characteristics of Japanese minimalism, <span class="avenir-black">mirko</span> is all about going back to the bare essentials. In every woman lives the spirit of the sea - there is grace but also such depth and mystery. Through <span class="avenir-black">mirko</span>, we believe everyone can boldly express her own deep truth and highlight what it means to be beautiful in the rawest form. Our icon of the woman in kimono hereby represents every enigmatic spirit to whom this brand is dedicated
+        <span class="avenir-black">mirko</span> seeks to be an innovative leader for women’s essentials. By targeting basic needs and providing only the most functional and top quality products, the brand stands to improve women’s overall quality of life - without all the fuss. We promise to champion this movement in our daily lives as a women-led team and ensure that our solutions remain sustainable and beneficial not only for the current setting but also for the everyday women of the future.
       </p>
       <p class="d-none d-md-block text-just">
-        Inspired by characteristics of Japanese minimalism, <span class="avenir-black">mirko</span> is all about going back to the bare essentials. In every woman lives the spirit of the sea - there is grace but also such depth and mystery. Through <span class="avenir-black">mirko</span>, we believe everyone can boldly express her own deep truth and highlight what it means to be beautiful in the rawest form. Our icon of the woman in kimono hereby represents every enigmatic spirit to whom this brand is dedicated
+        <span class="avenir-black">mirko</span> seeks to be an innovative leader for women’s essentials. By targeting basic needs and providing only the most functional and top quality products, the brand stands to improve women’s overall quality of life - without all the fuss. We promise to champion this movement in our daily lives as a women-led team and ensure that our solutions remain sustainable and beneficial not only for the current setting but also for the everyday women of the future.
       </p>
     </div>
 
 </template>
 
+
 <script>
 export default {
   name: 'aboutMirko',
-
 }
 </script>
 
