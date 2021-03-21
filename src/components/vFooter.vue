@@ -7,7 +7,7 @@
     <div class="row row-cols-xl-3">
       <div class="col-12 col-md-6 order-md-3">
         <img src="./photos/b-mnl.png" class="b-mnl" alt="">
-        <h4>★★★★★</h4>
+        <h4 class="font-mono">★★★★★</h4>
         <p class="fw-bold mt-4">
           “Mirko’s period underwear is such a great find! The fit is perfect, snug, with good support, but it doesn’t feel tight nor restrictive. The design is like a bodysuit, it hugs the hips, keeps the sanitary napkin in place, and so is ideal to prevent leakage. It’s very comfortable!”
         </p>

@@ -35,7 +35,7 @@
         <div class="col-12 col-md-9">
           <div class="d-sm-flex flex-sm-row">
             <div style="max-width:230px; width:100%;" class="m-2">
-              <label class="form-label">Shpping to Province:</label>
+              <label class="form-label">Shipping to Province:</label>
               <select class="form-select" v-model="province">
                 <option v-for="(option, index) in provinceOptions" :key="index" :value="option">{{option.text}}</option>
               </select>

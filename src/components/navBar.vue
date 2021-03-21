@@ -25,7 +25,7 @@
                 </div>
                 <ul class="dropdown-menu dropdown-menu-sm-end bg-pink border-0 pe-3 pe-sm-0" aria-labelledby="dropdownMenuButton1">
                   <li><div class="dropdown-item" @click="page('about')">Our Commitment</div></li>
-                  <li><div class="dropdown-item" @click="page('help')">FAQ's</div></li>
+                  <li><div class="dropdown-item" @click="page('help')">FAQ</div></li>
                   <li><div class="dropdown-item" @click="page('contact')">Contact Mirko</div></li>
                 </ul>
               </div>

@@ -52,7 +52,7 @@ export default {
           selected:0,
           options:["Singles", "Pack of 3", "Assorted Pack of 3"],
           pricediff:[0, 475, 475],
-          notes:["", "", "Please indicate your assorted pack sizes on checkout"]
+          notes:["", "", "Please indicate your assorted pack sizes at checkout"]
         }
       }
     }
