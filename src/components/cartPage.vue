@@ -25,8 +25,6 @@
           <p class="mb-0 text-end font-weight-bold text-danger"><s class="pesosign"></s>{{item.price * item.qty}}</p>
         </div>
       </div>
-
-
       <div class="row">
         <div class="col-12 d-flex border-top border-black py-3 px-2">
           <h5 class="header-font">Cart Total:</h5>
