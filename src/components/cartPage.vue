@@ -51,9 +51,8 @@
               <div class="">
                 <select class="form-select" v-model="shipmeth" :disabled="city.score > 1">
                   <option value="Standard">Standard
-                    <span v-if="city.score == 1">(3-5</span>
-                    <span v-else-if="city.score > 1">(5-7</span>
-                    Days)
+                    <span v-if="city.score == 1">(3-5 Days)</span>
+                    <span v-else-if="city.score > 1">(5-7 Days)</span>
                   </option>
                   <option v-if="city.score == 1" value="Same Day">Same Day (Grab/Lalamove)</option>
                 </select>
