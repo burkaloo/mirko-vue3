@@ -106,7 +106,7 @@ export default {
       provinceOptions: [],
       cityOptions:[],
       btnspin: false,
-      baseurl: 'http://mirkophp.navitag.net/'
+      baseurl: 'https://mirkophp.navitag.net/'
     }
   },
   mounted(){
