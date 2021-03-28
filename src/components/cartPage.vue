@@ -35,21 +35,27 @@
         <div class="col-12 col-md-9">
           <div class="d-sm-flex flex-sm-row">
             <div style="max-width:230px; width:100%;" class="m-2">
-              <label class="form-label">Shipping to Province:</label>
+              <label class="form-label">Province:</label>
               <select class="form-select" v-model="province">
-                <option v-for="(option, index) in provinceOptions" :key="index" :value="option">{{option.text}}</option>
+                <option v-for="(option, index) in provinceOptions" :key="index" :value="option">{{option.name}}</option>
+              </select>
+            </div>
+            <div style="max-width:230px; width:100%;" class="m-2">
+              <label class="form-label">City:</label>
+              <select class="form-select" v-model="city" :disabled="cityOptions.length == 0">
+                <option v-for="(option, index) in cityOptions" :key="index" :value="option">{{option.name}}</option>
               </select>
             </div>
             <div style="max-width:260px; width:100%;" class="m-2">
               <label class="form-label">Shipping Method</label>
               <div class="">
-                <select class="form-select" v-model="shipmeth" :disabled="province.score > 1">
+                <select class="form-select" v-model="shipmeth" :disabled="city.score > 1">
                   <option value="Standard">Standard
-                    <span v-if="province.score == 1">(3-5</span>
-                    <span v-else>(5-7</span>
+                    <span v-if="city.score == 1">(3-5</span>
+                    <span v-else-if="city.score > 1">(5-7</span>
                     Days)
                   </option>
-                  <option v-if="province.score == 1" value="Same Day">Same Day (Grab/Lalamove)</option>
+                  <option v-if="city.score == 1" value="Same Day">Same Day (Grab/Lalamove)</option>
                 </select>
               </div>
             </div>
@@ -85,6 +91,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name: 'cartPage',
   props: {
@@ -92,94 +100,27 @@ export default {
   },
   data(){
     return {
-      province: {score: 1, text:"Metro Manila"},
+      province: null,
+      city: {name:"Choose One...", score: 0},
       shipmeth: "Standard",
-      provinceOptions: [
-        {score: 1, text: "Metro Manila"},
-        {score: 2, text: "Abra"},
-        {score: 3, text: "Agusan del Norte"},
-        {score: 3, text: "Agusan del Sur"},
-        {score: 3, text: "Aklan"},
-        {score: 2, text: "Albay"},
-        {score: 3, text: "Antique"},
-        {score: 2, text: "Apayao"},
-        {score: 2, text: "Aurora"},
-        {score: 3, text: "Basilan"},
-        {score: 2, text: "Bataan"},
-        {score: 2, text: "Batanes"},
-        {score: 2, text: "Batangas"},
-        {score: 2, text: "Benguet"},
-        {score: 3, text: "Biliran"},
-        {score: 3, text: "Bohol"},
-        {score: 3, text: "Bukidnon"},
-        {score: 2, text: "Bulacan"},
-        {score: 2, text: "Cagayan"},
-        {score: 2, text: "Camarines Norte"},
-        {score: 2, text: "Camarines Sur"},
-        {score: 3, text: "Camiguin"},
-        {score: 3, text: "Capiz"},
-        {score: 2, text: "Catanduanes"},
-        {score: 2, text: "Cavite"},
-        {score: 2, text: "Cebu"},
-        {score: 3, text: "Cotabato"},
-        {score: 3, text: "Davao de Oro"},
-        {score: 3, text: "Davao del Norte"},
-        {score: 3, text: "Davao del Sur"},
-        {score: 3, text: "Davao Occidental"},
-        {score: 3, text: "Davao Oriental"},
-        {score: 3, text: "Dinagat Islands"},
-        {score: 3, text: "Eastern Samar"},
-        {score: 3, text: "Guimaras"},
-        {score: 2, text: "Ifugao"},
-        {score: 2, text: "Ilocos Norte"},
-        {score: 2, text: "Ilocos Sur"},
-        {score: 3, text: "Iloilo"},
-        {score: 2, text: "Isabela"},
-        {score: 2, text: "Kalinga"},
-        {score: 2, text: "La Union"},
-        {score: 2, text: "Laguna"},
-        {score: 3, text: "Lanao del Norte"},
-        {score: 3, text: "Lanao del Sur"},
-        {score: 3, text: "Leyte"},
-        {score: 3, text: "Maguindanao"},
-        {score: 2, text: "Marinduque"},
-        {score: 2, text: "Masbate"},
-        {score: 3, text: "Misamis Occidental"},
-        {score: 3, text: "Misamis Oriental"},
-        {score: 2, text: "Mountain Province"},
-        {score: 3, text: "Negros Occidental"},
-        {score: 3, text: "Negros Oriental"},
-        {score: 3, text: "Northern Samar"},
-        {score: 2, text: "Nueva Ecija"},
-        {score: 2, text: "Nueva Vizcaya"},
-        {score: 2, text: "Occidental Mindoro"},
-        {score: 2, text: "Oriental Mindoro"},
-        {score: 2, text: "Palawan"},
-        {score: 2, text: "Pampanga"},
-        {score: 2, text: "Pangasinan"},
-        {score: 2, text: "Quezon"},
-        {score: 2, text: "Quirino"},
-        {score: 2, text: "Rizal"},
-        {score: 2, text: "Romblon"},
-        {score: 3, text: "Samar"},
-        {score: 3, text: "Sarangani"},
-        {score: 3, text: "Siquijor"},
-        {score: 2, text: "Sorsogon"},
-        {score: 3, text: "South Cotabato"},
-        {score: 3, text: "Southern Leyte"},
-        {score: 3, text: "Sultan Kudarat"},
-        {score: 3, text: "Sulu"},
-        {score: 3, text: "Surigao del Norte"},
-        {score: 3, text: "Surigao del Sur"},
-        {score: 2, text: "Tarlac"},
-        {score: 3, text: "Tawi-Tawi"},
-        {score: 2, text: "Zambales"},
-        {score: 3, text: "Zamboanga del Norte"},
-        {score: 3, text: "Zamboanga del Sur"},
-        {score: 3, text: "Zamboanga Sibugay"}
-      ],
-      btnspin: false
+      provinceOptions: [],
+      cityOptions:[],
+      btnspin: false,
+      baseurl: 'http://mirkophp.navitag.net/'
     }
+  },
+  mounted(){
+      let comp = this
+      axios.post(this.baseurl+ "getprovinces.php").
+      then(function(r){
+        if(r.data.status == "success"){
+          comp.provinceOptions = r.data.response
+        } else{
+          console.log(r.data.response)
+        }
+      }).catch(function(e){
+        console.log(e)
+      })
   },
   methods:{
     checkout(){
@@ -192,7 +133,8 @@ export default {
       }
       var data =  {
         products: datastring.replace(/^\s+|\s+$/g, ''),
-        province:this.province.text,
+        province:this.province.name,
+        city:this.city.name,
         total: this.withshipping,
         shipping : this.shipmeth
       }
@@ -205,7 +147,20 @@ export default {
       this.$emit('shipcost', newval)
     },
     province: function(newval){
-      if(newval.score > 1){
+      this.cityOptions = []
+      this.city = {name:"Choose One...", score: 0}
+      this.shipmeth = "Standard"
+      var comp = this
+      axios.post(this.baseurl + "getcities.php",{
+        prov: newval.id
+      }).then(function(r){
+        if(r.data.status == "success"){
+          comp.cityOptions = r.data.response
+        }
+      })
+    },
+    city(newval){
+      if(newval.score > 1 || newval == null){
           this.shipmeth = "Standard"
       }
     },
@@ -224,7 +179,7 @@ export default {
 
     },
     shipcost(){
-      if(this.province.score == 1){
+      if(this.city.score == 1){
         if(this.shipmeth == "Standard"){
             return 100
         } else if(this.shipmeth == "Sameday"){
@@ -233,10 +188,10 @@ export default {
           return 0
         }
       }
-      else if(this.province.score == 2){
+      else if(this.city.score == 2){
         return 150
       }
-      else if(this.province.score == 3){
+      else if(this.city.score == 3){
         return 200
 
       } else{
