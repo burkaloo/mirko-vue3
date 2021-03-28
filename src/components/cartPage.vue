@@ -74,6 +74,9 @@
         </tr>
       </table>
       <div class=" text-end">
+          <button v-if="city.score > 0" class="btn btn-lg text-light bg-pink fw-bold mt-4" @click="checkout" disabled>
+            <div class="pt-1">Checkout</div>
+          </button>
           <button class="btn btn-lg text-light bg-pink fw-bold mt-4" @click="checkout" :disabled="btnspin">
             <div v-if="btnspin" class="spinner-border mx-4" role="status" >
               <span class="visually-hidden">Loading...</span>
