@@ -6,7 +6,7 @@
   <div class="container">
     <div class="row row-cols-xl-3">
       <div class="col-12 col-md-6 order-md-3">
-        <img src="./photos/b-mnl.png" class="b-mnl" alt="">
+        <img src="../assets/photos/b-mnl.png" class="b-mnl" alt="">
         <h4 class="font-mono">★★★★★</h4>
         <p class="fw-bold mt-4">
           “Mirko’s period underwear is such a great find! The fit is perfect, snug, with good support, but it doesn’t feel tight nor restrictive. The design is like a bodysuit, it hugs the hips, keeps the sanitary napkin in place, and so is ideal to prevent leakage. It’s very comfortable!”
@@ -17,8 +17,8 @@
           Mirko Social Accounts
         </h5>
         <div class="d-flex mt-4">
-          <a href="https://www.facebook.com/MirkoPH/" target="_blank" class="d-block m-1"><img class="thumb-sm d-inline me-3" src="./photos/fb-icon.png" alt=""></a>
-          <a href="https://instagram.com/mirko_ph?igshid=1ec8afvt815sh" target="_blank" class="d-block m-1"><img class="thumb-sm d-inline" src="./photos/ig-icon.png" alt=""></a>
+          <a href="https://www.facebook.com/MirkoPH/" target="_blank" class="d-block m-1"><img class="thumb-sm d-inline me-3" src="../assets/photos/fb-icon.png" alt=""></a>
+          <a href="https://instagram.com/mirko_ph?igshid=1ec8afvt815sh" target="_blank" class="d-block m-1"><img class="thumb-sm d-inline" src="../assets/photos/ig-icon.png" alt=""></a>
         </div>
       </div>
       <div class="col-6 col-md-3 mt-4 order-md-2">

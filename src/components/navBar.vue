@@ -3,7 +3,7 @@
     <nav class="navbar navbar-expand-md navbar-light bg-pink navbar-fixed " :style="'top:'+totalTopmargin+ 'px;'">
       <div class="container">
         <div class="navbar-brand">
-          <img src="./photos/mirko-logo.png" class="border border-2 border-black p-1" :style="navphoto" @click="$emit('page','home')">
+          <img src="../assets/photos/mirko-logo.png" class="border border-2 border-black p-1" :style="navphoto" @click="$emit('page','home')">
         </div>
 
         <div v-if="open" class="w-100 cover" :style="'top:' + totalSpace +'px; height: calc(100vh - ' + totalSpace +'px);'" @click="close"></div>
@@ -14,13 +14,13 @@
         <div v-show="open" :class="collapseClass" :style="'top: '+totalSpace+'px;'">
           <ul class="navbar-nav ms-auto mb-lg-0">
             <li class="nav-item ms-0 ms-md-4 pt-md-2 hoverpointer" @click="page('prod')">
-              <!-- img src="./photos/bag-icon.png" class="p-2" alt="" :style="navphoto" -->
+              <!-- img src="../assets/photos/bag-icon.png" class="p-2" alt="" :style="navphoto" -->
               <h5 class="m-2">Shop</h5>
             </li>
             <li class="nav-item ms-0 ms-md-4 pt-md-2 hoverpointer">
               <div class="dropdown">
                 <div type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                    <!--img src="./photos/help-icon.png" alt="" :style="navphoto" class=" p-2 dropdown-toggle" -->
+                    <!--img src="../assets/photos/help-icon.png" alt="" :style="navphoto" class=" p-2 dropdown-toggle" -->
                     <h5 class="m-2">Customer Care</h5>
                 </div>
                 <ul class="dropdown-menu dropdown-menu-sm-end bg-pink border-0 pe-3 pe-sm-0" aria-labelledby="dropdownMenuButton1">
@@ -31,7 +31,7 @@
               </div>
             </li>
             <li class="nav-item ms-2 ms-md-3 hoverpointer my-sm-0" @click="page('cart')">
-              <img src="./photos/cart-icon.png" alt="" :style="navphoto" class="mt-1">
+              <img src="../assets/photos/cart-icon.png" alt="" :style="navphoto" class="mt-1">
               <!--span class="d-inline d-sm-none ms-3">Cart</span-->
               <span v-show="cartcount > 0" class="badge bg-secondary cart-badge">{{cartcount}}</span>
             </li>
