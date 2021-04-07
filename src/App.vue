@@ -5,6 +5,7 @@
         <div class="">Nationwide Shipping</div>
       </div>
 
+
     </div>
 
     <navBar :docscroll="docscroll" topmargin="40" spacer="71" logo="./photos/mirko-logo.png" logoh="45" :cartcount="cartcount"
@@ -20,19 +21,7 @@
       @back="backpage"
       @updatetotal="updatetotal"
     />
-
-    <homePage v-show="page == 'home'" @page="nextpage"/>
-
-    <contactUs v-show="page == 'contact'" class="container mt-5 px-3" @page="nextpage"/>
-
-    <aboutMirko v-show="page == 'about'" class="container mx-auto" @page="nextpage"/>
-
-    <prodPage v-show="page == 'prod'" class="mt-5" @cartinput="addtocart" @page="nextpage"/>
-
-    <helpPage v-show="page == 'help'" class="mt-5 px-3"/>
-
-
-    <checkout v-show="page == 'checkout'"  :params="params"/>
+    <router-view/>
 
     <div style="padding-bottom: 70px;">
         <v-footer class="pt-5" @page="nextpage"/>
@@ -47,13 +36,6 @@
 
 import navBar from './components/navBar.vue'
 import vFooter from './components/vFooter.vue'
-import contactUs from './components/contactUs.vue'
-import aboutMirko from './components/aboutMirko.vue'
-import prodPage from './components/prodPage.vue'
-import homePage from './components/homePage.vue'
-import cartPage from './components/cartPage.vue'
-import helpPage from './components/helpPage.vue'
-import checkout from './components/checkout.vue'
 
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -64,7 +46,7 @@ require('./assets/styles/main.css')
 
 export default {
   name: 'app',
-  components:{navBar, prodPage, vFooter, contactUs, aboutMirko, homePage, cartPage, helpPage, checkout},
+  components:{navBar, vFooter},
   data(){
     return{
       docscroll:0,

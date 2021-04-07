@@ -1,7 +1,7 @@
 <template>
     <div style="max-width: 800px" class="text-left mx-auto">
       <div class="text-center py-5">
-        <img src="./photos/mirko-logo.png" class="p-3" alt="">
+        <img src="../assets/photos/mirko-logo.png" class="p-3" alt="">
       </div>
       <h2 class="header-font my-3">Return Policy.</h2>
       <p>

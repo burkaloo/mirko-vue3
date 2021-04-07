@@ -2,15 +2,14 @@
     <div>
       <div class=" text-center">
         <div class="mx-auto d-md-none">
-            <img class="img-fluid" style="" src="./photos/hero.jpg" alt="">
+            <img class="img-fluid" style="" src="../assets/photos/hero.jpg" alt="">
         </div>
         <div class="d-none d-md-block container mt-5">
           <div class="mx-auto">
-              <img class="img-fluid" style="" src="./photos/hero.jpg" alt="">
+              <img class="img-fluid" style="" src="../assets/photos/hero.jpg" alt="">
           </div>
         </div>
       </div>
-
 
       <div class="container">
         <div class="d-flex justify-content-center mt-5 mb-5">
@@ -30,7 +29,7 @@
         <div class="row row-cols-1 row-cols-sm-2">
           <div class="col px-3 px-md-5 mb-5">
             <div style="max-width:450px;" class="mx-auto">
-              <img src="./photos/select-1.jpg" class="img-fluid hoverpointer"  alt="" @click="$emit('page', 'prod')">
+              <img src="../assets/photos/select-1.jpg" class="img-fluid hoverpointer"  alt="" @click="$emit('page', 'prod')">
               <div class="text-start mt-2">
                   <h5 class="ms-2 header-font">Flow Underwear</h5>
               </div>
@@ -38,7 +37,7 @@
           </div>
           <div class="col px-3 px-md-5">
             <div style="max-width:450px;" class="mx-auto">
-              <img src="./photos/select-2.jpg" class="img-fluid"  alt="">
+              <img src="../assets/photos/select-2.jpg" class="img-fluid"  alt="">
               <div class="text-start mt-2">
                   <h5 class="ms-2 header-font">Coming Soon</h5>
               </div>

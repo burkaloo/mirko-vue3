@@ -1,7 +1,7 @@
 <template>
     <div style="max-width: 450px" class="text-center p-4">
       <div class="text-center py-5">
-        <img src="./photos/mirko-logo.png" class="p-3 b-ml" alt="">
+        <img src="../components/photos/mirko-logo.png" class="p-3 b-ml" alt="">
       </div>
       <h2 class="header-font my-5">About Mirko</h2>
 
