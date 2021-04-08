@@ -1,10 +1,15 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import about from '../views/aboutMirko.vue'
-import homePage from '../views/homePage.vue'
+import about from '@/views/aboutMirko.vue'
+import cart from '@/views/cartPage.vue'
+import checkout from '@/views/checkout.vue'
+import contact from '@/views/contactUs.vue'
+import help from '@/views/helpPage.vue'
+import homePage from '@/views/homePage.vue'
+import prod from '@/views/prodPage.vue'
 
 const routes = [
   {
-    path: '/home',
+    path: '/',
     name: 'home',
     component: homePage
   },
@@ -14,8 +19,34 @@ const routes = [
     component: about
   },
   {
-    path: '/instructions/cups',
-    redirect: '/about'
+    path: '/cart',
+    name: 'cart',
+    component: cart,
+    props: true
+  },
+  {
+    path: '/checkout',
+    name: 'checkout',
+    component: checkout
+  },
+  {
+    path: '/contact',
+    name: 'contact',
+    component: contact
+  },
+  {
+    path: '/help',
+    name: 'help',
+    component: help
+  },
+  {
+    path: '/product/flowunderwear',
+    name: 'prod',
+    component: prod
+  },
+  {
+    path: '/linkto/instructions-cups',
+    redirect: '/home'
   }
 ]
 

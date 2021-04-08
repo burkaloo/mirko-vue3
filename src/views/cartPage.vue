@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container mt-5">
     <div class="">
       <i class="lnr lnr-cross fs-1" @click="$emit('back')"></i>
     </div>
@@ -96,7 +96,7 @@ import axios from 'axios'
 export default {
   name: 'cartPage',
   props: {
-    cart: Array,
+    cartstr: {default:'[]', type: String},
   },
   data(){
     return {
@@ -169,6 +169,9 @@ export default {
     },
   },
   computed:{
+    cart(){
+      return JSON.parse(this.cartstr)
+    },
     withshipping(){
       if(isNaN(this.shipcost)){
         return this.carttotal

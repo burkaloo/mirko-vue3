@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class="container mt-5">
     <h1 class="header-font mb-5">Contact Mirko</h1>
     <h5 class="header-font">Email:</h5>
     <p>info@mirkoessentials.com</p>

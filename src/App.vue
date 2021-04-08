@@ -4,24 +4,21 @@
       <div class="d-flex py-2">
         <div class="">Nationwide Shipping</div>
       </div>
-
-
     </div>
 
     <navBar :docscroll="docscroll" topmargin="40" spacer="71" logo="./photos/mirko-logo.png" logoh="45" :cartcount="cartcount"
     @page="nextpage"/>
 
-
-    <cartPage v-show="page == 'cart'"
-      class="container pt-5 pb-3"
-      :cart="cart"
+    <router-view
       @remove="removefromcart"
       @add="addqtycart"
       @checkout="checkout"
       @back="backpage"
       @updatetotal="updatetotal"
+      @page="nextpage"
+
+      @cartinput="addtocart"
     />
-    <router-view/>
 
     <div style="padding-bottom: 70px;">
         <v-footer class="pt-5" @page="nextpage"/>
@@ -51,8 +48,8 @@ export default {
     return{
       docscroll:0,
       cart:[],
-      page: "home",
       lastpage: "home",
+      page: "",
       params : ""
     }
   },
@@ -126,16 +123,25 @@ export default {
     nextpage(page){
       this.lastpage = this.page
       this.page = page
+      if(page == "cart"){
+        let cartcopy = JSON.stringify(this.cart)
+        console.log(cartcopy)
+        this.$router.push({name:page, params: {cartstr: cartcopy}})
+      } else{
+        this.$router.push({name:page})
+      }
+
       setTimeout(
         function(){
           document.body.scrollTop = 0; // For Safari
           document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         },
-        130
+        70
       );
+
     },
     backpage(){
-      this.page = this.lastpage
+      this.nextpage(this.lastpage)
     },
     checkout(data){
       var params = ""

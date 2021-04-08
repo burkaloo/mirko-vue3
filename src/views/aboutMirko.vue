@@ -1,5 +1,6 @@
 <template>
-    <div style="max-width: 450px" class="text-center p-4">
+  <div class="container">
+    <div style="max-width: 450px" class="text-center p-4 mx-auto">
       <div class="text-center py-5">
         <img src="../assets/photos/mirko-logo.png" class="p-3 b-ml" alt="">
       </div>
@@ -18,7 +19,7 @@
         <span class="avenir-black">mirko</span> seeks to be an innovative leader for women’s essentials. By targeting basic needs and providing only the most functional and top quality products, the brand stands to improve women’s overall quality of life - without all the fuss. We promise to champion this movement in our daily lives as a women-led team and ensure that our solutions remain sustainable and beneficial not only for the current setting but also for the everyday women of the future.
       </p>
     </div>
-
+  </div>
 </template>
 
 
