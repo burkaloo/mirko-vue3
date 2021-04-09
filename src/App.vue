@@ -159,14 +159,7 @@ export default {
         params += encodeURI(key) + "=" + encodeURI(data[key])
       });
       this.params = params
-      this.page = "checkout"
-      setTimeout(
-        function(){
-          document.body.scrollTop = 0; // For Safari
-          document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-        },
-        130
-      );
+      this.nextpage("checkout")
     }
   },
   computed:{
