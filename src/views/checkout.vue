@@ -1,11 +1,11 @@
 <template>
-    <div class="" style="height:1650px; position: relative">
-      <div class="d-flex justify-content-center" style="margin-top: 300px;">
+    <div class="" style="position: relative">
+      <div class="d-flex justify-content-center" style="position: absolute; top:300; left:0">
         <div class="spinner-border" role="status">
           <span class="visually-hidden">Loading...</span>
         </div>
       </div>
-      <div  style="position: absolute; top: 0; z-index:2">
+      <div  style="height:1650px; position: absolute; top: 0; left:0; right:0; z-index:2">
         <iframe :src="url" width="100%" height="100%"></iframe>
       </div>
     </div>
@@ -21,6 +21,11 @@ export default {
   },
   props:{
     params: String
+  },
+  mounted(){
+    if(this.params == "" || this.params == null ){
+      this.$emit('page', 'home')
+    }
   },
   computed:{
     url(){

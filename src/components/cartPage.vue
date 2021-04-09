@@ -169,9 +169,6 @@ export default {
     },
   },
   computed:{
-    /*cart(){
-      return JSON.parse(this.cartstr)
-    },*/
     withshipping(){
       if(isNaN(this.shipcost)){
         return this.carttotal
