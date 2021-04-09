@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import about from '@/views/aboutMirko.vue'
+import cart from '@/views/cartPage.vue'
 import checkout from '@/views/checkout.vue'
 import contact from '@/views/contactUs.vue'
 import help from '@/views/helpPage.vue'
@@ -20,7 +21,8 @@ const routes = [
   {
     path: '/checkout',
     name: 'checkout',
-    component: checkout
+    component: checkout,
+    props: true
   },
   {
     path: '/contact',

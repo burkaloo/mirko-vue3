@@ -129,10 +129,8 @@ export default {
     nextpage(page){
       this.lastpage = this.page
       this.page = page
-      if(page == "cart"){
-        //let cartcopy = JSON.stringify(this.cart)
-        //console.log(cartcopy)
-        //this.$router.push({name:page, params: {cartstr: cartcopy}})
+      if(page == "checkout"){
+        this.$router.push({name:page, params: {params: this.params}})
       } else{
         this.$router.push({name:page})
       }
