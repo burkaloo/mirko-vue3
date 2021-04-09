@@ -1,5 +1,5 @@
 <template>
-    <div class="" style="position: relative">
+    <div class="" style="position: relative; min-height:700px;">
       <div class="d-flex justify-content-center" style="position: absolute; left:0px; right:0px; top:200px;">
         <div class="spinner-border" role="status">
           <span class="visually-hidden">Loading...</span>
