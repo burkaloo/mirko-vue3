@@ -12,6 +12,8 @@
     <router-view
       v-show="page != 'cart'"
       @cartinput="addtocart"
+      @page="nextpage"
+      @back="backpage"
     />
 
     <cartPage
@@ -129,11 +131,14 @@ export default {
     nextpage(page){
       this.lastpage = this.page
       this.page = page
-      if(page == "checkout"){
-        this.$router.push({name:page, params: {params: this.params}})
-      } else{
-        this.$router.push({name:page})
+      if(page != 'cart'){
+        if(page == "checkout"){
+          this.$router.push({name:page, params: {params: this.params}})
+        } else{
+          this.$router.push({name:page})
+        }
       }
+
 
       setTimeout(
         function(){

@@ -3,7 +3,7 @@
     <nav class="navbar navbar-expand-md navbar-light bg-pink navbar-fixed " :style="'top:'+totalTopmargin+ 'px;'">
       <div class="container">
         <div class="navbar-brand">
-          <img src="../assets/photos/mirko-logo.png" class="border border-2 border-black p-1" :style="navphoto" @click="$emit('page','home')">
+          <img src="../assets/photos/mirko-logo.png" class="border border-2 border-black p-1 hoverpointer" :style="navphoto" @click="$emit('page','home')">
         </div>
 
         <div v-if="open" class="w-100 cover" :style="'top:' + totalSpace +'px; height: calc(100vh - ' + totalSpace +'px);'" @click="close"></div>
