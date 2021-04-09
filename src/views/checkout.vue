@@ -1,6 +1,6 @@
 <template>
     <div class="" style="position: relative">
-      <div class="d-flex justify-content-center" style="position: absolute; top:300; left:0">
+      <div class="d-flex justify-content-center" style="position: absolute; top:300; left:0; right:0;">
         <div class="spinner-border" role="status">
           <span class="visually-hidden">Loading...</span>
         </div>
