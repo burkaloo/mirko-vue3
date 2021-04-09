@@ -96,7 +96,7 @@ import axios from 'axios'
 export default {
   name: 'cartPage',
   props: {
-    cartstr: {default:'[]', type: String},
+    cart: {},
   },
   data(){
     return {
@@ -169,9 +169,9 @@ export default {
     },
   },
   computed:{
-    cart(){
+    /*cart(){
       return JSON.parse(this.cartstr)
-    },
+    },*/
     withshipping(){
       if(isNaN(this.shipcost)){
         return this.carttotal

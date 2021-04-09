@@ -10,14 +10,19 @@
     @page="nextpage"/>
 
     <router-view
+      v-show="page != 'cart'"
+      @cartinput="addtocart"
+    />
+
+    <cartPage
+      v-show="page == 'cart'"
+      :cart="cart"
       @remove="removefromcart"
       @add="addqtycart"
       @checkout="checkout"
       @back="backpage"
       @updatetotal="updatetotal"
       @page="nextpage"
-
-      @cartinput="addtocart"
     />
 
     <div style="padding-bottom: 70px;">
@@ -33,6 +38,7 @@
 
 import navBar from './components/navBar.vue'
 import vFooter from './components/vFooter.vue'
+import cartPage from './components/cartPage.vue'
 
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -43,13 +49,13 @@ require('./assets/styles/main.css')
 
 export default {
   name: 'app',
-  components:{navBar, vFooter},
+  components:{navBar, vFooter, cartPage},
   data(){
     return{
       docscroll:0,
       cart:[],
       lastpage: "home",
-      page: "",
+      page: "home",
       params : ""
     }
   },
@@ -124,9 +130,9 @@ export default {
       this.lastpage = this.page
       this.page = page
       if(page == "cart"){
-        let cartcopy = JSON.stringify(this.cart)
-        console.log(cartcopy)
-        this.$router.push({name:page, params: {cartstr: cartcopy}})
+        //let cartcopy = JSON.stringify(this.cart)
+        //console.log(cartcopy)
+        //this.$router.push({name:page, params: {cartstr: cartcopy}})
       } else{
         this.$router.push({name:page})
       }
