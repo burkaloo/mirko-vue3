@@ -2,7 +2,7 @@
   <div>
     <div style="max-width: 800px" class="text-left mx-auto">
       <div class="text-center py-5">
-        <img src="../assets/photos/mirko-logo.png" class="p-3" alt="">
+        <img src="../assets/photos/mirko-logo.png" class="p-3 img-fluid" style="max-width: 120px"  alt="">
       </div>
       <h2 class="header-font text-center">Mirko Menstrual Cups: An Easy Guide</h2>
       <br><br>
