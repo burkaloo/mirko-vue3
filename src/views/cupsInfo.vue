@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div style="max-width: 800px" class="text-left mx-auto">
+    <div style="max-width: 800px" class="text-left mx-auto px-2">
       <div class="text-center py-5">
         <img src="../assets/photos/mirko-logo.png" class="p-3 img-fluid" style="max-width: 120px"  alt="">
       </div>
@@ -92,7 +92,7 @@
       </p>
       <br><br>
     </div>
-    <div class="container">
+    <div class="container-fluid px-3">
       <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4">
         <div v-for="(img, index) in imgs" class="col mt-4" :key="index">
           <img class="img-fluid" :src="img" alt="" >
