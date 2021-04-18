@@ -5,6 +5,7 @@ import contact from '@/views/contactUs.vue'
 import help from '@/views/helpPage.vue'
 import homePage from '@/views/homePage.vue'
 import prod from '@/views/prodPage.vue'
+import cupsinfo from '@/views/cupsInfo.vue'
 
 const routes = [
   {
@@ -40,7 +41,8 @@ const routes = [
   },
   {
     path: '/linkto/instructions-cups',
-    redirect: '/home'
+    name: 'cupsInfo',
+    component: cupsinfo
   }
 ]
 
