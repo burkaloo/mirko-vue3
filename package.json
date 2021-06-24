@@ -15,7 +15,8 @@
     "lodash": "^4.17.21",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0-0",
-    "vue3-carousel": "^0.1.12"
+    "vue3-carousel": "^0.1.12",
+    "vue3-simple-file-input": "^1.0.3"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",

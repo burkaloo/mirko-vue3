@@ -1,5 +1,11 @@
 <template>
   <div class="bg-grey" id="app">
+    <div v-if="alert.show" class="position-fixed start-0 end-0 mx-auto bg-transparent alert-box">
+      <div :class="'alert alert-' + alert.class + ' alert-dismissible shadow-lg'">
+        <span>{{alert.text}}</span>
+        <span type="button" class="btn-close" @click="togglealert({show: false})"></span>
+      </div>
+    </div>
     <div class="container">
       <div class="d-flex py-2">
         <div class="">Nationwide Shipping</div>
@@ -7,36 +13,51 @@
     </div>
 
     <navBar :docscroll="docscroll" topmargin="40" spacer="71" logo="./photos/mirko-logo.png" logoh="45" :cartcount="cartcount"
-    @page="nextpage"/>
+    @page="nextpage"
+    @alert="togglealert"/>
 
     <router-view
       v-show="page != 'cart'"
       @cartinput="addtocart"
       @page="nextpage"
       @back="backpage"
+      @load="load"
+      @alert="togglealert"
+      @order="placeorder"
     />
 
     <cartPage
       v-show="page == 'cart'"
       :cart="cart"
+      :carttotal="carttotal"
       @remove="removefromcart"
       @add="addqtycart"
       @checkout="checkout"
       @back="backpage"
       @updatetotal="updatetotal"
       @page="nextpage"
+      @load="load"
+      @alert="togglealert"
     />
 
     <div style="padding-bottom: 70px;">
-        <v-footer class="pt-5" @page="nextpage"/>
+        <v-footer class="pt-5" @page="nextpage" @alert="togglealert"/>
     </div>
 
+    <div v-if="loading" class="grey-out z-top position-fixed top-0 vh-100 vw-100">
+      <div class="text-center" style="margin-top:40vh">
+        <div class="spinner-border m-5" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    </div>
 
   </div>
 </template>
 
 <script>
 
+const axios = require('axios');
 
 import navBar from './components/navBar.vue'
 import vFooter from './components/vFooter.vue'
@@ -47,7 +68,9 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 require('./assets/styles/main.css')
 
-
+const sleep = (milliseconds) => {
+  return new Promise(resolve => setTimeout(resolve, milliseconds))
+}
 
 export default {
   name: 'app',
@@ -58,7 +81,13 @@ export default {
       cart:[],
       lastpage: "home",
       page: "home",
-      params : ""
+      loading: false,
+      alert:{
+        class: 'danger',
+        text: "error Message",
+        show: false
+      },
+      bccemail: "camille@mirkoessentials.com"
     }
   },
   mounted() {
@@ -68,7 +97,10 @@ export default {
     window.removeEventListener("scroll", this.onScroll)
   },
   methods:{
-    onScroll() {
+    sleep(ms){
+      return new Promise(resolve => setTimeout(resolve, ms));
+    },
+    onScroll(){
       this.docscroll = document.documentElement.scrollTop
     },
     addtocart(data){
@@ -132,14 +164,8 @@ export default {
       this.lastpage = this.page
       this.page = page
       if(page != 'cart'){
-        if(page == "checkout"){
-          this.$router.push({name:page, params: {params: this.params}})
-        } else{
-          this.$router.push({name:page})
-        }
+        this.$router.push({name:page})
       }
-
-
       setTimeout(
         function(){
           document.body.scrollTop = 0; // For Safari
@@ -147,27 +173,86 @@ export default {
         },
         70
       );
-
     },
     backpage(){
       this.nextpage(this.lastpage)
     },
     checkout(data){
-      var params = ""
-      var keys = Object.keys(data)
-      keys.forEach(( key, i) => {
-        if(i > 0 ){
-         params += "&"
-       }else{
-         params += "?"
-       }
-        params += encodeURI(key) + "=" + encodeURI(data[key])
-      });
-      this.params = params
-      this.nextpage("checkout")
+      this.lastpage = this.page
+      this.page = "checkout"
+      this.$router.push({name:"checkout", params: {carttotal: data, carttable: this.carttable}})
+      setTimeout(
+        function(){
+          document.body.scrollTop = 0; // For Safari
+          document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        },
+        70
+      );
+    },
+    load(state = null){
+      if(state === null){
+        this.loading = !this.loading
+      } else{
+        this.loading = state
+      }
+    },
+    async togglealert(data){
+      if(data.show == false){
+        this.alert.show = false
+      } else if(data.show == true){
+        if(this.alert.show == true){
+          this.alert.show = false
+          await sleep(200)
+        }
+        this.alert.text = "text" in data ? data.text : "undefined system message"
+        this.alert.class = "class" in data ? data.class : "undefined system message"
+        this.alert.show = data.show
+      } else{
+        this.alert.show =  false
+      }
+    },
+    placeorder(data){
+      //send email will complete order details
+      let postdata = {
+        merge:{
+          cart: this.carttable,
+          total: this.carttotal.toString(),
+          payment: data.payment,
+          shipinfo: data.shipinfo
+        },
+        token: 'mirko-order',
+        email: {to: data.email, bcc: this.bccemail},
+        "subject-post": 'order for ' + data.name
+      }
+      if('files' in data){
+        postdata.files = [{BinaryContent: data.files.base64, Name: data.files.name}]
+      }
+
+      console.log(postdata);
+      let comp = this
+      axios({
+        method: 'post',
+        url: 'https://mailer.navitag.net',
+        data: postdata
+      }).then(function(r){
+        if("MessageID" in r.data && "TransactionID" in r.data){
+          comp.cart = []
+          comp.nextpage('thanks')
+          comp.lastpage = 'home'
+        } else{
+          this.togglealert({show: true, class: 'danger', text: "Somthing went wrong... Order has not been confirmed."});
+        }
+      }).catch(function(){
+        this.togglealert({show: true, class: 'danger', text: "Somthing went wrong... Order has not been confirmed."});
+      }).finally(function(){
+        comp.load(false)
+      })
     }
   },
   computed:{
+    alertclass(){
+      return 'alert alert-' + this.alert.class + ' alert-dismissible shadow-lg'
+    },
     cartcount(){
       var total = 0
       for (var i = 0; i < this.cart.length; i++) {
@@ -175,11 +260,46 @@ export default {
       }
       return total
     },
+    carttotal(){
+      var total = 0
+      for (var i = 0; i < this.cart.length; i++) {
+        total += (this.cart[i].qty * this.cart[i].price)
+      }
+      return total
+    },
+    carttable(){
+      let cartstring = ""
+      this.cart.forEach((itemobj) => {
+        let qtystr = '<tr><td>' + itemobj.qty.toString() + '</td><td>'
+        let itemstr = '<p style="margin-bottom: 0">' + itemobj.title  + '</p><small style="margin-bottom: 0">' + itemobj.variations + '</small>'
+        let pricestr = '</td><td style="text-align: right; padding:0 0 0 0">' + itemobj.price + '</td></tr>'
+        cartstring += qtystr
+        cartstring += itemstr
+        cartstring += pricestr
+      });
+
+      return cartstring
+    }
   }
 }
-
 </script>
 
 <style>
+.grey-out{
+  background-color: rgba(128,128,128,.7);
+}
+
+.z-top{
+  z-index: 9999999999;
+}
+
+.alert-box{
+  max-width: 650px;
+  width:100%;
+  top:20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  z-index: 10;
+}
 
 </style>

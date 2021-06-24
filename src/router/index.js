@@ -6,6 +6,7 @@ import help from '@/views/helpPage.vue'
 import homePage from '@/views/homePage.vue'
 import prod from '@/views/prodPage.vue'
 import cupsinfo from '@/views/cupsInfo.vue'
+import thanks from '@/views/thanks.vue'
 
 const routes = [
   {
@@ -43,6 +44,11 @@ const routes = [
     path: '/linkto/instructions-cups',
     name: 'cupsInfo',
     component: cupsinfo
+  },
+  {
+    path: '/thankyou',
+    name: 'thanks',
+    component: thanks
   }
 ]
 

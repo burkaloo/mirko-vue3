@@ -30,7 +30,7 @@
           <h5 class="header-font">Cart Total:</h5>
           <h5 class="ms-auto text-danger"><s class="pesosign"></s>{{carttotal }}</h5>
         </div>
-        <div class="col-12 col-md-9">
+        <!--div class="col-12 col-md-9">
           <div class="d-sm-flex flex-sm-row">
             <div style="max-width:230px; width:100%;" class="m-2">
               <label class="form-label">Province:</label>
@@ -64,20 +64,21 @@
         </div>
         <div v-show="shipmeth == 'Same Day'" class="col-12">
           We will contact you for the exact delivery fee after check out. Kindly note that shipping will come from Manila.
-        </div>
+        </div-->
       </div>
 
-      <table class="table mt-5">
+      <!--table class="table mt-5">
         <tr class="border-top border-black">
           <td><h3 class="header-font">Total:</h3></td>
           <td><h3 class="text-end"><s class="pesosign"></s>{{withshipping }}</h3></td>
         </tr>
-      </table>
+      </table-->
       <div class=" text-end">
-          <button v-if="city.score == 0" class="btn btn-lg text-light bg-pink fw-bold mt-4" @click="checkout" disabled>
+          <!--button v-if="city.score == 0" class="btn btn-lg text-light bg-pink fw-bold mt-4" @click="checkout" disabled>
             <div class="pt-1">Checkout</div>
           </button>
-          <button v-else class="btn btn-lg text-light bg-pink fw-bold mt-4" @click="checkout" :disabled="btnspin">
+          <button v-else class="btn btn-lg text-light bg-pink fw-bold mt-4" @click="checkout" :disabled="btnspin"-->
+          <button class="btn btn-lg text-light bg-pink fw-bold mt-4" @click="checkout" :disabled="btnspin">
             <div v-if="btnspin" class="spinner-border mx-4" role="status" >
               <span class="visually-hidden">Loading...</span>
             </div>
@@ -91,120 +92,32 @@
 </template>
 
 <script>
-import axios from 'axios'
+//import axios from 'axios'
 
 export default {
   name: 'cartPage',
   props: {
     cart: {},
+    carttotal:{},
   },
   data(){
     return {
-      province: null,
-      city: {name:"Choose One...", score: 0},
-      shipmeth: "Standard",
-      provinceOptions: [],
-      cityOptions:[],
       btnspin: false,
       baseurl: 'https://mirkophp.navitag.net/'
     }
   },
   mounted(){
-      let comp = this
-      axios.post(this.baseurl+ "getprovinces.php").
-      then(function(r){
-        if(r.data.status == "success"){
-          comp.provinceOptions = r.data.response
-        } else{
-          console.log(r.data.response)
-        }
-      }).catch(function(e){
-        console.log(e)
-      })
   },
   methods:{
     checkout(){
       this.btnspin = true
-      var datastring = ""
-      for (var i = 0; i < this.cart.length; i++) {
-        var qtystring = this.cart[i].qty < 10 ? "0" + this.cart[i].qty.toString() : this.cart[i].qty.toString()
-        var itemtotal = this.cart[i].qty * this.cart[i].price
-        datastring += `${qtystring} | ${this.cart[i].title} ${this.cart[i].variations} - ₱${itemtotal}\n`
-      }
-      var data =  {
-        products: datastring.replace(/^\s+|\s+$/g, ''),
-        province:this.province.name,
-        city:this.city.name,
-        total: this.withshipping,
-        shipping : this.shipmeth
-      }
-      this.$emit('checkout', data)
+      this.$emit('checkout', this.carttotal)
       this.btnspin = false
     }
   },
   watch:{
-    shipcost: function(newval){
-      this.$emit('shipcost', newval)
-    },
-    province: function(newval){
-      this.cityOptions = []
-      this.city = {name:"Choose One...", score: 0}
-      this.shipmeth = "Standard"
-      var comp = this
-      axios.post(this.baseurl + "getcities.php",{
-        prov: newval.id
-      }).then(function(r){
-        if(r.data.status == "success"){
-          comp.cityOptions = r.data.response
-        }
-      })
-    },
-    city(newval){
-      if(newval.score > 1 || newval == null){
-          this.shipmeth = "Standard"
-      }
-    },
-    withshipping: function(newval){
-      this.$emit('updatetotal', newval)
-    },
   },
   computed:{
-    withshipping(){
-      if(isNaN(this.shipcost)){
-        return this.carttotal
-      } else{
-        var total = this.carttotal + this.shipcost
-        return total
-      }
-
-    },
-    shipcost(){
-      if(this.city.score == 1){
-        if(this.shipmeth == "Standard"){
-            return 100
-        } else if(this.shipmeth == "Sameday"){
-          return "Based on App booking"
-        } else{
-          return 0
-        }
-      }
-      else if(this.city.score == 2){
-        return 150
-      }
-      else if(this.city.score == 3){
-        return 200
-
-      } else{
-        return 0
-      }
-    },
-    carttotal(){
-      var total = 0
-      for (var i = 0; i < this.cart.length; i++) {
-        total += (this.cart[i].qty * this.cart[i].price)
-      }
-      return total
-    },
   }
 }
 </script>
