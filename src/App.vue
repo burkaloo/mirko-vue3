@@ -222,7 +222,7 @@ export default {
         },
         token: 'mirko-order',
         email: {to: data.email, bcc: this.bccemail},
-        "subject-post": 'order for ' + data.name
+        "subject-pre": 'Mirko order for ' + data.name
       }
       if('files' in data){
         postdata.files = [{BinaryContent: data.files.base64, Name: data.files.name}]
