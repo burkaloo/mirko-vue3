@@ -104,7 +104,7 @@ export default {
       this.docscroll = document.documentElement.scrollTop
     },
     addtocart(data){
-      console.log(data)
+      //console.log(data)
       var opts = data[0]
       var qty = data[1]
       var price = data[2]
@@ -113,7 +113,7 @@ export default {
       var keys = Object.keys(opts)
 
       var searchArr = JSON.parse(JSON.stringify(this.cart))
-      console.log(searchArr)
+      //console.log(searchArr)
       var addnew = true
       for (var i = 0; i < searchArr.length; i++) {
         var varStr = keys.length == 0 ? '' : JSON.stringify(opts).replace("{", '[').replace("}", "]").replace(/,/g, "; ").replace(/"/g, '').replace(/:/g, ": ")
@@ -139,7 +139,7 @@ export default {
         this.nextpage('cart')
       }
 
-      console.log(this.cart)
+      //console.log(this.cart)
       //open cart here
     },
     removefromcart(ind){
