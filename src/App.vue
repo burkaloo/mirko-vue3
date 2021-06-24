@@ -237,7 +237,7 @@ export default {
       }).then(function(r){
         if("MessageID" in r.data && "TransactionID" in r.data){
           comp.cart = []
-          comp.nextpage('thanks')
+          comp.nextpage('thankyou')
           comp.lastpage = 'home'
         } else{
           this.togglealert({show: true, class: 'danger', text: "Somthing went wrong... Order has not been confirmed."});

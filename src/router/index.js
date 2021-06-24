@@ -6,7 +6,7 @@ import help from '@/views/helpPage.vue'
 import homePage from '@/views/homePage.vue'
 import prod from '@/views/prodPage.vue'
 import cupsinfo from '@/views/cupsInfo.vue'
-import thanks from '@/views/thanks.vue'
+import thankyou from '@/views/thankyou.vue'
 
 const routes = [
   {
@@ -47,8 +47,8 @@ const routes = [
   },
   {
     path: '/thankyou',
-    name: 'thanks',
-    component: thanks
+    name: 'thankyou',
+    component: thankyou
   }
 ]
 
