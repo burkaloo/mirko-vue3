@@ -22,7 +22,7 @@
                 <ul class="dropdown-menu dropdown-menu-sm-end bg-pink border-0 pe-3 pe-sm-0" aria-labelledby="dropdownMenuButton2">
                   <li><div class="dropdown-item" @click="page('flowunderwear')">Flow Underwear</div></li>
                   <li><div class="dropdown-item" @click="page('menstralcups')">Menstral Cups</div></li>
-                  <li><div class="dropdown-item" @click="page('duokits')">Game Changer Kits</div></li>
+                  <li><div class="dropdown-item" @click="page('duokits')">Game Changer Duo Kits</div></li>
                 </ul>
               </div>
             </li>
