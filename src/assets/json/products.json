@@ -36,9 +36,11 @@
       "- Smooth polyester spandex",
       "- Leak-proof lining (absorbs up to 8-10ml)",
       "- Machine-washable (note: avoid heat)",
+      "- Sleek bikini cut",
+      "- Ready for light days, extra protection on heavy days",
       "<br>",
-      "<a href=\"https://www.mirkoessentials.com/product/menstralcups\">Shop menstral cup</a>",
-      "<a href=\"https://www.mirkoessentials.com/product/duokits\">Shop Game Changer Duo Kit</a>"
+      "Make the switch to sustainable wear! Get <a href=\"https://www.mirkoessentials.com/product/menstrualcups\">Mirko Menstrual Cup</a> today!",
+      "Level up your period game. Get the <a href=\"https://www.mirkoessentials.com/product/duokits\"> Mirko Game Changer Duo Kit</a> #MakeTheSwitch"
     ],
     "cards":["https://mirkophp.navitag.net/photos/fu-cards-1.jpg","https://mirkophp.navitag.net/photos/fu-cards-2.jpg","https://mirkophp.navitag.net/photos/fu-cards-3.jpg","https://mirkophp.navitag.net/photos/fu-cards-4.jpg"]
   },
@@ -71,17 +73,18 @@
         "ignore": [[],[], []]
       }
     },
-    "title": "Menstral Cups",
-    "tagline": "Not all menstral cups are made the same. #MakeTheSwitch",
+    "title": "Menstrual Cups",
+    "tagline": "Not all menstrual cups are made the same. #MakeTheSwitch",
     "points":[
       "- 100% medical grade liquid silicone",
       "- Certified by US-FDA",
       "- Classic shape with a long trimmable stem",
+      "- Easy wash and care",
       "<br>",
-      "<a href=\"https://www.mirkoessentials.com/linkto/instructions-cups\">How to use a menstral cup</a>",
-      "<br>",
-      "<a href=\"https://www.mirkoessentials.com/product/duokits\">Shop Game Changer Duo Kit</a>",
-      "<a href=\"https://www.mirkoessentials.com/product/flowunderwear\">Shop flowunderwear</a>"
+      "First time using a cup? Check out our guide on <a href=\"https://www.mirkoessentials.com/linkto/instructions-cups\">how to use a menstrual cup.</a>",
+      "Need extra Protection? Pair with <a href=\"https://www.mirkoessentials.com/product/flowunderwear\">Mirko Flow Underwear.</a>",
+      "Level up your period game. Get the <a href=\"https://www.mirkoessentials.com/product/duokits\"> Mirko Game Changer Duo Kit</a> #MakeTheSwitch"
+
     ],
     "cards":["https://mirkophp.navitag.net/photos/mc-cards-1.jpg","https://mirkophp.navitag.net/photos/mc-cards-2.jpg","https://mirkophp.navitag.net/photos/mc-cards-3.jpg","https://mirkophp.navitag.net/photos/mc-cards-4.jpg"]
   },
@@ -107,23 +110,23 @@
       },
       "Underwear Size":{
         "selected":0,
-        "options":["S","M","L","XL"],
-        "pricediff":[0,0,0,0],
-        "notes":["", "", "",""],
-        "ignore": [[],[],[],[]]
+        "options":["S","M","L","XL", "Assorted"],
+        "pricediff":[0,0,0,0,0],
+        "notes":["", "", "","","Please indicate your flow underwear sizes at checkout"],
+        "ignore": [[],[],[],[],[]]
       },
       "Cup Color":{
         "selected":0,
-        "options":["Aqua","Clear", "Pink"],
-        "pricediff":[0, 0, 0],
-        "notes":["", "", ""],
-        "ignore": [[],[],[]]
+        "options":["Aqua","Clear", "Pink", "Assorted"],
+        "pricediff":[0, 0, 0, 0],
+        "notes":["", "", "","Please indicate your cups colors at checkout"],
+        "ignore": [[],[],[],[]]
       },
       "Cup Size":{
         "selected":0,
-        "options":["Small", "Large"],
-        "pricediff":[0, 0],
-        "notes":["", ""],
+        "options":["Small", "Large", "1 of each"],
+        "pricediff":[0, 0, 0],
+        "notes":["", "", ""],
         "ignore": [[],[],[]]
       }
 
@@ -136,8 +139,8 @@
       "Set C - 3 Underwear + 1 Cup",
       "Set D - 3 Underwear + 2 Cups",
       "<br>",
-      "<a href=\"https://www.mirkoessentials.com/product/flowunderwear\">Shop Flow Underwear</a>",
-      "<a href=\"https://www.mirkoessentials.com/product/menstralcups\">Shop Menstal Cups</a>"],
+      "Need our flow underwear only? Shop <a href=\"https://www.mirkoessentials.com/product/flowunderwear\">Flow Underwear</a>",
+      "Looking for menstrual cups only? Shop <a href=\"https://www.mirkoessentials.com/product/menstrualcups\">Mensrtual Cups</a>"],
     "cards":["https://mirkophp.navitag.net/photos/fu-cards-1.jpg","https://mirkophp.navitag.net/photos/mc-cards-1.jpg","https://mirkophp.navitag.net/photos/fu-cards-2.jpg", "https://mirkophp.navitag.net/photos/dk-cards-1.jpg"]
   }
 }

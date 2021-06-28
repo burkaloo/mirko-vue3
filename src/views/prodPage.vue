@@ -2,19 +2,16 @@
     <div>
       <div class="container mt-5">
         <div class="row">
-          <div class="col-12 col-lg-6 px-xl-4">
+          <div class="col-12 col-lg-6 col-xl-5 px-xl-4">
             <h1 class="header-font mb-3 d-lg-none">{{inview.title}}</h1>
             <photoShow :imgs="inview.imgs"/>
           </div>
-          <div class="col-12 col-lg-6 mt-5 mt-lg-0">
+          <div class="col-12 col-lg-6 col-xl-7 mt-5 mt-lg-0">
             <div class="">
               <h1 class="header-font d-none d-lg-block">{{inview.title}}</h1>
               <p class="avenir-black mt-2">{{inview.tagline}}</p>
               <p v-for="(point, pInd) in inview.points" class="mb-1" :key="pInd" v-html="point"></p>
             </div>
-          </div>
-          <div class="col-12 col-lg-0">
-            <!-- empty spacer -->
           </div>
           <div class="col-12 ps-lg-5">
             <div class="ps-lg-5">

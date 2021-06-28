@@ -37,7 +37,7 @@
           </div>
           <div class="col px-3 px-md-5 mb-5">
             <div style="max-width:450px;" class="mx-auto">
-              <img src="https://mirkophp.navitag.net/photos/select-2.jpg" class="img-fluid hoverpointer"  alt="" @click="$emit('page', 'menstralcups')">
+              <img src="https://mirkophp.navitag.net/photos/select-2.jpg" class="img-fluid hoverpointer"  alt="" @click="$emit('page', 'menstrualcups')">
               <div class="text-start mt-2">
                   <h5 class="ms-2 header-font">Menstral Cups</h5>
               </div>

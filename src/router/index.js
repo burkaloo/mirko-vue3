@@ -42,8 +42,8 @@ const routes = [
     props: { pid: 1 }
   },
   {
-    path: '/product/menstralcups',
-    name: 'menstralcups',
+    path: '/product/menstrualcups',
+    name: 'menstrualcups',
     component: prod,
     props: { pid: 2 }
   },
