@@ -1,0 +1,72 @@
+{
+  "1": {
+    "baseprice": 275,
+    "imgs": ["https://mirkophp.navitag.net/photos/fu-1.jpg","https://mirkophp.navitag.net/photos/fu-2.jpg","https://mirkophp.navitag.net/photos/fu-3.jpg","https://mirkophp.navitag.net/photos/fu-4.jpg","https://mirkophp.navitag.net/photos/fu-5.jpg"],
+    "imgfocus": 0,
+    "chart":{
+      "title":"Size Chart",
+      "header":["Size", "Waist", "Hip"],
+      "body":[
+        ["S","22-25","33-35"],
+        ["M","25-28","35-37"],
+        ["L","28-31","37-39"],
+        ["XL","31-34","39-41"]
+      ],
+      "note": "*measurements in inches"
+    },
+    "variations":{
+      "Size":{
+        "selected":0,
+        "options":["S", "M", "L", "XL"],
+        "pricediff":[0, 0, 0, 0],
+        "notes":["", "", "", ""],
+        "ignore": [[],[],[]]
+      },
+      "Pack Size":{
+        "selected":0,
+        "options":["Singles", "Pack of 3", "Assorted Pack of 3"],
+        "pricediff":[0, 475, 475],
+        "notes":["", "", "Please indicate your assorted pack sizes at checkout"],
+        "ignore": [[],[],["size"]]
+      }
+    },
+    "title": "Flow Underwear",
+    "tagline": "Designed to be your last layer of protection against leaks during flow days.",
+    "points":["- Smooth polyester spandex","- Leak-proof lining (absorbs up to 8-10ml)","- Machine-washable (note: avoid heat)"],
+    "cards":["https://mirkophp.navitag.net/photos/fu-cards-1.jpg","https://mirkophp.navitag.net/photos/fu-cards-2.jpg","https://mirkophp.navitag.net/photos/fu-cards-3.jpg","https://mirkophp.navitag.net/photos/fu-cards-4.jpg"]
+  },
+  "2": {
+    "baseprice": 720,
+    "imgs": ["https://mirkophp.navitag.net/photos/mc-prod-1.jpg","https://mirkophp.navitag.net/photos/mc-prod-2.jpg","https://mirkophp.navitag.net/photos/mc-prod-3.jpg","https://mirkophp.navitag.net/photos/mc-prod-4.jpg"],
+    "imgfocus": 0,
+    "chart":{
+      "title":"Size Chart",
+      "header":["Size", "Height", "Diameter", "Capacity"],
+      "body":[
+        ["S","70.3","42.5","24ml"],
+        ["L","76.3","45.5","30ml"]
+      ],
+      "note": "*measurements in mm"
+    },
+    "variations":{
+      "Size":{
+        "selected":0,
+        "options":["Small","Large"],
+        "pricediff":[0, 0],
+        "notes":["", ""],
+        "ignore": [[],[]]
+      },
+      "Color":{
+        "selected":0,
+        "options":["Aqua","Clear", "Pink"],
+        "pricediff":[0, 0, 0],
+        "notes":["", "", ""],
+        "ignore": [[],[], []]
+      }
+    },
+    "title": "Menstral Cups",
+    "tagline": "Designed to be your last layer of protection against leaks during flow days.",
+    "points":["- 100% medical grade liquid silicone","- Certified by US-FDA","- Classic shape with a long trimmable stem"],
+    "cards":["https://mirkophp.navitag.net/photos/mc-cards-1.jpg","https://mirkophp.navitag.net/photos/mc-cards-2.jpg","https://mirkophp.navitag.net/photos/mc-cards-3.jpg","https://mirkophp.navitag.net/photos/mc-cards-4.jpg"]
+  }
+}

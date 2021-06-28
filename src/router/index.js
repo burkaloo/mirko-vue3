@@ -37,8 +37,15 @@ const routes = [
   },
   {
     path: '/product/flowunderwear',
-    name: 'prod',
-    component: prod
+    name: 'flowunderwear',
+    component: prod,
+    props: { pid: 1 }
+  },
+  {
+    path: '/product/menstralcups',
+    name: 'menstralcups',
+    component: prod,
+    props: { pid: 2 }
   },
   {
     path: '/linkto/instructions-cups',

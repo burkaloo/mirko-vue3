@@ -13,9 +13,17 @@
 
         <div v-show="open" :class="collapseClass" :style="'top: '+totalSpace+'px;'">
           <ul class="navbar-nav ms-auto mb-lg-0">
-            <li class="nav-item ms-0 ms-md-4 pt-md-2 hoverpointer" @click="page('prod')">
-              <!-- img src="../assets/photos/bag-icon.png" class="p-2" alt="" :style="navphoto" -->
-              <h5 class="m-2">Shop</h5>
+            <li class="nav-item ms-0 ms-md-4 pt-md-2 hoverpointer">
+              <div class="dropdown">
+                <div type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                    <!--img src="../assets/photos/help-icon.png" alt="" :style="navphoto" class=" p-2 dropdown-toggle" -->
+                    <h5 class="m-2">Shop</h5>
+                </div>
+                <ul class="dropdown-menu dropdown-menu-sm-end bg-pink border-0 pe-3 pe-sm-0" aria-labelledby="dropdownMenuButton2">
+                  <li><div class="dropdown-item" @click="page('flowunderwear')">Flow Underwear</div></li>
+                  <li><div class="dropdown-item" @click="page('menstralcups')">Menstral Cups</div></li>
+                </ul>
+              </div>
             </li>
             <li class="nav-item ms-0 ms-md-4 pt-md-2 hoverpointer">
               <div class="dropdown">

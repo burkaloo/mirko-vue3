@@ -66,6 +66,8 @@ import cartPage from './components/cartPage.vue'
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
+import productsjson from './assets/json/products.json'
+
 require('./assets/styles/main.css')
 
 const sleep = (milliseconds) => {
@@ -87,8 +89,12 @@ export default {
         text: "error Message",
         show: false
       },
+      products: null,
       bccemail: "camille@mirkoessentials.com"
     }
+  },
+  created(){
+    this.products = productsjson
   },
   mounted() {
     window.addEventListener("scroll", this.onScroll)
