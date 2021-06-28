@@ -101,10 +101,7 @@
         "options":["Set A","Set B", "Set C", "Set D"],
         "pricediff":[0,500,475,975],
         "notes":[
-          "",
-          "Includes: 1 Flow Underwear + 2 Menstral Cup",
-          "Includes: 3 Flow Underwear + 1 Menstral Cup",
-          "Includes: 3 Flow Underwear + 2 Menstral Cup"
+          "","","",""
         ],
         "ignore": [[],[],[],[]]
       },
