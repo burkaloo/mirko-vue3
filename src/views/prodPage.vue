@@ -7,15 +7,25 @@
             <photoShow :imgs="inview.imgs"/>
           </div>
           <div class="col-12 col-lg-6 mt-5 mt-lg-0">
-            <h1 class="header-font d-none d-lg-block">{{inview.title}}</h1>
-            <p class="avenir-black mt-2">{{inview.tagline}}</p>
-            <p v-for="(point, pInd) in inview.points" class="mb-1" :key="pInd" v-html="point"></p>
-            <itemSelect
-              :baseprice="inview.baseprice"
-              :variations="inview.variations"
-              @addtocart="pushtitle"
-              @optclick="optselect"
-            />
+            <div class="">
+              <h1 class="header-font d-none d-lg-block">{{inview.title}}</h1>
+              <p class="avenir-black mt-2">{{inview.tagline}}</p>
+              <p v-for="(point, pInd) in inview.points" class="mb-1" :key="pInd" v-html="point"></p>
+            </div>
+          </div>
+          <div class="col-12 col-lg-0">
+            <!-- empty spacer -->
+          </div>
+          <div class="col-12 ps-lg-5">
+            <div class="ps-lg-5">
+              <itemSelect
+                :baseprice="inview.baseprice"
+                :variations="inview.variations"
+                @addtocart="pushtitle"
+                @optclick="optselect"
+                @priceupdate="priceupdate"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -55,7 +65,8 @@ export default {
   },
   data(){
     return {
-      prodlist: null
+      prodlist: null,
+      price: 0
     }
   },
   created(){
@@ -69,6 +80,9 @@ export default {
     },
     optselect(data){
       this.inview.variations[data[0]].selected = data[1]
+    },
+    priceupdate(data){
+      this.price = data
     }
   },
   computed:{

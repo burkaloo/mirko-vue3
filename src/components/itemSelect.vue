@@ -1,35 +1,38 @@
 <template>
-<div class="">
-  <h1 class="mt-4 text-green font-weight-bold"><s class="pesosign"></s><span class="header-font ms-2">{{scPrice}}</span></h1>
-  <div class="d-flex align-content-around flex-wrap">
-    <div v-for="(vObj, vTitle) in variations" class="my-4 ms-3 d-inline-block" :key="vTitle" style="max-width: 250px">
-      <div>
-        <h5 :class=" varignored.includes(vTitle.toLowerCase()) ? 'text-muted' : '' ">{{vTitle}}:</h5>
+<div class="row">
+  <div class="col-12">
+    <h1 class="mt-4 text-green font-weight-bold"><s class="pesosign"></s><span class="header-font ms-2">{{scPrice}}</span></h1>
+  </div>
+  <div class="col-12">
+    <div class="d-flex align-content-around flex-wrap">
+      <div v-for="(vObj, vTitle) in variations" class="my-4 ms-3 d-inline-block" :key="vTitle">
         <div>
-          <button v-for="(opt, optInd) in vObj.options"
-            :class="vObj.selected == optInd && !varignored.includes(vTitle.toLowerCase()) ? 'btn border border-pink bg-pink mx-2 my-1' : 'btn border mx-2 my-1'"
-            :key="optInd"
-            :disabled="varignored.includes(vTitle.toLowerCase())"
-            @click="$emit('optclick',[vTitle, optInd])"
-          >
-            {{opt}}
-          </button>
+          <h5 :class=" varignored.includes(vTitle.toLowerCase()) ? 'text-muted' : '' ">{{vTitle}}:</h5>
+          <div>
+            <button v-for="(opt, optInd) in vObj.options"
+              :class="vObj.selected == optInd && !varignored.includes(vTitle.toLowerCase()) ? 'btn border border-pink bg-pink mx-2 my-1' : 'btn border mx-2 my-1'"
+              :key="optInd"
+              :disabled="varignored.includes(vTitle.toLowerCase())"
+              @click="$emit('optclick',[vTitle, optInd])"
+            >
+              {{opt}}
+            </button>
+          </div>
         </div>
       </div>
     </div>
+    <div class="text-danger" v-html="notes"></div>
   </div>
-
-  <div>
-    <p class="text-danger" v-html="notes"></p>
+  <div class="col-12 mt-4">
     <h5 class="d-inline-block">Quantity:</h5>
     <div class="d-inline-block">
       <button class="btn" @click="addqty(1, true)"> <i class="lnr lnr-circle-minus"></i> </button>
       <p class="mb-0 mx-2 d-inline-block" style="width: 22px">{{qty}}</p>
       <button class="btn" @click="addqty(1)"> <i class="lnr lnr-plus-circle"></i> </button>
     </div>
-  </div>
-  <div class="pt-5">
-    <button class="btn btn-lg btn-block bg-pink header-font" @click="$emit('addtocart', [getScOptions, qty, scItemPrice])">Add to Cart</button>
+    <div class="d-grid d-lg-block mt-3">
+      <button class="btn btn-lg btn-block bg-pink header-font px-lg-5" @click="$emit('addtocart', [getScOptions, qty, scItemPrice])">Add to Cart</button>
+    </div>
   </div>
 </div>
 </template>
@@ -44,6 +47,14 @@ export default {
   data(){
     return {
       qty:1
+    }
+  },
+  mounted(){
+    this.$emit('priceupdate', this.scPrice)
+  },
+  watch:{
+    scPrice(newval){
+      this.$emit('priceupdate', newval)
     }
   },
   computed:{

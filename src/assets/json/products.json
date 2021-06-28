@@ -32,7 +32,14 @@
     },
     "title": "Flow Underwear",
     "tagline": "Designed to be your last layer of protection against leaks during flow days.",
-    "points":["- Smooth polyester spandex","- Leak-proof lining (absorbs up to 8-10ml)","- Machine-washable (note: avoid heat)"],
+    "points":[
+      "- Smooth polyester spandex",
+      "- Leak-proof lining (absorbs up to 8-10ml)",
+      "- Machine-washable (note: avoid heat)",
+      "<br>",
+      "<a href=\"https://www.mirkoessentials.com/product/menstralcups\">Shop menstral cup</a>",
+      "<a href=\"https://www.mirkoessentials.com/product/duokits\">Shop Game Changer Duo Kit</a>"
+    ],
     "cards":["https://mirkophp.navitag.net/photos/fu-cards-1.jpg","https://mirkophp.navitag.net/photos/fu-cards-2.jpg","https://mirkophp.navitag.net/photos/fu-cards-3.jpg","https://mirkophp.navitag.net/photos/fu-cards-4.jpg"]
   },
   "2": {
@@ -71,7 +78,9 @@
       "- Certified by US-FDA",
       "- Classic shape with a long trimmable stem",
       "<br>",
-      "<a href=\"https://www.mirkoessentials.com/linkto/instructions-cups\">How to use a menstral cup</a>"
+      "<a href=\"https://www.mirkoessentials.com/linkto/instructions-cups\">How to use a menstral cup</a>",
+      "<a href=\"https://www.mirkoessentials.com/product/duokits\">Shop Game Changer Duo Kit</a>",
+      "<a href=\"https://www.mirkoessentials.com/product/flowunderwear\">Shop flowunderwear</a>"
     ],
     "cards":["https://mirkophp.navitag.net/photos/mc-cards-1.jpg","https://mirkophp.navitag.net/photos/mc-cards-2.jpg","https://mirkophp.navitag.net/photos/mc-cards-3.jpg","https://mirkophp.navitag.net/photos/mc-cards-4.jpg"]
   },
@@ -80,14 +89,9 @@
     "imgs": ["https://mirkophp.navitag.net/photos/dk-prod-1.jpg","https://mirkophp.navitag.net/photos/dk-prod-2.jpg","https://mirkophp.navitag.net/photos/dk-prod-3.jpg","https://mirkophp.navitag.net/photos/dk-prod-4.jpg"],
     "imgfocus": 0,
     "chart":{
-      "title":"Set Breakdown",
-      "header":["Set", "Flow Underwear", "Menstral Cups"],
-      "body":[
-        ["Set A","1pc","1pc"],
-        ["Set B","1pc","2pc"],
-        ["Set C","3pc","1pc"],
-        ["Set D","3pc","2pc"]
-      ],
+      "title":"",
+      "header":[],
+      "body":[],
       "note": ""
     },
     "variations":{
@@ -96,7 +100,7 @@
         "options":["Set A","Set B", "Set C", "Set D"],
         "pricediff":[0,500,475,975],
         "notes":[
-          "Includes: 1 Flow Underwear + 1 Menstral Cup",
+          "",
           "Includes: 1 Flow Underwear + 2 Menstral Cup",
           "Includes: 3 Flow Underwear + 1 Menstral Cup",
           "Includes: 3 Flow Underwear + 2 Menstral Cup"
@@ -128,7 +132,14 @@
     },
     "title": "Game Change Duo Kits",
     "tagline": "A duo specially designed to revolutionized your period game",
-    "points":["<a href=\"https://www.mirkoessentials.com/product/flowunderwear\">Shop Flow Underwear</a>","<a href=\"https://www.mirkoessentials.com/product/menstralcups\">Shop Menstal Cups</a>"],
+    "points":[
+      "Set A - 1 Underwear + 1 Cup",
+      "Set B - 1 Underwear + 2 Cups",
+      "Set C - 3 Underwear + 1 Cup",
+      "Set D - 3 Underwear + 2 Cups",
+      "<br>",
+      "<a href=\"https://www.mirkoessentials.com/product/flowunderwear\">Shop Flow Underwear</a>",
+      "<a href=\"https://www.mirkoessentials.com/product/menstralcups\">Shop Menstal Cups</a>"],
     "cards":["https://mirkophp.navitag.net/photos/fu-cards-1.jpg","https://mirkophp.navitag.net/photos/mc-cards-1.jpg","https://mirkophp.navitag.net/photos/fu-cards-2.jpg", "https://mirkophp.navitag.net/photos/dk-cards-1.jpg"]
   }
 }
