@@ -48,6 +48,12 @@ const routes = [
     props: { pid: 2 }
   },
   {
+    path: '/product/duokits',
+    name: 'duokits',
+    component: prod,
+    props: { pid: 3 }
+  },
+  {
     path: '/linkto/instructions-cups',
     name: 'cupsInfo',
     component: cupsinfo

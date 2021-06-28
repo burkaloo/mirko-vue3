@@ -66,7 +66,69 @@
     },
     "title": "Menstral Cups",
     "tagline": "Not all menstral cups are made the same. #MakeTheSwitch",
-    "points":["- 100% medical grade liquid silicone","- Certified by US-FDA","- Classic shape with a long trimmable stem"],
+    "points":[
+      "- 100% medical grade liquid silicone",
+      "- Certified by US-FDA",
+      "- Classic shape with a long trimmable stem",
+      "<br>",
+      "<a href=\"https://www.mirkoessentials.com/linkto/instructions-cups\">How to use a menstral cup</a>"
+    ],
     "cards":["https://mirkophp.navitag.net/photos/mc-cards-1.jpg","https://mirkophp.navitag.net/photos/mc-cards-2.jpg","https://mirkophp.navitag.net/photos/mc-cards-3.jpg","https://mirkophp.navitag.net/photos/mc-cards-4.jpg"]
+  },
+  "3": {
+    "baseprice": 875,
+    "imgs": ["https://mirkophp.navitag.net/photos/dk-prod-1.jpg","https://mirkophp.navitag.net/photos/dk-prod-2.jpg","https://mirkophp.navitag.net/photos/dk-prod-3.jpg","https://mirkophp.navitag.net/photos/dk-prod-4.jpg"],
+    "imgfocus": 0,
+    "chart":{
+      "title":"Set Breakdown",
+      "header":["Set", "Flow Underwear", "Menstral Cups"],
+      "body":[
+        ["Set A","1pc","1pc"],
+        ["Set B","1pc","2pc"],
+        ["Set C","3pc","1pc"],
+        ["Set D","3pc","2pc"]
+      ],
+      "note": ""
+    },
+    "variations":{
+      "Set":{
+        "selected":0,
+        "options":["Set A","Set B", "Set C", "Set D"],
+        "pricediff":[0,500,475,975],
+        "notes":[
+          "Includes: 1 Flow Underwear + 1 Menstral Cup",
+          "Includes: 1 Flow Underwear + 2 Menstral Cup",
+          "Includes: 3 Flow Underwear + 1 Menstral Cup",
+          "Includes: 3 Flow Underwear + 2 Menstral Cup"
+        ],
+        "ignore": [[],[],[],[]]
+      },
+      "Underwear Size":{
+        "selected":0,
+        "options":["S","M","L","XL"],
+        "pricediff":[0,0,0,0],
+        "notes":["", "", "",""],
+        "ignore": [[],[],[],[]]
+      },
+      "Cup Color":{
+        "selected":0,
+        "options":["Aqua","Clear", "Pink"],
+        "pricediff":[0, 0, 0],
+        "notes":["", "", ""],
+        "ignore": [[],[],[]]
+      },
+      "Cup Size":{
+        "selected":0,
+        "options":["Small", "Large"],
+        "pricediff":[0, 0],
+        "notes":["", ""],
+        "ignore": [[],[],[]]
+      }
+
+    },
+    "title": "Game Change Duo Kits",
+    "tagline": "A duo specially designed to revolutionized your period game",
+    "points":["<a href=\"https://www.mirkoessentials.com/product/flowunderwear\">Shop Flow Underwear</a>","<a href=\"https://www.mirkoessentials.com/product/menstalcups\">Shop Menstal Cups</a>"],
+    "cards":["https://mirkophp.navitag.net/photos/fu-cards-1.jpg","https://mirkophp.navitag.net/photos/mc-cards-1.jpg","https://mirkophp.navitag.net/photos/fu-cards-2.jpg", "https://mirkophp.navitag.net/photos/dk-cards-1.jpg"]
   }
 }
