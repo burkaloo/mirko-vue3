@@ -10,9 +10,9 @@
           <h5 :class=" varignored.includes(vTitle.toLowerCase()) ? 'text-muted' : '' ">{{vTitle}}:</h5>
           <div>
             <button v-for="(opt, optInd) in vObj.options"
-              :class="vObj.selected == optInd && !varignored.includes(vTitle.toLowerCase()) ? 'btn border border-pink bg-pink mx-2 my-1' : 'btn border mx-2 my-1'"
+              :class="vObj.selected == optInd && !varignored.includes(vTitle.toLowerCase()) ? 'btn border border-pink bg-pink mx-2 my-1' : 'btn border border-secondary mx-2 my-1'"
               :key="optInd"
-              :disabled="varignored.includes(vTitle.toLowerCase())"
+              :disabled="varignored.includes(vTitle.toLowerCase()) || optdisabled[vTitle].includes(optInd)"
               @click="$emit('optclick',[vTitle, optInd])"
             >
               {{opt}}
@@ -38,23 +38,49 @@
 </template>
 
 <script>
+Array.prototype.unique = function() {
+    var a = this.concat();
+    for(var i=0; i<a.length; ++i) {
+        for(var j=i+1; j<a.length; ++j) {
+            if(a[i] === a[j])
+                a.splice(j--, 1);
+        }
+    }
+
+    return a;
+};
+
 export default {
   name: 'itemSelect',
   props: {
     baseprice:{},
-    variations:{}
+    variations:{},
   },
   data(){
     return {
-      qty:1
+      qty:1,
     }
   },
   mounted(){
     this.$emit('priceupdate', this.scPrice)
   },
   watch:{
-    scPrice(newval){
-      this.$emit('priceupdate', newval)
+    optdisabled(newval){
+      //console.log('deepwatch')
+      let keys = Object.keys(this.variations)
+      outloop: for (var i = 0; i < keys.length; i++) {
+        let key = keys[i]
+        if(newval[key].includes(this.variations[key].selected)){
+          //change selected option
+          for (var x = 0; x < this.variations[key].options.length; x++) {
+            let newopt = x
+            if (! newval[key].includes(newopt)){
+              this.$emit('optclick',[key, newopt])
+              break outloop
+            }
+          }
+        }
+      }
     }
   },
   computed:{
@@ -101,6 +127,26 @@ export default {
         ret = ret.concat(this.variations[key].ignore[this.variations[key].selected])
       }
       return ret
+    },
+    optdisabled(){
+      let ret = {}
+      //add each variable as empty to disabled object
+      let keys = Object.keys(this.variations)
+      for (var i = 0; i < keys.length; i++) {
+        let key = keys[i]
+        ret[key] = []
+      }
+
+      for (var y = 0; y < keys.length; y++) {
+        let key = keys[y]
+        let selectedVarDis = this.variations[key].disable[this.variations[key].selected]
+        let subkeys = Object.keys(selectedVarDis)
+        for (var x = 0; x < subkeys.length; x++) {
+          let subkey = subkeys[x]
+          ret[subkey] = ret[subkey].concat(selectedVarDis[subkey]).unique()
+        }
+      }
+      return ret
     }
   },
   methods:{
@@ -117,3 +163,15 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+button:disabled,
+button[disabled]{
+  border: 1px solid #999999 !important;
+  background-color: #cccccc;
+  color: #666666;
+}
+
+
+
+</style>

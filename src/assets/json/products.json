@@ -20,14 +20,16 @@
         "options":["S", "M", "L", "XL"],
         "pricediff":[0, 0, 0, 0],
         "notes":["", "", "", ""],
-        "ignore": [[],[],[]]
+        "ignore": [[],[],[],[]],
+        "disable":[{},{},{},{}]
       },
       "Pack Size":{
         "selected":0,
         "options":["Singles", "Pack of 3", "Assorted Pack of 3"],
         "pricediff":[0, 475, 475],
         "notes":["", "", "Please indicate your assorted pack sizes at checkout"],
-        "ignore": [[],[],["size"]]
+        "ignore": [[],[],["size"]],
+        "disable":[{},{},{}]
       }
     },
     "title": "Flow Underwear",
@@ -63,14 +65,16 @@
         "options":["Small","Large"],
         "pricediff":[0, 0],
         "notes":["", ""],
-        "ignore": [[],[]]
+        "ignore": [[],[]],
+        "disable": [{},{}]
       },
       "Color":{
         "selected":0,
         "options":["Aqua","Clear", "Pink"],
         "pricediff":[0, 0, 0],
         "notes":["", "", ""],
-        "ignore": [[],[], []]
+        "ignore": [[],[],[]],
+        "disable": [{},{},{}]
       }
     },
     "title": "Menstrual Cups",
@@ -106,32 +110,36 @@
         "notes":[
           "","","",""
         ],
-        "ignore": [[],[],[],[]]
+        "ignore": [[],[],[],[]],
+        "disable": [{"Underwear Size":[4],"Cup Color":[3],"Cup Size":[2]},{"Underwear Size":[4]},{"Cup Color":[3],"Cup Size":[2]},{}]
       },
       "Underwear Size":{
         "selected":0,
         "options":["S","M","L","XL", "Assorted"],
         "pricediff":[0,0,0,0,0],
         "notes":["", "", "","","Please indicate your flow underwear sizes at checkout"],
-        "ignore": [[],[],[],[],[]]
+        "ignore": [[],[],[],[],[]],
+        "disable": [{},{},{},{},{}]
       },
       "Cup Color":{
         "selected":0,
         "options":["Aqua","Clear", "Pink", "Assorted"],
         "pricediff":[0, 0, 0, 0],
         "notes":["", "", "","Please indicate your cups colors at checkout"],
-        "ignore": [[],[],[],[]]
+        "ignore": [[],[],[],[]],
+        "disable": [{},{},{},{}]
       },
       "Cup Size":{
         "selected":0,
         "options":["Small", "Large", "1 of each"],
         "pricediff":[0, 0, 0],
         "notes":["", "", ""],
-        "ignore": [[],[],[]]
+        "ignore": [[],[],[]],
+        "disable": [{},{},{}]
       }
 
     },
-    "title": "Game Change Duo Kits",
+    "title": "Game Changer Duo Kits",
     "tagline": "A duo specially designed to revolutionized your period game",
     "points":[
       "Mix and match your kits!",
@@ -142,7 +150,7 @@
       "Set D - 3 Underwear + 2 Cups",
       "<br>",
       "Need our flow underwear only? Shop <a href=\"https://www.mirkoessentials.com/product/flowunderwear\">Flow Underwear</a>",
-      "Looking for menstrual cups only? Shop <a href=\"https://www.mirkoessentials.com/product/menstrualcups\">Mensrtual Cups</a>"],
+      "Looking for menstrual cups only? Shop <a href=\"https://www.mirkoessentials.com/product/menstrualcups\">Menstrual Cups</a>"],
     "cards":["https://mirkophp.navitag.net/photos/fu-cards-1.jpg","https://mirkophp.navitag.net/photos/mc-cards-1.jpg","https://mirkophp.navitag.net/photos/fu-cards-2.jpg", "https://mirkophp.navitag.net/photos/dk-cards-1.jpg"]
   }
 }
