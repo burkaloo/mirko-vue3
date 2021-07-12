@@ -24,6 +24,7 @@
       @load="load"
       @alert="togglealert"
       @order="placeorder"
+      @shipcost="updateSF"
     />
 
     <cartPage
@@ -34,7 +35,6 @@
       @add="addqtycart"
       @checkout="checkout"
       @back="backpage"
-      @updatetotal="updatetotal"
       @page="nextpage"
       @load="load"
       @alert="togglealert"
@@ -90,7 +90,8 @@ export default {
         show: false
       },
       products: null,
-      bccemail: "camille@mirkoessentials.com"
+      bccemail: "camille@mirkoessentials.com",
+      shipfee: 0
     }
   },
   created(){
@@ -108,6 +109,13 @@ export default {
     },
     onScroll(){
       this.docscroll = document.documentElement.scrollTop
+    },
+    updateSF(data){
+      if( isNaN(data) ){
+        this.shipfee = 0
+      } else{
+        this.shipfee = data
+      }
     },
     addtocart(data){
       //console.log(data)
@@ -219,6 +227,9 @@ export default {
     },
     placeorder(data){
       //send email will complete order details
+
+      //'<tr><td>' + itemobj.qty.toString() + '</td><td>'
+      //add shipping to cart
       let postdata = {
         merge:{
           cart: this.carttable,
@@ -230,6 +241,9 @@ export default {
         email: {to: data.email, bcc: this.bccemail},
         "subject-pre": 'Mirko order for ' + data.name
       }
+
+      postdata.merge.cart += '<tr><td></td><td>Shipping fee</td><td style="text-align: right; padding:0 0 0 0">' + this.shipfee +"</td></tr>"
+
       if('files' in data){
         postdata.files = [{BinaryContent: data.files.base64, Name: data.files.name}]
       }
@@ -271,13 +285,15 @@ export default {
       for (var i = 0; i < this.cart.length; i++) {
         total += (this.cart[i].qty * this.cart[i].price)
       }
+
+      total += this.shipfee
       return total
     },
     carttable(){
       let cartstring = ""
       this.cart.forEach((itemobj) => {
         let qtystr = '<tr><td>' + itemobj.qty.toString() + '</td><td>'
-        let itemstr = '<p style="margin-bottom: 0">' + itemobj.title  + '</p><small style="margin-bottom: 0">' + itemobj.variations + '</small>'
+        let itemstr = '<p style="margin: 0 0 0 0">' + itemobj.title  + '</p><small>' + itemobj.variations + '</small>'
         let pricestr = '</td><td style="text-align: right; padding:0 0 0 0">' + itemobj.price + '</td></tr>'
         cartstring += qtystr
         cartstring += itemstr

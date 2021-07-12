@@ -71,7 +71,7 @@ export default {
   },
   methods:{
     pushtitle(data){
-        data.push('Flow Underwear')
+        data.push(this.inview.title)
         //console.log(data)
         this.$emit('cartinput', data)
     },

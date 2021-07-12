@@ -37,7 +37,11 @@
           </div>
           <div class="col-12 mb-3">
             <label class="form-label">Street Adress</label>
-            <textarea class="form-control" rows="2" v-model.trim="address"></textarea>
+            <input class="form-control" v-model.trim="address">
+          </div>
+          <div class="col-12 mb-3">
+            <label class="form-label">Barangay</label>
+            <input class="form-control" v-model.trim="brgy">
           </div>
           <div class="col-12 col-lg-5 mb-3">
             <label class="form-label">City:</label>
@@ -165,6 +169,7 @@ export default {
       provinceOptions: [],
       cityOptions:[],
       address: "",
+      brgy:"",
       zip:"",
       notes:"",
       file: {
@@ -230,6 +235,8 @@ export default {
         this.$emit('alert', {show: true, class: 'danger', text: "Invalid contact number"})
       } else if(!this.emailvalid){
         this.$emit('alert', {show: true, class: 'danger', text: "Invalid Email Address"})
+      } else if(this.brgy == ""){
+        this.$emit('alert', {show: true, class: 'danger', text: "Shipping address incomplete. Barangay info required"})
       } else if(this.province == null){
         this.$emit('alert', {show: true, class: 'danger', text: "Shipping address incomplete. Select province"})
       } else if(this.city.name == null){
@@ -242,9 +249,9 @@ export default {
         this.$emit('alert', {show: true, class: 'danger', text: "Select payment method"})
       } else{
         this.$emit("load", true);
-        let addArr = [this.shipmeth, this.name, this.phone, this.address, this.city.name + " "+ this.province.name + " " + this.zip]
+        let addArr = [this.shipmeth + "<br>", this.name, this.phone + "<br>", this.address + ",",this.brgy +", "+ this.city.name + ", ", this.province.name + " " + this.zip]
         if(this.notes != ""){
-          addArr.push('Note: ' + this.notes)
+          addArr.push('<br>Note: ' + this.notes)
         }
 
         let data = {name: this.name, email: this.email, shipinfo: addArr.join('<br>'), payment: this.pay}
@@ -293,9 +300,6 @@ export default {
       if(newval.score > 1 || newval == null){
           this.shipmeth = "Standard"
       }
-    },
-    withshipping: function(newval){
-      this.$emit('updatetotal', newval)
     },
     pay(newval){
       this.removefile()
