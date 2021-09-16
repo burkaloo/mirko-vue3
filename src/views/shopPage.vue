@@ -1,8 +1,8 @@
 <template>
   <div class="container mt-5">
     <!--srtoing UI -->
-    <!--div class="row">
-      <div class="col-12">
+    <div class="row">
+      <!--div class="col-12">
         <select class="form-select form-select-sm" v-model="sortpick">
           <option v-for="(opt, ind) in sortopts" :value="opt.value" :key="ind">{{opt.display}}</option>
         </select>
@@ -13,11 +13,11 @@
           <Slider v-model="slider.val" v-bind="slider" :min="0" :max="50" />
 
         </div>
-      </div>
+      </div-->
       <div class="col-12">
           <input type="text" class="form-control" v-model.trim="searchinput" @keyup.enter="search">
       </div>
-    </div-->
+    </div>
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
       <div v-for="(feat, fInd) in prodstoshow" class="col p-3" :key="fInd">
         <div class="border p-2 h-100" @click="gotoitem(feat.pid)">
@@ -26,10 +26,13 @@
           <h5 class="text-center mt-3">PHP {{feat.price}}</h5>
         </div>
       </div>
+
     </div>
+    <h1 v-if="prods.length == 0" class="text-center my-5 py-5"> No products matched search</h1>
     <div class=" mt-5">
       <pagenav :lastresult="islastresult" :totalcount="prods.length" :displaycount="siteconf.catalogdisplaylimit" :curpage="curpage" @loadnext="loadnextpage"/>
     </div>
+    <spinner :show="spinnershow"/>
   </div>
 </template>
 
@@ -37,9 +40,8 @@
 <script>
 //import Slider from '@vueform/slider'
 import pagenav from '@/components/pagenav.vue'
-
+import spinnerMix from '@/mixin/spinnerMix.js'
 const axios = require('axios');
-
 const sleep = (milliseconds) => {
   return new Promise(resolve => setTimeout(resolve, milliseconds))
 }
@@ -54,6 +56,7 @@ export default {
   components:{
     pagenav, //Slider
   },
+  mixins:[spinnerMix],
   data(){
     return{
       prods:[],
@@ -89,7 +92,8 @@ export default {
     search(){
       if(this.searchinput.length > 3){
         this.lastsearch = this.searchinput
-        this.$emit('load', true)
+        //this.$emit('load', true)
+        this.spinnertoggle(true)
         this.prods = []
         this.getprods(this.searchinput)
 
@@ -99,7 +103,8 @@ export default {
     },
     async getprods(keyword = null){
       if(keyword == null){
-        this.$emit('load', true)
+        //this.$emit('load', true)
+        this.spinnertoggle(true)
       }
       let comp = this
       while(isNaN(this.siteconf.catalogdisplaylimit)){
@@ -146,7 +151,8 @@ export default {
           });
         }
       }).finally(function(){
-          comp.$emit('load', false)
+          //comp.$emit('load', false)
+          comp.spinnertoggle(false)
       })
     },
     gotoitem(pid){
@@ -198,7 +204,7 @@ export default {
     },
     prodstoshow(){
       let offset = (this.curpage -1) * parseInt(this.siteconf.catalogdisplaylimit)
-      console.log(offset)
+      //console.log(offset)
       let limit = offset + parseInt(this.siteconf.catalogdisplaylimit)
       return this.prods.slice(offset, limit + 1)
     },

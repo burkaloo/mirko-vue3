@@ -45,6 +45,7 @@ export default {
   },
   methods:{
     sendmsg(){
+      this.buttonload = true
       let postdata = {
         merge:{
           name: this.name,
@@ -63,13 +64,14 @@ export default {
         data: postdata
       }).then(function(r){
         if("MessageID" in r.data && "TransactionID" in r.data){
-          comp.$emit('alert', {text: "Message Sent", class: "success"})
+          comp.$emit('alert', {show: true, text: "Message Sent", class: "success"})
         } else{
-          comp.$emit('alert', {text: "Encountered error while sending. Message not sent...", class: "danger"})
+          comp.$emit('alert', {show: true, text: "Encountered error while sending. Message not sent...", class: "danger"})
         }
       }).catch(function(){
         comp.$emit('alert', {text: "Encountered error while sending. Message not sent...", class: "danger"})
       }).finally(function(){
+        comp.buttonload = false
       })
     }
 

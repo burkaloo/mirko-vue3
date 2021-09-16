@@ -47,14 +47,15 @@
 
     <vFooter @page="nextpage" @alert="togglealert"/>
 
-    <div v-if="loading" class="bg-pink z-top position-fixed top-0 vh-100 vw-100">
+    <!--div v-if="loading" class="bg-pink z-top position-fixed top-0 vh-100 vw-100">
       <div class="text-center" style="margin-top:40vh">
         <div class="spinner-border m-5" role="status">
           <span class="visually-hidden">Loading...</span>
         </div>
       </div>
-    </div>
+    </div-->
 
+    <spinner :show="spinnershow"/>
   </div>
 </template>
 
@@ -65,7 +66,7 @@ const axios = require('axios');
 import navBar from './components/navBar.vue'
 import vFooter from './components/vFooter.vue'
 import cartPage from './components/cartPage.vue'
-
+import spinnerMix from '@/mixin/spinnerMix.js'
 
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -75,10 +76,12 @@ require('./assets/styles/main.css')
 const sleep = (milliseconds) => {
   return new Promise(resolve => setTimeout(resolve, milliseconds))
 }
+//var tID = false;
 
 export default {
   name: 'app',
   components:{navBar, vFooter, cartPage},
+  mixin:[spinnerMix],
   data(){
     return{
       docscroll:0,
@@ -89,7 +92,7 @@ export default {
         class: 'danger',
         text: "error Message",
         show: false,
-        clear: false
+        timeout: false
       },
       products: null,
       bccemail: "camille@mirkoessentials.com",
@@ -98,7 +101,6 @@ export default {
       uid: 1,
       backend: "https://mirkophp.navitag.net/dbconn.php",
       siteconf: {},
-
     }
   },
   created(){
@@ -121,9 +123,6 @@ export default {
     window.removeEventListener("scroll", this.onScroll)
   },
   methods:{
-    sleep(ms){
-      return new Promise(resolve => setTimeout(resolve, ms));
-    },
     onScroll(){
       this.docscroll = document.documentElement.scrollTop
     },
@@ -201,8 +200,6 @@ export default {
       if(page != 'cart'){
         this.$router.push(page)
       }
-
-
       setTimeout(
         function(){
           document.body.scrollTop = 0; // For Safari
@@ -226,49 +223,32 @@ export default {
         70
       );
     },
-    load(state = null){
-      console.log(state)
-      if(state === null){
-        this.loading = !this.loading
-      } else{
-        this.loading = state
-      }
-    },
     async togglealert(data){
+      let toggle = this.togglealert
       if(data.show == true){
         if(this.alert.show == true){
-          this.alert.show = false
-/*
-          if(this.alert.clear){
-            this.alert.clear()
-          }
-          this.alert.clear = false
-*/
+          toggle({show:false})
           if("delay" in data){
             await sleep(data.delay)
           } else{
             await sleep(200)
           }
         }
-
         this.alert.text = "text" in data ? data.text : "undefined system message"
         this.alert.class = "class" in data ? data.class : "undefined system message"
         this.alert.show = data.show
-
-
-        // return a function which will cancel the timer
-        //this.alert.clear = function () { clearTimeout(alertCloseTimerId);};
-
+        this.alert.timeout = setTimeout(function(){toggle({show:false})}, 5000)
       } else{
         this.alert.show =  false
-        //if(this.alert.clear){ this.alert.clear() }
-        //this.alert.clear = false
+        if(this.alert.timeout !== false){
+          clearTimeout(this.alert.timeout)
+          this.alert.timeout = false
+        }
       }
     },
     placeorder(data){
+      this.spinnertoggle(true)
       //send email will complete order details
-
-      //'<tr><td>' + itemobj.qty.toString() + '</td><td>'
       //add shipping to cart
       let postdata = {
         merge:{
@@ -312,7 +292,7 @@ export default {
       }).catch(function(){
         this.togglealert({show: true, class: 'danger', text: "Somthing went wrong... Order has not been confirmed."});
       }).finally(function(){
-        comp.load(false)
+        comp.spinnertoggle(false)
       })
     },
     discountupdate(data){

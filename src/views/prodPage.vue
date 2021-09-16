@@ -89,7 +89,7 @@
           </div>
         </div>
       </div>
-
+      <spinner :show="spinnershow"/>
     </div>
 
 </template>
@@ -100,10 +100,11 @@ const axios = require('axios');
 import sizeChart from '@/components/sizeChart.vue'
 import itemSelect from '@/components/itemSelect.vue'
 import photoShow from '@/components/photoShow.vue'
-
+import spinnerMix from '@/mixin/spinnerMix.js'
 export default {
   name: 'prodPage',
   components:{sizeChart, itemSelect, photoShow},
+  mixins:[spinnerMix],
   props:{
     pid: {},
     backend: {},
@@ -193,7 +194,7 @@ export default {
       this.price = data
     },
     getprod(){
-      this.$emit('load', true)
+      this.spinnertoggle(true)
       this.prod = null
       this.details = null
       let comp = this
@@ -225,7 +226,7 @@ export default {
 
           }
           comp.prod = newprod
-          comp.$emit('load', false)
+          comp.spinnertoggle(false)
         }
       })
 

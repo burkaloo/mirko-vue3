@@ -218,13 +218,14 @@
 
       </div>
     </div>
-
+    <spinner :show="spinnershow" />
   </div>
 
 </template>
 
 <script>
 import axios from 'axios'
+import spinnerMix from '@/mixin/spinnerMix.js'
 
 const toBase64 = file => new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -267,9 +268,8 @@ export default {
       }
     }
   },
-  components:{
-
-  },
+  mixin:[spinnerMix],
+  components:{},
   props:{
     carttotal: {default: 0, type: Number},
     carttable: {type: String, default: ""}
@@ -283,7 +283,6 @@ export default {
     if(this.carttotal == 0){
       this.$router.push({name:"home"})
     }
-    this.$emit("load", true)
     let comp = this
     axios.post(this.baseurl+ "getprovinces.php").
     then(function(r){
@@ -295,7 +294,6 @@ export default {
     }).catch(function(e){
       console.log(e)
     }).finally(function(){
-      comp.$emit("load")
     })
   },
   methods:{
@@ -352,7 +350,7 @@ export default {
       this.pay = ""
     },
     async checkout(){
-      this.$emit("load", true);
+      this.spinnertoggle(true)
       let addArr = [this.shipmeth + "<br>", this.name, this.phone + "<br>", this.address + ",",this.brgy +", "+ this.city.name + ", ", this.province.name + " " + this.zip]
       if(this.notes != ""){
         addArr.push('<br>Note: ' + this.notes)
@@ -369,6 +367,7 @@ export default {
             this.removefile()
             //open upload file message
             this.paymsg = true
+            this.spinnertoggle(false)
             return false;
         } else{
           let fileArr = result.split(",")
@@ -376,6 +375,7 @@ export default {
         }
       }
       //parse address
+      this.spinnertoggle(false)
       this.$emit('order', data);
     },
   },
@@ -388,7 +388,7 @@ export default {
         this.cityOptions = []
         this.city = "Select City"
         this.shipmeth = "Standard"
-        this.$emit("load", true)
+        this.spinnertoggle(true)
         var comp = this
         axios.post(this.baseurl + "getcities.php",{
           prov: newval.id
@@ -397,7 +397,7 @@ export default {
             comp.cityOptions = r.data.response
           }
         }).finally(function(){
-          comp.$emit("load")
+          comp.spinnertoggle(false)
         })
       }
     },
