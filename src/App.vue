@@ -1,23 +1,24 @@
 <template>
-  <div class="bg-grey" id="app">
+  <div id="app">
     <div v-if="alert.show" class="position-fixed start-0 end-0 mx-auto bg-transparent alert-box">
       <div :class="'alert alert-' + alert.class + ' alert-dismissible shadow-lg'">
         <span>{{alert.text}}</span>
         <span type="button" class="btn-close" @click="togglealert({show: false})"></span>
       </div>
     </div>
-    <div class="container">
-      <div class="d-flex py-2">
-        <div class="">Nationwide Shipping</div>
-      </div>
+    <div class="py-2 border-bottom">
+      <div class="text-center">Nationwide Shipping!</div>
     </div>
 
-    <navBar :docscroll="docscroll" topmargin="40" spacer="71" logo="./photos/mirko-logo.png" logoh="45" :cartcount="cartcount"
+    <navBar :docscroll="docscroll" topmargin="40" spacer="71" logo="./photos/mirko-logo.png" :cartcount="cartcount"
     @page="nextpage"
     @alert="togglealert"/>
 
     <router-view
       v-show="page != 'cart'"
+      :siteconf="siteconf"
+      :backend="backend"
+      :bccemail="bccemail"
       @cartinput="addtocart"
       @page="nextpage"
       @back="backpage"
@@ -30,7 +31,10 @@
     <cartPage
       v-show="page == 'cart'"
       :cart="cart"
+      :itemstotal="itemstotal"
       :carttotal="carttotal"
+      :uid="uid"
+      :discount="discount"
       @remove="removefromcart"
       @add="addqtycart"
       @checkout="checkout"
@@ -38,13 +42,12 @@
       @page="nextpage"
       @load="load"
       @alert="togglealert"
+      @discountupdate="discountupdate"
     />
 
-    <div style="padding-bottom: 70px;">
-        <v-footer class="pt-5" @page="nextpage" @alert="togglealert"/>
-    </div>
+    <vFooter @page="nextpage" @alert="togglealert"/>
 
-    <div v-if="loading" class="grey-out z-top position-fixed top-0 vh-100 vw-100">
+    <div v-if="loading" class="bg-pink z-top position-fixed top-0 vh-100 vw-100">
       <div class="text-center" style="margin-top:40vh">
         <div class="spinner-border m-5" role="status">
           <span class="visually-hidden">Loading...</span>
@@ -63,10 +66,9 @@ import navBar from './components/navBar.vue'
 import vFooter from './components/vFooter.vue'
 import cartPage from './components/cartPage.vue'
 
+
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
-
-import productsjson from './assets/json/products.json'
 
 require('./assets/styles/main.css')
 
@@ -83,19 +85,34 @@ export default {
       cart:[],
       lastpage: "home",
       page: "home",
-      loading: false,
       alert:{
         class: 'danger',
         text: "error Message",
-        show: false
+        show: false,
+        clear: false
       },
       products: null,
       bccemail: "camille@mirkoessentials.com",
-      shipfee: 0
+      shipfee: 0,
+      discount:{amt: 1, title:"INVALID"},
+      uid: 1,
+      backend: "http://localhost/mirkobackend/dbconn.php",
+      siteconf: {},
+
     }
   },
   created(){
-    this.products = productsjson
+    let comp = this
+    axios.post(
+      this.backend,
+      {statement: "siteconf"}
+    ).then(function(res){
+      if(res.data.status == "success"){
+        res.data.response.forEach((set) => {
+          comp.siteconf[set.key] = set.value
+        });
+      }
+    })
   },
   mounted() {
     window.addEventListener("scroll", this.onScroll)
@@ -119,20 +136,25 @@ export default {
     },
     addtocart(data){
       //console.log(data)
-      var opts = data[0]
-      var qty = data[1]
-      var price = data[2]
-      var title = data[3]
+      let opts = data[0]
+      let qty = data[1]
+      let price = data[2]
+      let sku = data[3]
+      let title = data[4]
+      let itemid = data[5]
 
-      var keys = Object.keys(opts)
-
-      var searchArr = JSON.parse(JSON.stringify(this.cart))
-      //console.log(searchArr)
-      var addnew = true
+      let keys = Object.keys(opts)
+      let varStr = keys.length == 0 ? '' : JSON.stringify(opts).replace("{", '[').replace("}", "]").replace(/,/g, "; ").replace(/"/g, '').replace(/:/g, ": ")
+      let searchArr = JSON.parse(JSON.stringify(this.cart))
+      let addnew = true
       for (var i = 0; i < searchArr.length; i++) {
-        var varStr = keys.length == 0 ? '' : JSON.stringify(opts).replace("{", '[').replace("}", "]").replace(/,/g, "; ").replace(/"/g, '').replace(/:/g, ": ")
-        if(searchArr[i].title === title && searchArr[i].variations === varStr){
-          var cartitem = this.cart[i]
+        let cartitem = this.cart[i]
+        if(sku != "" && searchArr[i].sku === sku){
+          cartitem.qty+= qty
+          this.cart.splice(i,1, cartitem)
+          addnew = false
+          break
+        } else if(searchArr[i].title === title && searchArr[i].variations === varStr){
           cartitem.qty+= qty
           this.cart.splice(i,1, cartitem)
           addnew = false
@@ -141,18 +163,17 @@ export default {
       }
 
       if(addnew){
-        var newcartitem = {
+        let newcartitem = {
           title: title,
-          variations: keys.length == 0 ? '' : JSON.stringify(opts).replace("{", '[').replace("}", "]").replace(/,/g, "; ").replace(/"/g, '').replace(/:/g, ": "),
+          variations: varStr,
           price: price,
-          qty: qty
-
+          qty: qty,
+          pid: itemid,
+          sku: sku
         }
-
         this.cart.push(newcartitem)
-        this.nextpage('cart')
       }
-
+      this.nextpage('cart')
       //console.log(this.cart)
       //open cart here
     },
@@ -178,8 +199,10 @@ export default {
       this.lastpage = this.page
       this.page = page
       if(page != 'cart'){
-        this.$router.push({name:page})
+        this.$router.push(page)
       }
+
+
       setTimeout(
         function(){
           document.body.scrollTop = 0; // For Safari
@@ -191,10 +214,10 @@ export default {
     backpage(){
       this.nextpage(this.lastpage)
     },
-    checkout(data){
+    checkout(){
       this.lastpage = this.page
       this.page = "checkout"
-      this.$router.push({name:"checkout", params: {carttotal: data, carttable: this.carttable}})
+      this.$router.push({name:"checkout", params: {carttotal: this.carttotal, carttable: this.carttable}})
       setTimeout(
         function(){
           document.body.scrollTop = 0; // For Safari
@@ -204,6 +227,7 @@ export default {
       );
     },
     load(state = null){
+      console.log(state)
       if(state === null){
         this.loading = !this.loading
       } else{
@@ -211,18 +235,34 @@ export default {
       }
     },
     async togglealert(data){
-      if(data.show == false){
-        this.alert.show = false
-      } else if(data.show == true){
+      if(data.show == true){
         if(this.alert.show == true){
           this.alert.show = false
-          await sleep(200)
+/*
+          if(this.alert.clear){
+            this.alert.clear()
+          }
+          this.alert.clear = false
+*/
+          if("delay" in data){
+            await sleep(data.delay)
+          } else{
+            await sleep(200)
+          }
         }
+
         this.alert.text = "text" in data ? data.text : "undefined system message"
         this.alert.class = "class" in data ? data.class : "undefined system message"
         this.alert.show = data.show
+
+
+        // return a function which will cancel the timer
+        //this.alert.clear = function () { clearTimeout(alertCloseTimerId);};
+
       } else{
         this.alert.show =  false
+        //if(this.alert.clear){ this.alert.clear() }
+        //this.alert.clear = false
       }
     },
     placeorder(data){
@@ -242,7 +282,14 @@ export default {
         "subject-pre": 'Mirko order for ' + data.name
       }
 
-      postdata.merge.cart += '<tr><td></td><td>Shipping fee</td><td style="text-align: right; padding:0 0 0 0">' + this.shipfee +"</td></tr>"
+      //add shipping line on email
+      if(this.shipfee > 0){
+          postdata.merge.cart += '<tr><td></td><td>Shipping fee</td><td style="text-align: right; padding:0 0 0 0">' + this.shipfee +"</td></tr>"
+      }
+      //add discount line on email
+      if(this.discount.title != "INVALID"){
+          postdata.merge.cart += '<tr><td></td><td>'+this.discount.title+'</td><td style="text-align: right; padding:0 0 0 0">-' + this.discount.amt +"</td></tr>"
+      }
 
       if('files' in data){
         postdata.files = [{BinaryContent: data.files.base64, Name: data.files.name}]
@@ -267,6 +314,9 @@ export default {
       }).finally(function(){
         comp.load(false)
       })
+    },
+    discountupdate(data){
+      this.discount = data
     }
   },
   computed:{
@@ -280,13 +330,18 @@ export default {
       }
       return total
     },
-    carttotal(){
+    itemstotal(){
       var total = 0
       for (var i = 0; i < this.cart.length; i++) {
         total += (this.cart[i].qty * this.cart[i].price)
       }
-
-      total += this.shipfee
+      return total
+    },
+    carttotal(){
+      let total = this.itemstotal + this.shipfee
+      if(this.discount.title != "INVALID"){
+        total -= this.discount.amt
+      }
       return total
     },
     carttable(){
@@ -301,7 +356,7 @@ export default {
       });
 
       return cartstring
-    }
+    },
   }
 }
 </script>
@@ -322,6 +377,27 @@ export default {
   padding-left: 10px;
   padding-right: 10px;
   z-index: 10;
+}
+
+#app{
+  background-color: white
+}
+
+.fade-enter-active{
+  transition: height 0.5s ease;
+  height: 200px;
+}
+
+.fade-leave-active {
+  transition: height 0.5 ease;
+  height: 200px;
+}
+
+.fade-enter-from{
+  height: 0
+}
+.fade-leave-to {
+  height: 0;
 }
 
 </style>

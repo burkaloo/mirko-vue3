@@ -4,6 +4,11 @@
 }
 
 @font-face {
+  font-family: 'Open Sans';
+  src: url("./fonts/OpenSans-Regular.ttf");
+}
+
+@font-face {
   font-family: 'Avenir Medium Oblique';
   src: url("./fonts/Avenir-MediumOblique-10.ttf");
 }
@@ -19,17 +24,13 @@ html{
 }
 
 h1,h2,h3,h4, h5,h6,p,a,button,span,div{
-	font-family: 'Avenir Medium Oblique', sans-serif;
+	font-family: 'Open Sans', sans-serif;
   letter-spacing: .50px;
 }
 
 .header-font{
 	font-family: 'Didot Italic', serif !important;
   font-weight: 600;
-}
-
-.avenir-black{
-  font-family: 'Avenir Black Oblique', sans-serif;
 }
 
 .font-mono{
@@ -42,6 +43,10 @@ h1,h2,h3,h4, h5,h6,p,a,button,span,div{
 
 .bg-pink{
   background-color: #eec6c3;
+}
+
+.hover-bg-pink:hover{
+  background-color: #eec6c3
 }
 
 .border-pink{
@@ -68,6 +73,9 @@ h1,h2,h3,h4, h5,h6,p,a,button,span,div{
 	cursor: pointer;
 }
 
+.hoverbg-pink:hover{
+  background-color: #eec6c3
+}
 
 s, .pesosign::before{
 	content: '₱';

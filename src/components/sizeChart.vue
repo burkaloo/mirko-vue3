@@ -1,7 +1,7 @@
 <template>
   <div class="text-center">
     <h1 class="text-center header-font">{{title}}</h1>
-    <table class="table mt-3 table-bordered border-black">
+    <table class="table mt-3 mb-0 table-bordered border-black">
       <thead>
         <tr>
           <th v-for="(head, hInd) in header" :key="hInd">{{head}}</th>
@@ -14,7 +14,7 @@
       </tbody>
     </table>
     <div class="d-flex">
-      <small class="m-3">{{note}}</small>
+      <small class="mx-3 mt-1">{{note}}</small>
     </div>
   </div>
 </template>
