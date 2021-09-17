@@ -81,7 +81,7 @@ const sleep = (milliseconds) => {
 export default {
   name: 'app',
   components:{navBar, vFooter, cartPage},
-  mixin:[spinnerMix],
+  mixins:[spinnerMix],
   data(){
     return{
       docscroll:0,
@@ -118,6 +118,7 @@ export default {
   },
   mounted() {
     window.addEventListener("scroll", this.onScroll)
+    this.spinnertoggle(false)
   },
   beforeUmount() {
     window.removeEventListener("scroll", this.onScroll)
@@ -282,15 +283,18 @@ export default {
         url: 'https://mailer.navitag.net',
         data: postdata
       }).then(function(r){
+        comp.lastpage = {name:'home'}
         if("MessageID" in r.data && "TransactionID" in r.data){
           comp.cart = []
-          comp.nextpage('thankyou')
-          comp.lastpage = 'home'
+          comp.togglealert({show: true, class: 'success', text: "Order Placed"});
+          comp.nextpage({name:'thankyou'})
         } else{
-          this.togglealert({show: true, class: 'danger', text: "Somthing went wrong... Order has not been confirmed."});
+          comp.togglealert({show: true, class: 'danger', text: "Somthing went wrong... Order not placed."});
+          comp.nextpage({name:'home'})
         }
       }).catch(function(){
-        this.togglealert({show: true, class: 'danger', text: "Somthing went wrong... Order has not been confirmed."});
+        comp.togglealert({show: true, class: 'danger', text: "Somthing went wrong... Order not submitted."});
+        comp.nextpage({name:'home'})
       }).finally(function(){
         comp.spinnertoggle(false)
       })

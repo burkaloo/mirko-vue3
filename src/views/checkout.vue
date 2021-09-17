@@ -111,7 +111,7 @@
               <div class="form-check">
                 <div class="d-flex ">
                   <input value="Gcash" class="form-check-input" type="radio" name="gcash" id="gcash" v-model="pay">
-                  <label class="form-check-label ms-4" for="bdo">
+                  <label class="form-check-label ms-4" for="gcash">
                     <p class="mb-0">Gcash</p>
                     <small>0920 566 3896</small>
                   </label>
@@ -218,7 +218,7 @@
 
       </div>
     </div>
-    <spinner :show="spinnershow" />
+    <spinner/>
   </div>
 
 </template>
@@ -226,6 +226,7 @@
 <script>
 import axios from 'axios'
 import spinnerMix from '@/mixin/spinnerMix.js'
+//import spinner from '@/components/spinner.vue'
 
 const toBase64 = file => new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -268,8 +269,8 @@ export default {
       }
     }
   },
-  mixin:[spinnerMix],
-  components:{},
+  mixins:[spinnerMix],
+  //components:{},
   props:{
     carttotal: {default: 0, type: Number},
     carttable: {type: String, default: ""}
@@ -283,6 +284,7 @@ export default {
     if(this.carttotal == 0){
       this.$router.push({name:"home"})
     }
+    this.spinnertoggle(true)
     let comp = this
     axios.post(this.baseurl+ "getprovinces.php").
     then(function(r){
@@ -294,6 +296,7 @@ export default {
     }).catch(function(e){
       console.log(e)
     }).finally(function(){
+      comp.spinnertoggle(false)
     })
   },
   methods:{
