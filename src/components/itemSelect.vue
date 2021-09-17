@@ -9,13 +9,14 @@
       <select class="form-select mx-2 mt-3" v-for="(vObj, vTitle) in variations" v-model="selects[vTitle]"
       :key="vTitle"
       :disabled="varignored.includes(vTitle)"
+      @change="selectclick(vTitle)"
       >
         <option disabled>{{vTitle}}</option>
         <option v-for="(opt, optInd) in vObj.options"
+          :value="optInd"
           :class="vObj.selected == optInd && !varignored.includes(vTitle) ? ' ' : ' '"
           :key="optInd"
           :disabled="varignored.includes(vTitle) || optdisabled[vTitle].includes(optInd)"
-          @click="$emit('optclick',[vTitle, optInd, vObj.imgset[optInd]])"
         >{{opt}}</option>
       </select>
     </div>
@@ -37,6 +38,8 @@
         </div>
       </div>
     </div-->
+
+
     <div class="text-danger" v-html="notes"></div>
   </div>
   <div class="col-12 mt-4">
@@ -55,7 +58,7 @@
 </template>
 
 <script>
-Array.prototype.unique = function() {
+/*Array.prototype.unique = function() {
     var a = this.concat();
     for(var i=0; i<a.length; ++i) {
         for(var j=i+1; j<a.length; ++j) {
@@ -67,6 +70,7 @@ Array.prototype.unique = function() {
     return a;
 };
 
+*/
 export default {
   name: 'itemSelect',
   props: {
@@ -202,7 +206,8 @@ export default {
           let subkeys = Object.keys(selectedVarDis)
           for (var x = 0; x < subkeys.length; x++) {
             let subkey = subkeys[x]
-            ret[subkey] = ret[subkey].concat(selectedVarDis[subkey]).unique()
+            //ret[subkey] = ret[subkey].concat(selectedVarDis[subkey]).unique()
+            ret[subkey] = [... new Set(ret[subkey].concat(selectedVarDis[subkey]))]
           }
         }
       }
@@ -211,8 +216,7 @@ export default {
   },
   methods:{
     selectclick(data){
-      //[vTitle, optInd, vObj.imgset[optInd]]
-      this.$emit('optclick',data)
+      this.$emit('optclick', [data, this.selects[data], this.variations[data].imgset[this.selects[data] ] ])
     },
     addqty(num, nega = false){
       if(nega){
