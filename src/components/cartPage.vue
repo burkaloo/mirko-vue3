@@ -47,7 +47,12 @@
         <div class="col-6">
           <div class="input-group mb-3">
             <input type="text" class="form-control" placeholder="Coupon Code" v-model="dcode">
-            <button class="btn bg-pink text-white" @click="getdiscount">Apply</button>
+            <button class="btn bg-pink text-white" @click="getdiscount" :disabled="loading.discount">
+              <div v-if="loading.discount" class="spinner-border spinner-border-sm mx-3" role="status" >
+                <span class="visually-hidden">Loading...</span>
+              </div>
+              <span v-else>Apply</span>
+            </button>
           </div>
         </div>
         <div class="col-12 text-end">
@@ -82,7 +87,10 @@ export default {
       baseurl: 'https://mirkophp.navitag.net/',
       dcode:"",
       discountparams: null,
-      claimed:[]
+      claimed:[],
+      loading:{
+        discount: false
+      }
     }
   },
   watch:{
@@ -135,8 +143,8 @@ export default {
       this.btnspin = false
     },
     getdiscount(){
+      this.loading.discount = true
       let comp = this
-      this.$emit("load", true);
       axios.post(comp.baseurl+ "codecheck.php", comp.dcode, {
         headers: {
           'Content-Type': 'text/plain',
@@ -159,7 +167,7 @@ export default {
       }).catch(function(e){
         console.log(e)
       }).finally(function(){
-        comp.$emit("load", false);
+        comp.loading.discount = false
       })
     },
     removediscount(){

@@ -35,7 +35,7 @@
 
             </li>
 
-            <li class="nav-item ms-0 px-3 hoverpointer my-sm-0 pt-2 hoverbg-pink rounded" @click="page('cart')">
+            <li v-if="!oncheckoutroute" class="nav-item ms-0 px-3 hoverpointer my-sm-0 pt-2 hoverbg-pink rounded position-relative" @click="page('cart')">
               <h5 class="me-3 d-inline d-md-none mb-0">Cart</h5>
               <img src="../assets/photos/bag.png" alt="" class="endicons pb-2">
               <span v-show="cartcount > 0" class="badge bg-secondary cart-badge">{{cartcount}}</span>
@@ -128,6 +128,13 @@ export default {
       } else{
         return false
       }
+    },
+    oncheckoutroute(){
+      if(this.$route.path == '/checkout'){
+        return true
+      } else{
+        return false
+      }
     }
   },
 }
@@ -154,8 +161,8 @@ export default {
   }
   .cart-badge{
     padding: 5px !important;
-    position: relative;
-    top:10px;
+    position: absolute;
+    top:5px;
     right:10px;
     //border-radius: 45%
   }

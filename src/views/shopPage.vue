@@ -20,9 +20,9 @@
     </div>
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
       <div v-for="(feat, fInd) in prodstoshow" class="col p-3" :key="fInd">
-        <div class="border p-2 h-100 hoverpointer" @click="gotoitem(feat.pid)">
+        <div class="border p-2 h-100 hoverpointer" @click="$emit('page',{path: '/product/'+feat.pid})">
           <img :src="feat.thumb" class="img-fluid" alt="">
-          <p class="text-center mt-4" @click="featuredlink(feat.id)">{{feat.name}}</p>
+          <p class="text-center mt-4">{{feat.name}}</p>
           <h5 class="text-center mt-3">PHP {{feat.price}}</h5>
         </div>
       </div>
@@ -154,9 +154,6 @@ export default {
           //comp.$emit('load', false)
           comp.spinnertoggle(false)
       })
-    },
-    gotoitem(pid){
-      this.$router.push({path: '/product/'+pid})
     },
     loadnextpage(){
       this.curpage++

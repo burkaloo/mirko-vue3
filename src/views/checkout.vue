@@ -4,10 +4,12 @@
       <div :class="showsummary ? 'col-12 col-md-7 pe-5 pb-5' : 'col-12'">
 
         <div class="row my-5 pe-5">
-          <div class="col-12 d-flex justify-content-start">
+          <div class="col-12 col-sm-9 order-2 order-sm-1 d-flex justify-content-start">
             <p v-for="(tabitem, ind) in tabopts" :key="ind" :class="tab == tabitem ? 'mx-3 text-black' : 'mx-3 text-muted'">{{tabitem}}</p>
-            <h3 v-if="!showsummary"  class="ms-auto mb-0" @click="summarytoggle">
-              <i class="lnr lnr-arrow-left"></i>
+          </div>
+          <div class="col-12 col-sm-3 order-1 order-sm-2 d-flex mb-4 mb-sm-0">
+            <h3 v-if="!showsummary" class="ms-auto mb-0 hoverpointer" @click="summarytoggle">
+              <i class="lnr lnr-arrow-left"></i> Cart
             </h3>
           </div>
         </div>
@@ -53,6 +55,7 @@
           </div>
           <div class="col-12 mt-3">
             <select class="form-select" v-model="city" :disabled="cityOptions.length == 0">
+              <option v-show="city == 'Province Required'" disabled>Province Required</option>
               <option disabled>Select City</option>
               <option v-for="(option, index) in cityOptions" :key="index" :value="option">{{option.name}}</option>
             </select>
@@ -218,7 +221,7 @@
 
       </div>
     </div>
-    <spinner/>
+    <spinner :show="spinnershow"/>
   </div>
 
 </template>
@@ -226,7 +229,7 @@
 <script>
 import axios from 'axios'
 import spinnerMix from '@/mixin/spinnerMix.js'
-//import spinner from '@/components/spinner.vue'
+import stringMix from '@/mixin/stringMix.js'
 
 const toBase64 = file => new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -247,7 +250,7 @@ export default {
       phone: null,
       email:"",
       province: "Select Province",
-      city: "Select City",
+      city: "Province Required",
       shipmeth: "Standard",
       pay:"",
       paydetails:{"BDO":['Camille Deezhialyn And Tan', '001700315240'], "BPI": ['Camille Deezhialyn And Tan', '1579276963'], "GCash": ['Camille Deezhialyn And Tan', '0920 566 3896'] },
@@ -269,7 +272,7 @@ export default {
       }
     }
   },
-  mixins:[spinnerMix],
+  mixins:[spinnerMix, stringMix],
   //components:{},
   props:{
     carttotal: {default: 0, type: Number},
@@ -284,7 +287,7 @@ export default {
     if(this.carttotal == 0){
       this.$router.push({name:"home"})
     }
-    this.spinnertoggle(true)
+    //this.spinnertoggle(true)
     let comp = this
     axios.post(this.baseurl+ "getprovinces.php").
     then(function(r){
@@ -296,7 +299,7 @@ export default {
     }).catch(function(e){
       console.log(e)
     }).finally(function(){
-      comp.spinnertoggle(false)
+      //comp.spinnertoggle(false)
     })
   },
   methods:{
@@ -354,12 +357,13 @@ export default {
     },
     async checkout(){
       this.spinnertoggle(true)
-      let addArr = [this.shipmeth + "<br>", this.name, this.email, this.phone + "<br>", this.address + ",",this.brgy +", "+ this.city.name + ", ", this.province.name + " " + this.zip]
+      let titlename = this.titleCase(this.name)
+      let addArr = [this.shipmeth + "<br>", titlename, this.email, this.phone + "<br>", this.address + ",",this.brgy +", "+ this.city.name + ", ", this.province.name + " " + this.zip]
       if(this.notes != ""){
         addArr.push('<br>Note: ' + this.notes)
       }
 
-      let data = {name: this.name, email: this.email, shipinfo: addArr.join('<br>'), payment: this.pay}
+      let data = {name: titlename, email: this.email, shipinfo: addArr.join('<br>'), payment: this.pay}
       if(this.pay != 'COD'){ // for non-COD orders
         //convert img to base64
         let result = await toBase64(this.file.rawfile).catch(e => Error(e));
@@ -389,10 +393,9 @@ export default {
     province: function(newval){
       if(typeof newval === 'object' && newval !== null){
         this.cityOptions = []
-        this.city = "Select City"
         this.shipmeth = "Standard"
         this.spinnertoggle(true)
-        var comp = this
+        let comp = this
         axios.post(this.baseurl + "getcities.php",{
           prov: newval.id
         }).then(function(r){
@@ -400,6 +403,7 @@ export default {
             comp.cityOptions = r.data.response
           }
         }).finally(function(){
+          comp.city = "Select City"
           comp.spinnertoggle(false)
         })
       }

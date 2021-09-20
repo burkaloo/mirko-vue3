@@ -86,8 +86,8 @@ export default {
     return{
       docscroll:0,
       cart:[],
-      lastpage: "home",
-      page: "home",
+      lastpage: {name: "home"},
+      page: {name: "home"},
       alert:{
         class: 'danger',
         text: "error Message",
@@ -210,7 +210,12 @@ export default {
       );
     },
     backpage(){
-      this.nextpage(this.lastpage)
+      if(this.page != 'cart'){
+        this.nextpage(this.lastpage)
+      } else{
+        this.page = this.lastpage
+        this.lastpage = 'cart'
+      }
     },
     checkout(){
       this.lastpage = this.page
@@ -260,7 +265,7 @@ export default {
         },
         token: 'mirko-order',
         email: {to: data.email, bcc: this.bccemail},
-        "subject-pre": 'Mirko order for ' + data.name
+        "subject-pre": 'Mirko order for ' + data.name + '. '
       }
 
       //add shipping line on email
