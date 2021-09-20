@@ -256,7 +256,7 @@ export default {
           cart: this.carttable,
           total: this.carttotal.toString(),
           payment: data.payment,
-          shipinfo: data.shipinfo
+          shipinfo: data.shipinfo,
         },
         token: 'mirko-order',
         email: {to: data.email, bcc: this.bccemail},

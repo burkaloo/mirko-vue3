@@ -354,7 +354,7 @@ export default {
     },
     async checkout(){
       this.spinnertoggle(true)
-      let addArr = [this.shipmeth + "<br>", this.name, this.phone + "<br>", this.address + ",",this.brgy +", "+ this.city.name + ", ", this.province.name + " " + this.zip]
+      let addArr = [this.shipmeth + "<br>", this.name, this.email, this.phone + "<br>", this.address + ",",this.brgy +", "+ this.city.name + ", ", this.province.name + " " + this.zip]
       if(this.notes != ""){
         addArr.push('<br>Note: ' + this.notes)
       }
