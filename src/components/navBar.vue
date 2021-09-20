@@ -22,17 +22,19 @@
             </li>
           </ul>
           <ul class="navbar-nav">
-            <li v-if="!onshoproute" class="nav-item ms-0 px-3 hoverpointer my-sm-0 pt-2 pb-1 hoverbg-pink rounded">
-              <div v-if="searchshow">
+            <li v-if="!onshoproute" class="nav-item ms-0 px-3 hoverbg-pink hoverpointer pt-1 pt-md-0 rounded">
+              <div v-if="searchshow" class="hoverbg-pink rounded pt-md-2 pb-md-1">
                 <input type="text" class="me-3" placeholder="search products" v-model.trim="searchinput" @keyup.enter="linksearch">
                 <img src="../assets/photos/search.png" alt="" class="endicons pb-2" @click="togglesearch">
               </div>
-              <div v-else @click="togglesearch">
+
+              <div v-else @click="togglesearch" class="hoverbg-pink rounded pt-md-2 pb-md-1">
                 <h5 v-if="!searchshow" class="me-3 d-inline d-md-none mb-0">Search</h5>
                 <img src="../assets/photos/search.png" alt="" class="endicons pb-2">
               </div>
 
             </li>
+
             <li class="nav-item ms-0 px-3 hoverpointer my-sm-0 pt-2 hoverbg-pink rounded" @click="page('cart')">
               <h5 class="me-3 d-inline d-md-none mb-0">Cart</h5>
               <img src="../assets/photos/bag.png" alt="" class="endicons pb-2">

@@ -40,7 +40,7 @@
     </div-->
 
 
-    <div class="text-danger" v-html="notes"></div>
+    <div class="text-secondary mt-3" v-html="notes"></div>
   </div>
   <div class="col-12 mt-4">
     <h5 class="d-inline-block">Quantity:</h5>

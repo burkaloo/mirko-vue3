@@ -10,10 +10,10 @@
             <span class="hoverpointer" @click="$emit('page', {path:'/about'})">About</span>
           </div>
           <div class="col-4 col-sm-2 col-lg-1 col-xl-2 hoverpointer">
-            <span class="hoverpointer" @click="$emit('page', {path:'/help'})">FAQ</span>
+            <span class="hoverpointer" @click="$emit('page', {path:'/help/return'})">FAQ</span>
           </div>
           <div class="col-4 col-sm-3 col-lg-2 col-xl-2">
-            <span class="hoverpointer" @click="$emit('page', {path:'/help'})">
+            <span class="hoverpointer" @click="$emit('page', {path:'/help/return'})">
               Return Policy</span>
           </div>
           <div class="col-7 col-sm-3 col-lg-2 col-xl-2 mt-4 mt-sm-0">

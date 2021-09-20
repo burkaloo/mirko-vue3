@@ -7,7 +7,7 @@
       </div>
     </div>
     <div class="py-2 border-bottom">
-      <div class="text-center">Nationwide Shipping!</div>
+      <div class="text-center hoverpointer" @click="nextpage('/help/delivery')">Nationwide Shipping!</div>
     </div>
 
     <navBar :docscroll="docscroll" topmargin="40" spacer="71" logo="./photos/mirko-logo.png" :cartcount="cartcount"
