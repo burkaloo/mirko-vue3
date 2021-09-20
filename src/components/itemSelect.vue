@@ -39,8 +39,8 @@
       </div>
     </div-->
 
-
-    <div class="text-secondary mt-3" v-html="notes"></div>
+    <br>
+    <div v-show="!newload" class="text-secondary" v-html="notes"></div>
   </div>
   <div class="col-12 mt-4">
     <h5 class="d-inline-block">Quantity:</h5>
@@ -82,7 +82,8 @@ export default {
   data(){
     return {
       qty:1,
-      selects: {}
+      selects: {},
+      newload: true
     }
   },
   mounted(){
@@ -217,6 +218,7 @@ export default {
   methods:{
     selectclick(data){
       this.$emit('optclick', [data, this.selects[data], this.variations[data].imgset[this.selects[data] ] ])
+      this.newload = false
     },
     addqty(num, nega = false){
       if(nega){

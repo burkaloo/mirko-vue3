@@ -22,8 +22,8 @@
             </span>
           </div>
           <div class="col-5 col-sm-2 col-lg-1 col-xl-2 mt-4 mt-sm-0 d-flex">
-            <img src="https://mirkophp.navitag.net/photos/pagegraphics/fb-icon.png" class="mx-1 img-fluid icon hoverpointer" alt="" @click="redirect('https://www.facebook.com/MirkoPH')">
-            <img src="https://mirkophp.navitag.net/photos/pagegraphics/ig-icon.png" class="mx-1 img-fluid icon hoverpointer" alt="" @click="redirect('https://www.instagram.com/mirko_ph')">
+            <img src="https://mirkophp.navitag.net/photos/pagegraphics/fb-icon.png" class="mx-1 img-fluid icon hoverpointer" alt="" @click="newtab('https://www.facebook.com/MirkoPH')">
+            <img src="https://mirkophp.navitag.net/photos/pagegraphics/ig-icon.png" class="mx-1 img-fluid icon hoverpointer" alt="" @click="newtab('https://www.instagram.com/mirko_ph')">
           </div>
           <div class="col-0 col-lg-2 col-xl">
             <span></span>
@@ -38,8 +38,11 @@
 
 <script>
 
+import urlMix from '@/mixin/urlMix.js'
+
 export default {
   name: 'vFooter',
+  mixins:[urlMix],
   data(){
     return{
       height: 0
@@ -52,9 +55,6 @@ export default {
   methods:{
     updateheight(){
       this.height = window.innerWidth *.35
-    },
-    redirect(url){
-      window.location.href = url
     }
   },
   computed:{

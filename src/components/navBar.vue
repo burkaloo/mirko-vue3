@@ -90,6 +90,8 @@ export default {
     linksearch(){
       if(this.searchinput.length >3){
         this.page({ path: '/shop', query: { search: this.searchinput } })
+        this.searchinput = ""
+        this.searchshow = false
       } else{
         this.$emit('alert', {show: true, class: 'warning', text: "Search word too short"});
       }
