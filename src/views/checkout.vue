@@ -299,7 +299,7 @@ export default {
     }).catch(function(e){
       console.log(e)
     }).finally(function(){
-      //comp.spinnertoggle(false)
+      comp.spinnertoggle(false)
     })
   },
   methods:{
