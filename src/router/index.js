@@ -3,6 +3,7 @@ import about from '@/views/aboutMirko.vue'
 import checkout from '@/views/checkout.vue'
 import contact from '@/views/contactUs.vue'
 import help from '@/views/helpPage.vue'
+import shop from '@/views/shopPage.vue'
 import homePage from '@/views/homePage.vue'
 import prod from '@/views/prodPage.vue'
 import cupsinfo from '@/views/cupsInfo.vue'
@@ -16,7 +17,6 @@ const routes = [
   },
   {
     path: '/about',
-    name: 'about',
     component: about
   },
   {
@@ -31,27 +31,23 @@ const routes = [
     component: contact
   },
   {
+    path: '/help/:section',
+    component: help,
+    props: true
+  },
+  {
     path: '/help',
-    name: 'help',
-    component: help
+    component: help,
   },
   {
-    path: '/product/flowunderwear',
-    name: 'flowunderwear',
+    path: '/product/:pid',
     component: prod,
-    props: { pid: 1 }
+    props: true
   },
   {
-    path: '/product/menstrualcups',
-    name: 'menstrualcups',
-    component: prod,
-    props: { pid: 2 }
-  },
-  {
-    path: '/product/duokits',
-    name: 'duokits',
-    component: prod,
-    props: { pid: 3 }
+    path: '/shop',
+    component: shop,
+    props: route => ({ linksearch: route.query.search })
   },
   {
     path: '/linkto/instructions-cups',
@@ -62,7 +58,11 @@ const routes = [
     path: '/thankyou',
     name: 'thankyou',
     component: thankyou
-  }
+  },
+  {
+     path: '/:pathMatch(.*)*',
+     redirect: '/'
+   }
 ]
 
 const router = createRouter({

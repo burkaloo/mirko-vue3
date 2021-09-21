@@ -1,9 +1,10 @@
 <template>
   <div :style="'height:'+ spacer+'px;'">
-    <nav class="navbar navbar-expand-md navbar-light bg-pink navbar-fixed " :style="'top:'+totalTopmargin+ 'px;'">
-      <div class="container">
-        <div class="navbar-brand">
-          <img src="../assets/photos/mirko-logo.png" class="border border-2 border-black p-1 hoverpointer" :style="navphoto" @click="$emit('page','home')">
+    <nav class="navbar navbar-expand-md navbar-fixed navbar-light bg-white" :style="'top:'+totalTopmargin+ 'px;'">
+
+      <div class="container-md">
+        <div class="navbar-brand pt-2">
+          <img src="../assets/photos/mirko-logo.png" class="p-1 hoverpointer" :style="navphoto" @click="$emit('page',{name: 'home'})">
         </div>
 
         <div v-if="open" class="w-100 cover" :style="'top:' + totalSpace +'px; height: calc(100vh - ' + totalSpace +'px);'" @click="close"></div>
@@ -12,36 +13,31 @@
         </div>
 
         <div v-show="open" :class="collapseClass" :style="'top: '+totalSpace+'px;'">
-          <ul class="navbar-nav ms-auto mb-lg-0">
-            <li class="nav-item ms-0 ms-md-4 pt-md-2 hoverpointer">
-              <div class="dropdown">
-                <div type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
-                    <!--img src="../assets/photos/help-icon.png" alt="" :style="navphoto" class=" p-2 dropdown-toggle" -->
-                    <h5 class="m-2">Shop</h5>
-                </div>
-                <ul class="dropdown-menu dropdown-menu-sm-end bg-pink border-0 pe-3 pe-sm-0" aria-labelledby="dropdownMenuButton2">
-                  <li><div class="dropdown-item" @click="page('flowunderwear')">Flow Underwear</div></li>
-                  <li><div class="dropdown-item" @click="page('menstrualcups')">Menstrual Cups</div></li>
-                  <li><div class="dropdown-item" @click="page('duokits')">Game Changer Duo Kits</div></li>
-                </ul>
-              </div>
+          <ul class="navbar-nav me-auto mb-lg-0 pt-2">
+            <li class="nav-item ms-0 ms-md-4 px-3 pt-1 hoverpointer hoverbg-pink rounded">
+              <h5 @click="page({path: '/shop'})">Shop</h5>
             </li>
-            <li class="nav-item ms-0 ms-md-4 pt-md-2 hoverpointer">
-              <div class="dropdown">
-                <div type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                    <!--img src="../assets/photos/help-icon.png" alt="" :style="navphoto" class=" p-2 dropdown-toggle" -->
-                    <h5 class="m-2">Customer Care</h5>
-                </div>
-                <ul class="dropdown-menu dropdown-menu-sm-end bg-pink border-0 pe-3 pe-sm-0" aria-labelledby="dropdownMenuButton1">
-                  <li><div class="dropdown-item" @click="page('about')">Our Commitment</div></li>
-                  <li><div class="dropdown-item" @click="page('help')">FAQ</div></li>
-                  <li><div class="dropdown-item" @click="page('contact')">Contact Mirko</div></li>
-                </ul>
-              </div>
+            <li class="nav-item ms-0 ms-md-4 hoverpointer px-3 pt-1 hoverbg-pink rounded">
+              <h5 @click="page({path: '/about'})">About</h5>
             </li>
-            <li class="nav-item ms-2 ms-md-3 hoverpointer my-sm-0" @click="page('cart')">
-              <img src="../assets/photos/cart-icon.png" alt="" :style="navphoto" class="mt-1">
-              <!--span class="d-inline d-sm-none ms-3">Cart</span-->
+          </ul>
+          <ul class="navbar-nav">
+            <li v-if="!onshoproute" class="nav-item ms-0 px-3 hoverbg-pink hoverpointer pt-1 pt-md-0 rounded">
+              <div v-if="searchshow" class="hoverbg-pink rounded pt-md-2 pb-md-1">
+                <input type="text" class="me-3" placeholder="search products" v-model.trim="searchinput" @keyup.enter="linksearch">
+                <img src="../assets/photos/search.png" alt="" class="endicons pb-2" @click="togglesearch">
+              </div>
+
+              <div v-else @click="togglesearch" class="hoverbg-pink rounded pt-md-2 pb-md-1">
+                <h5 v-if="!searchshow" class="me-3 d-inline d-md-none mb-0">Search</h5>
+                <img src="../assets/photos/search.png" alt="" class="endicons pb-2">
+              </div>
+
+            </li>
+
+            <li v-if="!oncheckoutroute" class="nav-item ms-0 px-3 hoverpointer my-sm-0 pt-2 hoverbg-pink rounded position-relative" @click="page('cart')">
+              <h5 class="me-3 d-inline d-md-none mb-0">Cart</h5>
+              <img src="../assets/photos/bag.png" alt="" class="endicons pb-2">
               <span v-show="cartcount > 0" class="badge bg-secondary cart-badge">{{cartcount}}</span>
             </li>
           </ul>
@@ -60,15 +56,22 @@ export default {
     topmargin: Number,
     spacer: Number,
     logo: String,
-    logoh:String,
+    logoh:{default: 50},
     cartcount: Number
   },
   data(){
     return {
       open: false,
+      searchshow: false,
+      searchinput: ""
     }
   },
   watch:{
+    open(newval){
+      if(newval){
+        this.searchshow = false
+      }
+    }
   },
   methods:{
     opennav(){
@@ -80,14 +83,26 @@ export default {
     page(page){
       this.close()
       this.$emit('page', page)
+    },
+    togglesearch(){
+      this.searchshow = !this.searchshow
+    },
+    linksearch(){
+      if(this.searchinput.length >3){
+        this.page({ path: '/shop', query: { search: this.searchinput } })
+        this.searchinput = ""
+        this.searchshow = false
+      } else{
+        this.$emit('alert', {show: true, class: 'warning', text: "Search word too short"});
+      }
     }
   },
   computed:{
     collapseClass(){
       if(this.open){
-        return "navbar-collapse navbar-collapse-vue bg-pink p-2"
+        return "navbar-collapse navbar-collapse-vue p-2 bg-white"
       } else{
-        return "navbar-collapse bg-pink"
+        return "navbar-collapse bg-white"
       }
     },
     totalSpace(){
@@ -107,17 +122,31 @@ export default {
     navphoto(){
       return 'height: '+ this.logoh +'px; width: auto; padding:10px'
     },
+    onshoproute(){
+      if(this.$route.path == '/shop'){
+        return true
+      } else{
+        return false
+      }
+    },
+    oncheckoutroute(){
+      if(this.$route.path == '/checkout'){
+        return true
+      } else{
+        return false
+      }
+    }
   },
 }
 </script>
 
 
-<style>
+<style scoped>
   .navbar-collapse-vue{
     position: fixed;
     z-index: 5;
     left: 0;
-    width: 100%
+    width: 100%;
   }
   .navbar{
     position: fixed !important;
@@ -131,8 +160,21 @@ export default {
     z-index: 4;
   }
   .cart-badge{
-    position: relative;
-    bottom:10px;
-    right:20px;
+    padding: 5px !important;
+    position: absolute;
+    top:5px;
+    right:10px;
+    //border-radius: 45%
+  }
+  .endicons{
+    max-height: 30px;
+    max-width: 30px;
+  }
+  .pt-lowered{
+    padding-top: 30px !important;
+  }
+  input{
+    line-height: 5px;
+    padding: none;
   }
 </style>
