@@ -100,6 +100,7 @@ export default {
       discount:{amt: 1, title:"INVALID"},
       uid: 1,
       backend: "https://mirkophp.navitag.net/dbconn.php",
+      //backend: 'https://localhost/mirkobackend/dbconn.php',
       siteconf: {},
     }
   },

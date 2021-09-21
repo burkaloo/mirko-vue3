@@ -88,7 +88,22 @@
             </div>
           </div>
         </div>
+        <br>
+        <hr>
+        <section v-if="Wrelatedprods">
+          <h4 class="fw-bold mt-5 mb-3">More From Mirko</h4>
+          <div class="row row-cols-2 row-cols-sm-3 row-cols-lg-4 row-cols-xl-6">
+            <div v-for="(rprod, rprodInd) in relatedprods.slice(0,6)" :key="rprodInd" :class="rprodInd > 3 ? 'col d-none d-sm-block d-lg-none d-xl-block' : 'col'">
+              <div class="hovershadow hoverpointer border" @click="$emit('page',{path:'/product/'+ rprod.pid})">
+                <img :src="rprod.thumb" alt="" class="img-fluid">
+                <p class="fw-bolder px-2 mt-2 mb-0 text-truncate">{{rprod.title}}</p>
+                <p class="text-danger px-2"><s class="pesosign"></s>{{rprod.price}}</p>
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
+
       <spinner :show="spinnershow"/>
     </div>
 
@@ -120,12 +135,20 @@ export default {
       isDown: false,
       startX: 0,
       scrollLeft:0,
+      relatedprods:[]
     }
   },
   watch:{
     pid(){
       this.getprod()
     },
+    Wrelatedprods(newval){
+      if(newval){
+        this.getrelated()
+      } else{
+        this.relatedprods = []
+      }
+    }
   },
   mounted(){
     this.getprod()
@@ -244,6 +267,24 @@ export default {
           comp.details = dets
         }
       })
+    },
+    getrelated(){
+      let pidlist = ""
+      this.details.relatedprods.forEach((pid) => {
+        pidlist += ","
+        pidlist += pid.toString()
+      });
+      let comp = this
+      axios.post(this.backend, {statement: "getselectedlist", pidlist : pidlist.substring(1)})
+      .then(function(res){
+        if(res.data.status == "success"){
+          let resarr = res.data.response
+          //console.log(resarr)
+          resarr.forEach((item) => {
+            comp.relatedprods.push({title: item.title, price: item.baseprice, thumb: item.thumb, pid: item.id})
+          });
+        }
+      })
     }
   },
   computed:{
@@ -266,6 +307,13 @@ export default {
     testiwidth(){
       let px = this.details.testimonials.length * 420
       return px.toString() + 'px';
+    },
+    Wrelatedprods(){
+      if(this.details !== null && 'relatedprods' in this.details && this.details.relatedprods.length > 0){
+        return true
+      } else{
+        return false
+      }
     }
   },
 
