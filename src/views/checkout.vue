@@ -276,7 +276,8 @@ export default {
   //components:{},
   props:{
     carttotal: {default: 0, type: Number},
-    carttable: {type: String, default: ""}
+    carttable: {type: String, default: ""},
+    backend:{}
   },
   mounted(){
     if(document.documentElement.clientWidth < 768){
@@ -289,12 +290,14 @@ export default {
     }
     //this.spinnertoggle(true)
     let comp = this
-    axios.post(this.baseurl+ "getprovinces.php").
-    then(function(r){
-      if(r.data.status == "success"){
-        comp.provinceOptions = r.data.response
+    axios.post(this.backend,  {statement: "getprovinces"})
+    .then(function(res){
+      if(res.data.status == "success"){
+
+        comp.provinceOptions = res.data.response
       } else{
-        console.log(r.data.response)
+        //error
+        console.log(res.data.response)
       }
     }).catch(function(e){
       console.log(e)
@@ -396,12 +399,16 @@ export default {
         this.shipmeth = "Standard"
         this.spinnertoggle(true)
         let comp = this
-        axios.post(this.baseurl + "getcities.php",{
-          prov: newval.id
-        }).then(function(r){
-          if(r.data.status == "success"){
-            comp.cityOptions = r.data.response
+        axios.post(this.backend,{statement: "getcities", "province_id": newval.id})
+        .then(function(res){
+          if(res.data.status == "success"){
+            comp.cityOptions = res.data.response
+          } else{
+            //error
+            console.log(res.data.response)
           }
+        }).catch(function(e){
+          console.log(e)
         }).finally(function(){
           comp.city = "Select City"
           comp.spinnertoggle(false)

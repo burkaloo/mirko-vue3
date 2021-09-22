@@ -34,7 +34,6 @@
       :itemstotal="itemstotal"
       :carttotal="carttotal"
       :uid="uid"
-      :discount="discount"
       @remove="removefromcart"
       @add="addqtycart"
       @checkout="checkout"
@@ -68,6 +67,7 @@ import vFooter from './components/vFooter.vue'
 import cartPage from './components/cartPage.vue'
 import spinnerMix from '@/mixin/spinnerMix.js'
 
+
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
@@ -99,8 +99,8 @@ export default {
       shipfee: 0,
       discount:{amt: 1, title:"INVALID"},
       uid: 1,
-      backend: "https://mirkophp.navitag.net/dbconn.php",
-      //backend: 'https://localhost/mirkobackend/dbconn.php',
+      //backend: "https://mirkophp.navitag.net/dbconn.php",
+      backend: "http://localhost/mirkobackend/dbconn.php",
       siteconf: {},
     }
   },
@@ -344,7 +344,10 @@ export default {
         cartstring += itemstr
         cartstring += pricestr
       });
-
+      if(this.discount.title != "INVALID"){
+        //add discount into cart
+        cartstring += '<tr><td></td><td><p style="margin: 0 0 0 0">' + this.discount.title + '</p></td><td style="text-align: right; color: red; padding-right:0; padding-left: 0;">-' + this.discount.amt + '</td></tr>'
+      }
       return cartstring
     },
   }

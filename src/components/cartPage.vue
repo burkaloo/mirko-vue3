@@ -27,14 +27,23 @@
       </div>
       <div v-if="discountparams !== null" class="row border-bottom py-3">
         <div class="col-12 col-md-8 col-lg-9 col-xl-10">
-          <h5 v-if="discount.title == 'INVALID'">Invalid Code: {{discountparams.code}}</h5>
-          <h5 v-else>{{discount.title}}</h5>
+          <div v-if="computediscount.title == 'INVALID'">
+            <div v-if="computediscount.amt == 2">
+              <h5>{{discountparams.code}}</h5>
+              <small>Current cart items does not qualify for this discount code.</small>
+            </div>
+            <div v-else-if="computediscount.amt == 3">
+              <h5>{{discountparams.code}}</h5>
+              <small>Your Account cannot use this discout code</small>
+            </div>
+          </div>
+          <h5 v-else>{{computediscount.title}}</h5>
         </div>
         <div class="col-12 col-md-4 col-lg-3 col-xl-2 mt-4 mt-sm-0 text-end">
           <button class="btn bg-pink" @click="removediscount">Remove Discount</button>
         </div>
         <div class="col-12 mt-4">
-          <p v-if="discount.title != 'INVALID'" class="mb-0 text-end font-weight-bold text-danger">- <s class="pesosign"></s>{{discount.amt}}</p>
+          <p v-if="computediscount.title != 'INVALID'" class="mb-0 text-end font-weight-bold text-danger">- <s class="pesosign"></s>{{computediscount.amt}}</p>
         </div>
       </div>
       <div class="row">
@@ -71,15 +80,16 @@
 
 <script>
 import axios from 'axios'
+import stringMix from '@/mixin/stringMix.js'
 
 export default {
   name: 'cartPage',
+  mixins:[stringMix],
   props: {
     cart: {},
     itemstotal:{},
     carttotal:{},
     uid:{},
-    discount:{}
   },
   data(){
     return {
@@ -94,40 +104,6 @@ export default {
     }
   },
   watch:{
-    discount(newval){
-      if(newval.title != "INVALID" && this.discountparams !== null && !this.claimed.includes(this.discountparams.id) ){
-        this.claimed.push(this.discountparams.id)
-        axios.post(this.baseurl+ "codeclaimed.php", this.discountparams.id, {
-          headers: {
-            'Content-Type': 'text/plain',
-            'Accept': 'application/json'
-          }
-        })
-      }
-    },
-    computediscount(newval, oldval){
-      this.$emit('discountupdate', newval)
-
-      //watch valid discount change to invalid discount
-      if(oldval.title != "INVALID" && newval.title == 'INVALID'){
-        if(newval.amt == 2){
-          this.$emit('alert',{show: true, class: 'warning', text: "Your updated cart is no longer qualified for appiled coupon code"})
-        } else if(newval.amt == 3){
-          this.$emit('alert',{show: true, class: 'warning', text: "Your account cannot avail of this discount"})
-        }
-      }
-      // watch from invalid to invalid
-      else if(oldval.title == 'INVALID' && newval.title == 'INVALID'){
-        if(newval.amt == 2){
-          this.$emit('alert',{show: true, class: 'warning', text: "Items in cart does not qualify to redeem coupon code"})
-        } else if(newval.amt == 3){
-          this.$emit('alert',{show: true, class: 'warning', text: "Your account cannot avail of this discount"})
-        }
-      } else{
-        this.$emit('alert',{show: true, class: 'success', text: "Discount applied"})
-      }
-
-    },
     itemcount(newval){
       //watch for empty cart
       if(Object.keys(newval).length === 0)(
@@ -189,8 +165,10 @@ export default {
     },
     computediscount(){
       if(this.discountparams === null){
+        this.$emit('discountupdate', {title: 'INVALID', amt: 0})
         return {amt: 1, title: 'INVALID'}
       }
+
       let preqfail = false
       let areqfail = false
       let arequired = JSON.parse(this.discountparams.account_required)
@@ -230,13 +208,15 @@ export default {
       }
 
       if(preqfail){
-        return {amt: 2, title: 'INVALID'}
         // does not meet required products
-        //this.$emit('alert', {show: true, class: 'warning', text: "Your items does not qualify to redeem code.", delay: 300})
+        this.$emit('alert', {show: true, class: 'warning', text: "Your items does not qualify to redeem code.", delay: 300})
+        this.$emit('discountupdate', {title: 'INVALID', amt: 0})
+        return {amt: 2, title: 'INVALID'}
       } else if(areqfail){
-        return {amt: 3, title: 'INVALID'}
         //does not meet required user id
-        //this.$emit('alert', {show: true, class: 'warning', text: "Your account does is not qualified to redeem this code.", delay: 300})
+        this.$emit('alert', {show: true, class: 'warning', text: "Your account does is not qualified to redeem this code.", delay: 300})
+        this.$emit('discountupdate', {title: 'INVALID', amt: 0})
+        return {amt: 3, title: 'INVALID'}
       } else{
         //coupon valid parse this.discountparams
         let finaldis = parseFloat(this.discountparams.value)
@@ -245,7 +225,9 @@ export default {
           let percent = parseFloat(this.discountparams.value) / 100
           finaldis = parseFloat(this.itemstotal) * percent
         }
-        return {amt: finaldis, title: this.discountparams.title}
+        let retobj = {title: this.titleCase(this.discountparams.title), amt: finaldis}
+        this.$emit('discountupdate', retobj)
+        return retobj
       }
     },
   }
