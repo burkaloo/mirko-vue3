@@ -54,11 +54,16 @@
             <input class="form-control" type="text" v-model.trim="brgy" placeholder="Barangay">
           </div>
           <div class="col-12 mt-3">
-            <select class="form-select" v-model="city" :disabled="cityOptions.length == 0">
-              <option v-show="city == 'Province Required'" disabled>Province Required</option>
-              <option disabled>Select City</option>
-              <option v-for="(option, index) in cityOptions" :key="index" :value="option">{{option.name}}</option>
-            </select>
+            <div class="position-relative">
+              <select class="form-select" v-model="city" :disabled="cityOptions.length == 0">
+                <option v-show="city == 'Province Required'" disabled>Province Required</option>
+                <option disabled>Select City</option>
+                <option v-for="(option, index) in cityOptions" :key="index" :value="option">{{option.name}}</option>
+              </select>
+              <div v-if="cityloading" class="spinner-border spinner-border-sm position-absolute" :style="{top: '12px', right:'12px', backgroundColor: '#e9ecef'}" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </div>
           </div>
           <div class="col-12 mt-3">
             <select class="form-select" v-model="province">
@@ -269,7 +274,8 @@ export default {
       shipcosttable:{
         "Same Day":["-","-","-"],
         "Standard":["PHP 100","PHP 150","PHP 200"]
-      }
+      },
+      cityloading: false
     }
   },
   mixins:[spinnerMix, stringMix],
@@ -397,7 +403,8 @@ export default {
       if(typeof newval === 'object' && newval !== null){
         this.cityOptions = []
         this.shipmeth = "Standard"
-        this.spinnertoggle(true)
+        //this.spinnertoggle(true)
+        this.cityloading = true
         let comp = this
         axios.post(this.backend,{statement: "getcities", "province_id": newval.id})
         .then(function(res){
@@ -411,7 +418,7 @@ export default {
           console.log(e)
         }).finally(function(){
           comp.city = "Select City"
-          comp.spinnertoggle(false)
+          comp.cityloading = false
         })
       }
     },

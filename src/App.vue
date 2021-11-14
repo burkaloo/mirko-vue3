@@ -274,10 +274,11 @@ export default {
       if(this.shipfee > 0){
           postdata.merge.cart += '<tr><td></td><td>Shipping fee</td><td style="text-align: right; padding:0 0 0 0">' + this.shipfee +"</td></tr>"
       }
-      //add discount line on email
+      /*add discount line on email
+
       if(this.discount.title != "INVALID"){
           postdata.merge.cart += '<tr><td></td><td>'+this.discount.title+'</td><td style="text-align: right; padding:0 0 0 0">-' + this.discount.amt +"</td></tr>"
-      }
+      }*/
 
       if('files' in data){
         postdata.files = [{BinaryContent: data.files.base64, Name: data.files.name}]
