@@ -89,7 +89,8 @@ export default {
     cart: {},
     itemstotal:{},
     carttotal:{},
-    uid:{},
+    uid:{default: null},
+    backend:{},
   },
   data(){
     return {
@@ -121,20 +122,53 @@ export default {
     getdiscount(){
       this.loading.discount = true
       let comp = this
-      axios.post(comp.baseurl+ "codecheck.php", comp.dcode, {
-        headers: {
-          'Content-Type': 'text/plain',
-          'Accept': 'application/json'
-        },
-      }).then(function(r){
-        if(r.status == 200){
-          let data =  r.data.response
-          if(data.length == 0){
-            //empty code no rows
-            comp.$emit('alert', {show: true, class: 'warning', text: "Invalid Code"})
-          } else {
-            data[0].code = comp.dcode
-            comp.discountparams = data[0]
+      axios.post(this.backend, {statement: "checkvoucher", uid: this.uid == null ? "guest" : this.uid, code: this.dcode})
+      .then(function(res){
+        if(res.data.status == "success"){
+          let data =  res.data.response[0]
+
+          data.claimed = data.claimed == null ? 0 : parseInt(data.claimed)
+          data.reserved = data.reserved == null ? 0 : parseInt(data.reserved)
+          data.accountclaimed = data.accountclaimed == null ? 0 : parseInt(data.accountclaimed)
+          data.accountreserved = data.accountreserved == null ? 0 : parseInt(data.accountreserved)
+
+          console.log(data)
+          let acctreq = JSON.parse(data.account_required)
+          //requirelogin for all codes that are limited, use once per acct, has pre-requisit accounts
+          let reqlogin = data.count != null || data.use_once == 1 || acctreq.length > 0 ? true : false
+          let totalclaim = data.claimed + data.reserved
+          if(data.id == null && data.code == null){
+            // invalide code
+            comp.$emit('alert', {show: true, class: 'warning', text: "Invalid code."})
+          }
+          else if(data.expired == 1){
+            //expired code
+            comp.$emit('alert', {show: true, class: 'warning', text: "Code has expired"})
+          }
+          else if(data.count != null && totalclaim >= parseInt(data.count) ){
+            //limit reached
+            comp.$emit('alert', {show: true, class: 'warning', text: "The maximum number of claims for this code has been reached"})
+          }
+          else if(reqlogin && comp.uid == null){
+            //must be signed in to use code
+            comp.$emit('alert', {show: true, class: 'warning', text: "You must be signed in to use this code"})
+          }
+          else if(acctreq.length > 0 && !acctreq.includes(comp.uid)){
+            //loged in and not part of required accounts
+            comp.$emit('alert', {show: true, class: 'warning', text: "Your Account is not qualified to claim this code"})
+          }
+          else if(data.use_once == 1 && data.accountclaimed > 0){
+            //logged in code can only be used once
+            comp.$emit('alert', {show: true, class: 'warning', text: "Code has been claimed and can only be used once per account."})
+          }
+          else {
+            //code valid. do reservation on account if login and no reservation
+            if(comp.uid !== null && data.accountreserved == 0){
+              //make reservation
+              axios.post(comp.backend, {statement: "reservevoucher", uid: comp.uid, vid: data.id})
+            }
+            //update component data to reflect new reservation??
+            comp.discountparams = data
             comp.dcode = ""
           }
         } else {
@@ -149,6 +183,7 @@ export default {
     removediscount(){
       this.dcode = ""
       this.discountparams = null
+      this.$emit('discountupdate', {title: 'INVALID', amt: 0})
     }
   },
   computed:{
@@ -164,20 +199,21 @@ export default {
       return cartids
     },
     computediscount(){
-      if(this.discountparams === null){
+      if(this.discountparams == null){
+        // no discount input
         this.$emit('discountupdate', {title: 'INVALID', amt: 0})
         return {amt: 1, title: 'INVALID'}
       }
 
       let preqfail = false
-      let areqfail = false
-      let arequired = JSON.parse(this.discountparams.account_required)
       let prequired = JSON.parse(this.discountparams.product_required)
 
-      //check required accounts
+      /*check required accounts for deleting moved to getdiscount
+      let areqfail = false
+      let arequired = JSON.parse(this.discountparams.account_required)
       if(arequired.length > 0 && !arequired.includes(this.uid)){
           areqfail = true
-      }
+      }*/
 
       //check product required
       if(prequired.length > 0){
@@ -212,11 +248,12 @@ export default {
         this.$emit('alert', {show: true, class: 'warning', text: "Your items does not qualify to redeem code.", delay: 300})
         this.$emit('discountupdate', {title: 'INVALID', amt: 0})
         return {amt: 2, title: 'INVALID'}
-      } else if(areqfail){
+      /*} else if(areqfail){
         //does not meet required user id
-        this.$emit('alert', {show: true, class: 'warning', text: "Your account does is not qualified to redeem this code.", delay: 300})
+        this.$emit('alert', {show: true, class: 'warning', text: this.uid == null ? "Only selected registered accounts can redeem this code." : "Your account does not qualify to redeem this code.", delay: 300})
         this.$emit('discountupdate', {title: 'INVALID', amt: 0})
         return {amt: 3, title: 'INVALID'}
+      */
       } else{
         //coupon valid parse this.discountparams
         let finaldis = parseFloat(this.discountparams.value)

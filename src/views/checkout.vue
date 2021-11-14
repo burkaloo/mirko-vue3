@@ -16,7 +16,7 @@
 
         <div v-if="tab == 'Information'" class="row pe-5">
           <div class="col-12 mb-5 hoverpointer">
-            <small @click="emit('page','cart')"><i class="lnr lnr-chevron-left"></i> <u>back to cart</u></small>
+            <small @click="$emit('page','cart')"><i class="lnr lnr-chevron-left"></i> <u>back to cart</u></small>
           </div>
           <div class="col-12">
             <h5 class="mb-4">Contact Information</h5>

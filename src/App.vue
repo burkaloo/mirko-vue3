@@ -31,6 +31,7 @@
     <cartPage
       v-show="page == 'cart'"
       :cart="cart"
+      :backend="backend"
       :itemstotal="itemstotal"
       :carttotal="carttotal"
       :uid="uid"
@@ -98,9 +99,9 @@ export default {
       bccemail: "camille@mirkoessentials.com",
       shipfee: 0,
       discount:{amt: 1, title:"INVALID"},
-      uid: 1,
+      uid: 3,
       //backend: "https://mirkophp.navitag.net/dbconn.php",
-      backend: "http://localhost/mirkobackend/dbconn.php",
+      backend: "https://james.local/mirkobackend/dbconn.php",
       siteconf: {},
     }
   },

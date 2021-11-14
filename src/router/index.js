@@ -8,6 +8,7 @@ import homePage from '@/views/homePage.vue'
 import prod from '@/views/prodPage.vue'
 import cupsinfo from '@/views/cupsInfo.vue'
 import thankyou from '@/views/thankyou.vue'
+import signup from '@/views/signup.vue'
 
 const routes = [
   {
@@ -58,6 +59,11 @@ const routes = [
     path: '/thankyou',
     name: 'thankyou',
     component: thankyou
+  },
+  {
+    path: '/signup',
+    name: 'signup',
+    component: signup
   },
   {
      path: '/:pathMatch(.*)*',
