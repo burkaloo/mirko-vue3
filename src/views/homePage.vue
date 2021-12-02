@@ -2,12 +2,12 @@
     <div>
       <div class=" text-center">
         <div class="mx-auto d-md-none">
-            <p class="text-center text-white mb-0 p-2 fw-light" :style="{backgroundColor: '#b31b1b', fontSize:'.85rem'}">Enjoy 12% off ALL items until Dec 31, 2021! Use Promo Code <span class="fw-bold">MIRKOXMAS</span> upon checkout.</p>
+            <p class="text-center text-white mb-0 p-2 fw-light" :style="{backgroundColor: '#ce2029', fontSize:'.85rem'}">Enjoy 12% off ALL items until Dec 31, 2021! Use Promo Code <span class="fw-bold">MIRKOXMAS</span> upon checkout.</p>
             <img class="img-fluid" style="" src="../assets/photos/hero.jpg" alt="">
         </div>
         <div class="d-none d-md-block container mt-5">
           <div class="mx-auto">
-              <p class="text-center text-white mb-0 p-2 fw-light" :style="{backgroundColor: '#b31b1b'}">Enjoy 12% off ALL items until Dec 31, 2021! <span class="d-inline-block">Use Promo Code <span class="fw-bold">MIRKOXMAS</span> upon checkout.</span></p>
+              <p class="text-center text-white mb-0 p-2 fw-light" :style="{backgroundColor: '#ce2029'}">Enjoy 12% off ALL items until Dec 31, 2021! <span class="d-inline-block">Use Promo Code <span class="fw-bold">MIRKOXMAS</span> upon checkout.</span></p>
               <img class="img-fluid" style="" src="../assets/photos/hero.jpg" alt="">
           </div>
         </div>
@@ -52,19 +52,21 @@
         </div>
 
         <br><br><br>
-
-        <div class="row row-cols-1 row-cols-sm-3 row-cols-md-4">
-          <div class="col-sm-12 col-md mt-5 mt-md-3 px-2">
-            <h4 class="text-center mt-sm-5">AS SEEN ON</h4>
+        <div class="">
+          <h3 class="text-center">FEATURED ON</h3>
+        </div>
+        <div class="row row-cols-2 row-cols-md-4">
+          <div class="col mt-5 px-4">
+            <img src="https://mirkophp.navitag.net/photos/pagegraphics/spot.png" class="img-fluid p-5 p-sm-0" alt="">
           </div>
           <div class="col mt-5 px-4">
-            <img src="https://mirkophp.navitag.net/photos/pagegraphics/Preen.png" class="img-fluid hoverpointer" alt="" @click="newtab('https://preen.ph/98534/not-ready-for-menstrual-cups-give-period-panties-a-try')">
+            <img src="https://mirkophp.navitag.net/photos/pagegraphics/Preen.png" class="img-fluid hoverpointer p-5 p-sm-0" alt="" @click="newtab('https://preen.ph/98534/not-ready-for-menstrual-cups-give-period-panties-a-try')">
           </div>
           <div class="col mt-5 px-4">
-            <img src="https://mirkophp.navitag.net/photos/pagegraphics/Cosmopolitan.png" class="img-fluid hoverpointer" alt="" @click="newtab('https://www.cosmo.ph/health/i-tried-period-panties-for-the-first-time-a955-20180310')">
+            <img src="https://mirkophp.navitag.net/photos/pagegraphics/Cosmopolitan.png" class="img-fluid hoverpointer p-5 p-sm-0" alt="" @click="newtab('https://www.cosmo.ph/health/i-tried-period-panties-for-the-first-time-a955-20180310')">
           </div>
           <div class="col mt-5 px-4">
-            <img src="https://mirkophp.navitag.net/photos/pagegraphics/MyPopePH.png" class="img-fluid hoverpointer" alt="" @click="newtab('https://www.mypope.com.ph/3-sustainable-alternatives-to-menstrual-pads/')">
+            <img src="https://mirkophp.navitag.net/photos/pagegraphics/MyPopePH.png" class="img-fluid hoverpointer p-5 p-sm-0" alt="" @click="newtab('https://www.mypope.com.ph/3-sustainable-alternatives-to-menstrual-pads/')">
           </div>
         </div>
 

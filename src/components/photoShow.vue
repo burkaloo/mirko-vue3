@@ -3,6 +3,7 @@
     <div class="row">
       <div class="col-12 px-1">
         <div class="show-wrapper">
+          <img class="position-absolute top-0 start-0" :style="{width:'20%', height: 'auto'}" src="https://mirkophp.navitag.net/photos/pagegraphics/saleicon.png" alt="">
           <div class="show-button back" @click="back">
             <i class="lnr lnr-chevron-left"></i>
           </div>
