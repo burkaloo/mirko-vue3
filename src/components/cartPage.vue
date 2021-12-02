@@ -95,7 +95,7 @@ export default {
   data(){
     return {
       btnspin: false,
-      baseurl: 'https://mirkophp.navitag.net/',
+      //baseurl: 'https://mirkophp.navitag.net/',
       dcode:"",
       discountparams: null,
       claimed:[],
