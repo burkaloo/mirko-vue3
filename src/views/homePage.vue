@@ -57,16 +57,16 @@
         </div>
         <div class="row row-cols-2 row-cols-md-4">
           <div class="col mt-5 px-4">
-            <img src="https://mirkophp.navitag.net/photos/pagegraphics/spot.png" class="img-fluid p-5 p-sm-0" alt="">
+            <img src="https://mirkophp.navitag.net/photos/pagegraphics/spot.png" class="img-fluid p-3 p-sm-0" alt="">
           </div>
           <div class="col mt-5 px-4">
-            <img src="https://mirkophp.navitag.net/photos/pagegraphics/Preen.png" class="img-fluid hoverpointer p-5 p-sm-0" alt="" @click="newtab('https://preen.ph/98534/not-ready-for-menstrual-cups-give-period-panties-a-try')">
+            <img src="https://mirkophp.navitag.net/photos/pagegraphics/Preen.png" class="img-fluid hoverpointer p-3 p-sm-0" alt="" @click="newtab('https://preen.ph/98534/not-ready-for-menstrual-cups-give-period-panties-a-try')">
           </div>
           <div class="col mt-5 px-4">
-            <img src="https://mirkophp.navitag.net/photos/pagegraphics/Cosmopolitan.png" class="img-fluid hoverpointer p-5 p-sm-0" alt="" @click="newtab('https://www.cosmo.ph/health/i-tried-period-panties-for-the-first-time-a955-20180310')">
+            <img src="https://mirkophp.navitag.net/photos/pagegraphics/Cosmopolitan.png" class="img-fluid hoverpointer p-3 p-sm-0" alt="" @click="newtab('https://www.cosmo.ph/health/i-tried-period-panties-for-the-first-time-a955-20180310')">
           </div>
           <div class="col mt-5 px-4">
-            <img src="https://mirkophp.navitag.net/photos/pagegraphics/MyPopePH.png" class="img-fluid hoverpointer p-5 p-sm-0" alt="" @click="newtab('https://www.mypope.com.ph/3-sustainable-alternatives-to-menstrual-pads/')">
+            <img src="https://mirkophp.navitag.net/photos/pagegraphics/MyPopePH.png" class="img-fluid hoverpointer p-3 p-sm-0" alt="" @click="newtab('https://www.mypope.com.ph/3-sustainable-alternatives-to-menstrual-pads/')">
           </div>
         </div>
 
