@@ -7,7 +7,6 @@
         </div>
         <div class="d-none d-md-block container mt-5">
           <div class="mx-auto">
-              <p class="text-center text-white mb-0 p-2 fw-light" :style="{backgroundColor: '#ce2029'}">Enjoy 12% off ALL items until Dec 31, 2021! <span class="d-inline-block">Use Promo Code <span class="fw-bold">MIRKOXMAS</span> upon checkout.</span></p>
               <img class="img-fluid" style="" src="../assets/photos/hero.jpg" alt="">
           </div>
         </div>
