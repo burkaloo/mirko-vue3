@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="mx-auto" :style="{maxWidth: '2500px'}">
     <div v-if="alert.show" class="position-fixed start-0 end-0 mx-auto bg-transparent alert-box">
       <div :class="'alert alert-' + alert.class + ' alert-dismissible shadow-lg'">
         <span>{{alert.text}}</span>
@@ -10,9 +10,10 @@
       <div class="text-center hoverpointer" @click="nextpage('/help/delivery')">Nationwide Shipping!</div>
     </div>
 
-    <navBar :docscroll="docscroll" topmargin="40" spacer="71" logo="./photos/mirko-logo.png" :cartcount="cartcount"
+    <navBar :docscroll="docscroll" :topmargin="41" :spacer="66" logo="./photos/mirko-logo.png" :cartcount="cartcount"
     @page="nextpage"
-    @alert="togglealert"/>
+    @alert="togglealert"
+    />
 
     <router-view
       v-show="page != 'cart'"
@@ -45,7 +46,7 @@
       @discountupdate="discountupdate"
     />
 
-    <vFooter @page="nextpage" @alert="togglealert"/>
+    <vFooter/>
 
     <!--div v-if="loading" class="bg-pink z-top position-fixed top-0 vh-100 vw-100">
       <div class="text-center" style="margin-top:40vh">
@@ -81,7 +82,7 @@ const sleep = (milliseconds) => {
 
 export default {
   name: 'app',
-  components:{navBar, vFooter, cartPage},
+  components:{navBar, cartPage, vFooter},
   mixins:[spinnerMix],
   data(){
     return{
@@ -100,15 +101,16 @@ export default {
       shipfee: 0,
       discount:{amt: 1, title:"INVALID"},
       uid: 3,
-      backend: "https://mirkophp.navitag.net/dbconn.php",
-      //backend: "https://james.local/mirkobackend/dbconn.php",
+      //backend: "https://mirkophp.navitag.net/dbconn.php",
+      backend: "https://james.local/mirkobackend",
       siteconf: {},
+      load: false
     }
   },
   created(){
     let comp = this
     axios.post(
-      this.backend,
+      this.backend +"/dbconn.php",
       {statement: "siteconf"}
     ).then(function(res){
       if(res.data.status == "success"){
@@ -371,7 +373,7 @@ export default {
   top:20px;
   padding-left: 10px;
   padding-right: 10px;
-  z-index: 10;
+  z-index: 20;
 }
 
 #app{
@@ -384,7 +386,7 @@ export default {
 }
 
 .fade-leave-active {
-  transition: height 0.5 ease;
+  transition: height 0.5s ease;
   height: 200px;
 }
 
@@ -394,5 +396,44 @@ export default {
 .fade-leave-to {
   height: 0;
 }
+
+
+.fromtop-enter-active,
+.fromtop-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fromtop-enter-from,
+.fromtop-leave-to {
+  opacity: 0;
+  height: 0
+}
+
+
+.learn-flow > .carousel__prev{
+  left: 25px;
+  background-color: transparent !important;
+  color: lightgrey;
+  height: 100%;
+  width: 50px;
+  border-radius: 0 !important;
+}
+
+.learn-flow > .carousel__next{
+  right: 25px;
+  background-color: transparent !important;
+  color: lightgrey;
+  height: 100%;
+  width: 50px;
+  border-radius: 0 !important;
+}
+
+.carousel__next:hover, .carousel__prev:hover{
+  background-color: rgba(200, 200, 200, 0.5) !important;
+  color: black;
+}
+
+
+
 
 </style>

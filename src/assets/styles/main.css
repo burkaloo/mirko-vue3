@@ -19,16 +19,17 @@
 }
 
 
+@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
 html{
   height: 100%;
 }
 
-h1,h2,h3,h4, h5,h6,p,a,button,span,div{
-	font-family: 'Open Sans', sans-serif;
-  letter-spacing: .50px;
+*{
+  font-family: 'Lato', sans-serif;
 }
 
-.header-font{
+.font-didot{
 	font-family: 'Didot Italic', serif !important;
   font-weight: 600;
 }
@@ -41,12 +42,20 @@ h1,h2,h3,h4, h5,h6,p,a,button,span,div{
   color: #eec6c3;
 }
 
+.text-magenta{
+  color: #9d404f;
+}
+
 .bg-pink{
   background-color: #eec6c3;
 }
 
 .hover-bg-pink:hover{
   background-color: #eec6c3
+}
+
+.hover-bold:hover{
+  font-weight: 600;
 }
 
 .border-pink{
@@ -67,6 +76,10 @@ h1,h2,h3,h4, h5,h6,p,a,button,span,div{
 
 .bg-grey{
   background-color: #ededed;
+}
+
+.bg-bbblue{
+  background-color: #c5c3d6;
 }
 
 .hoverpointer:hover{
@@ -95,4 +108,114 @@ s, .pesosign::before{
 
 .hovershadow:hover{
   box-shadow: 0 .5rem 1rem lightgrey
+}
+
+.fw-07{
+  font-weight: 70;
+}
+
+.fw-1{
+  font-weight: 100;
+}
+
+.fw-2{
+  font-weight: 200;
+}
+
+.fw-3{
+  font-weight: 300;
+}
+
+.fw-4{
+  font-weight: 400;
+}
+
+.fw-5{
+  font-weight: 500;
+}
+
+.fw-6{
+  font-weight: 600;
+}
+
+.fw-7{
+  font-weight: 700;
+}
+
+.fw-8{
+  font-weight: 800;
+}
+
+.fw-9{
+  font-weight: 900;
+}
+
+.bg-pink2{
+  background-color: #fff0ed;
+}
+
+.bg-beige{
+  background-color: #dbd8ca;
+}
+
+.bg-babyblue{
+  background-color: #d0e7f6;
+}
+
+.bgpic-cover{
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.bgpic-contain{
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.bgpic-start {
+  background-position: left;
+}
+
+.bgpic-start-top{
+ background-position: left top;
+}
+
+.bgpic-start-bottom{
+  background-position: left bottom;
+}
+
+.bgpic-end{
+  background-position: right;
+}
+
+.bgpic-end-top{
+  background-position: right top;
+}
+
+.bgpic-end-bottom{
+  background-position: right bottom;
+}
+
+.bgpic-center{
+  background-position: center;
+}
+
+.bgpic-center-top{
+  background-position: top;
+}
+
+.bgpic-center-bottom{
+  background-position: bottom;
+}
+
+.rounded-5{
+  border-radius: .5rem
+}
+
+.fs-5-5{
+  font-size: 1.175rem
+}
+
+.fs-7{
+  font-size: .875rem
 }

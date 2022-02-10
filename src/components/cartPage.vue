@@ -1,5 +1,5 @@
 <template>
-  <div class="container mt-5">
+  <div class="container my-5">
     <div class="">
       <i class="lnr lnr-cross fs-1" @click="$emit('back')"></i>
     </div>
@@ -122,7 +122,7 @@ export default {
     getdiscount(){
       this.loading.discount = true
       let comp = this
-      axios.post(this.backend, {statement: "checkvoucher", uid: this.uid == null ? "guest" : this.uid, code: this.dcode})
+      axios.post(this.backend +"/dbconn.php", {statement: "checkvoucher", uid: this.uid == null ? "guest" : this.uid, code: this.dcode})
       .then(function(res){
         if(res.data.status == "success"){
           let data =  res.data.response[0]

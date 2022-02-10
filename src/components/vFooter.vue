@@ -1,39 +1,42 @@
 <template>
-  <div class="wrapper">
-    <div class="options">
-      <div class="container ">
-        <div class="row text-center">
-          <div class="col-0 col-lg-3 col-xl">
-            <span></span>
+  <section class="bg-grey">
+    <div class="container py-3">
+      <div class="row">
+        <div class="col-12 d-sm-none">
+          <div v-for="(row, ind)  in links_smallest" :key="ind" class="d-flex justify-content-center mb-3">
+            <div v-for="item in row" :key="item" class="footer-links">
+              <span class="hoverpointer" @click="itemcallback(item)">
+                {{item}}
+              </span>
+            </div>
           </div>
-          <div class="col-4 col-sm-2 col-lg-1 col-xl-2">
-            <span class="hoverpointer" @click="$emit('page', {path:'/about'})">About</span>
+        </div>
+
+        <div class="col-12 d-none d-sm-block d-md-none">
+          <div v-for="(row, ind)  in links_small" :key="'sm'+ind" class="d-flex justify-content-center mb-3">
+            <div v-for="item in row" :key="item" class="footer-links">
+              <span class="hoverpointer" @click="itemcallback(item)">
+                {{item}}
+              </span>
+            </div>
           </div>
-          <div class="col-4 col-sm-2 col-lg-1 col-xl-2 hoverpointer">
-            <span class="hoverpointer" @click="$emit('page', {path:'/help/return'})">FAQ</span>
-          </div>
-          <div class="col-4 col-sm-3 col-lg-2 col-xl-2">
-            <span class="hoverpointer" @click="$emit('page', {path:'/help/return'})">
-              Return Policy</span>
-          </div>
-          <div class="col-7 col-sm-3 col-lg-2 col-xl-2 mt-4 mt-sm-0">
-            <span class="hoverpointer" @click="$emit('page', {path:'/contact'})">
-              Contact Us
-            </span>
-          </div>
-          <div class="col-5 col-sm-2 col-lg-1 col-xl-2 mt-4 mt-sm-0 d-flex">
-            <img src="https://mirkophp.navitag.net/photos/pagegraphics/fb-icon.png" class="mx-1 img-fluid icon hoverpointer" alt="" @click="newtab('https://www.facebook.com/MirkoPH')">
-            <img src="https://mirkophp.navitag.net/photos/pagegraphics/ig-icon.png" class="mx-1 img-fluid icon hoverpointer" alt="" @click="newtab('https://www.instagram.com/mirko_ph')">
-          </div>
-          <div class="col-0 col-lg-2 col-xl">
-            <span></span>
+        </div>
+
+        <div class="col-12 d-none d-md-block">
+          <div v-for="(row, ind)  in links_med" :key="'md'+ind" class="d-flex justify-content-center mb-3">
+            <div v-for="item in row" :key="item" class="footer-links">
+              <span class="hoverpointer" @click="itemcallback(item)">
+                {{item}}
+              </span>
+            </div>
           </div>
         </div>
       </div>
     </div>
-
-    <div class="main hoverpointer" :style="{paddingTop:'12%', height: heightpx, backgroundImage: 'url(' + require('@/assets/photos/footer.png') + ')' }"></div>
-  </div>
+    <div class="px-3 py-2 fw-6 text-center">
+      Mirko PH™ 2022
+    </div>
+  </section>
 </template>
 
 <script>
@@ -45,21 +48,46 @@ export default {
   mixins:[urlMix],
   data(){
     return{
-      height: 0
+      links: ["Home" ,"Shop", "About Us", "FAQs"]
     }
   },
-  mounted(){
-    this.updateheight()
-    window.addEventListener('resize', this.updateheight);
-  },
   methods:{
-    updateheight(){
-      this.height = window.innerWidth *.35
+    itemcallback(item){
+      switch (item) {
+        case 'Home':
+        this.$router.push({path:'/'})
+          break;
+        case 'Shop':
+        this.$router.push({path:'/shop'})
+          break;
+        case 'About Us':
+        this.$router.push({path:'/about'})
+          break;
+        case 'FAQs':
+        this.$router.push({path:'/help'})
+          break;
+        default:
+          console.log(item)
+      }
     }
   },
   computed:{
-    heightpx(){
-      return this.height.toString() + 'px'
+    links_smallest(){
+      let ret = [], i,j, chunk = 3;
+      for (i = 0,j = this.links.length; i < j; i += chunk) {
+          ret.push(this.links.slice(i, i + chunk))
+      }
+      return ret
+    },
+    links_small(){
+      let ret = [], i,j, chunk = 4;
+      for (i = 0,j = this.links.length; i < j; i += chunk) {
+          ret.push(this.links.slice(i, i + chunk))
+      }
+      return ret
+    },
+    links_med(){
+      return [this.links]
     }
   }
 }
@@ -67,31 +95,15 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.main{
-  background-repeat: no-repeat;
-  background-position: bottom;
-  background-size: cover;
-  position: absolute;
-  z-index: 1;
-  bottom: 0;
-  left: 0;
-  right:0;
+
+.footer-links{
+  border-right: solid 2px;
+  min-width: 100px;
+  text-align: center;
 }
 
-.options{
-  padding-bottom: 20vw;
-  position: relative;
-  z-index: 2;
-}
-
-.wrapper{
-  position: relative;
-  margin-top: 15vw;
-}
-
-.icon{
-  max-width: 25px;
-  max-height: 25px;
+.footer-links:last-child{
+  border: none !important;
 }
 
 </style>

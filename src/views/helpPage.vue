@@ -1,7 +1,7 @@
 <template>
     <div class="container pt-5 maintemp">
       <h5 class="fw-bold">Help</h5>
-      <div class="row mt-4">
+      <div class="row my-4">
         <div class="col-xl-4 ps-4">
           <p @click="boxscroll('return')">Return Policy</p>
           <p @click="boxscroll('replacement')">Replacement</p>
@@ -13,7 +13,7 @@
           <p @click="boxscroll('reseller')">Reseller Program</p>
         </div>
         <div class="col-xl-8">
-          <div class="border content-wrapper" id="scrollbox">
+          <div class="border content-wrapper" id="scrollbox" >
             <section id="return">
               <p class="fw-bold">Return Policy.</p>
               <p>

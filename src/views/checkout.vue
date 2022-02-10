@@ -296,7 +296,7 @@ export default {
     }
     //this.spinnertoggle(true)
     let comp = this
-    axios.post(this.backend,  {statement: "getprovinces"})
+    axios.post(this.backend + '/dbconn.php',  {statement: "getprovinces"})
     .then(function(res){
       if(res.data.status == "success"){
 
@@ -406,7 +406,7 @@ export default {
         //this.spinnertoggle(true)
         this.cityloading = true
         let comp = this
-        axios.post(this.backend,{statement: "getcities", "province_id": newval.id})
+        axios.post(this.backend + '/dbconn.php',{statement: "getcities", "province_id": newval.id})
         .then(function(res){
           if(res.data.status == "success"){
             comp.cityOptions = res.data.response

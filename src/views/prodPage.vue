@@ -221,7 +221,7 @@ export default {
       this.prod = null
       this.details = null
       let comp = this
-      axios.post(this.backend, {statement: "getprodbyid", pid : this.pid})
+      axios.post(this.backend + '/dbconn.php', {statement: "getprodbyid", pid : this.pid})
       .then(function(res){
         if(res.data.status == "success"){
           let newprod = res.data.response[0]
@@ -253,7 +253,7 @@ export default {
         }
       })
 
-      axios.post(this.backend, {statement: "getproddetails", pid : this.pid})
+      axios.post(this.backend + '/dbconn.php', {statement: "getproddetails", pid : this.pid})
       .then(function(res){
         if(res.data.status == "success"){
           let dets = {}
@@ -275,7 +275,7 @@ export default {
         pidlist += pid.toString()
       });
       let comp = this
-      axios.post(this.backend, {statement: "getselectedlist", pidlist : pidlist.substring(1)})
+      axios.post(this.backend + '/dbconn.php', {statement: "getselectedlist", pidlist : pidlist.substring(1)})
       .then(function(res){
         if(res.data.status == "success"){
           let resarr = res.data.response

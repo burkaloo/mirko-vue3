@@ -1,49 +1,54 @@
 <template>
   <div :style="'height:'+ spacer+'px;'">
-    <nav class="navbar navbar-expand-md navbar-fixed navbar-light bg-white" :style="'top:'+totalTopmargin+ 'px;'">
-
-      <div class="container-md">
-        <div class="navbar-brand pt-2">
-          <img src="../assets/photos/mirko-logo.png" class="p-1 hoverpointer" :style="navphoto" @click="$emit('page',{name: 'home'})">
+    <nav class="position-fixed top-0 vw-100 overflow-hidden">
+      <div class="d-flex px-3 py-2 w-100 bg-white" :style="{marginTop: totalTopmargin+ 'px'}">
+        <div class="">
+          <img src="../assets/photos/mirko-logo.png" class="p-1 hoverpointer navphoto" @click="$emit('page',{name: 'home'})">
         </div>
 
-        <div v-if="open" class="w-100 cover" :style="'top:' + totalSpace +'px; height: calc(100vh - ' + totalSpace +'px);'" @click="close"></div>
-        <div class="navbar-toggler hoverpointer border-0" @click="opennav">
-          <span class="navbar-toggler-icon"></span>
+        <div v-for="(link, Ind) in navlinks" class="nav-item align-self-center text-center" :key="'lg-' + link">
+          <div class="hover-bold hoverpointer" @click="navlinkcallback(link, Ind)">{{link}}
+          </div>
         </div>
 
-        <div v-show="open" :class="collapseClass" :style="'top: '+totalSpace+'px;'">
-          <ul class="navbar-nav me-auto mb-lg-0 pt-2">
-            <li class="nav-item ms-0 ms-md-4 px-3 pt-1 hoverpointer hoverbg-pink rounded">
-              <h5 @click="page({path: '/shop'})">Shop</h5>
-            </li>
-            <li class="nav-item ms-0 ms-md-4 hoverpointer px-3 pt-1 hoverbg-pink rounded">
-              <h5 @click="page({path: '/about'})">About</h5>
-            </li>
-          </ul>
-          <ul class="navbar-nav">
-            <li v-if="!onshoproute" class="nav-item ms-0 px-3 hoverbg-pink hoverpointer pt-1 pt-md-0 rounded">
-              <div v-if="searchshow" class="hoverbg-pink rounded pt-md-2 pb-md-1">
-                <input type="text" class="me-3" placeholder="search products" v-model.trim="searchinput" @keyup.enter="linksearch">
-                <img src="../assets/photos/search.png" alt="" class="endicons pb-2" @click="togglesearch">
-              </div>
+        <div class="flex-grow-1">
+        </div>
 
-              <div v-else @click="togglesearch" class="hoverbg-pink rounded pt-md-2 pb-md-1">
-                <h5 v-if="!searchshow" class="me-3 d-inline d-md-none mb-0">Search</h5>
-                <img src="../assets/photos/search.png" alt="" class="endicons pb-2">
-              </div>
+        <div v-if="!oncheckoutroute" class=" align-self-center text-end pe-2" :style="{width: '120px'}">
+          <i class="lnr lnr-menu fs-1 d-md-none align-middle me-4 hoverpointer hover-bold" @click="open = !open"></i>
 
-            </li>
-
-            <li v-if="!oncheckoutroute" class="nav-item ms-0 px-3 hoverpointer my-sm-0 pt-2 hoverbg-pink rounded position-relative" @click="page('cart')">
-              <h5 class="me-3 d-inline d-md-none mb-0">Cart</h5>
-              <img src="../assets/photos/bag.png" alt="" class="endicons pb-2">
-              <span v-show="cartcount > 0" class="badge bg-secondary cart-badge">{{cartcount}}</span>
-            </li>
-          </ul>
+          <div class="d-inline align-bottom position-relative" @click="itemcallback('cart')">
+            <i class="lnr lnr-cart fs-1 hoverpointer hover-bold"></i>
+            <span v-show="cartcount > 0" class="badge cart-badge">{{cartcount}}</span>
+          </div>
         </div>
       </div>
+
+      <!-- mobile menu -->
+      <div v-if="open" class="d-md-none" :style="{height: 'calc( 100vh - ' + (totalTopmargin + spacer)  + 'px)'}" >
+        <div class="bg-white px-4 border-top py-2">
+          <div v-for="link in navlinks" :key="link" class="py-2 fs-5">
+            <div @click="mnavlinkcallback(link)" class="hover-bold hoverpointer">{{link}}</div>
+            <div v-if="link in submenu && submenu[link].mopen">
+              <div v-for="sub in submenu[link].menu" class="fs-6 px-2 mt-2 hover-bold hoverpointer" :key="sub" @click="itemcallback(link + '-' + sub)">
+                {{sub}}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="vh-100 100wh" @click="open = false">
+        </div>
+      </div>
+
+      <!-- drop down  on larger screens-->
+      <transition name="fromtop">
+        <div v-if="ddopen" class="d-none d-md-block bg-white pe-3 pt-4 pb-3 border-bottom" :style="{paddingLeft: submenu[ddopen].pad}">
+          <div class="fs-6 fw-7 mb-3">{{submenu[ddopen].title}}</div>
+          <div v-for="sub in submenu[ddopen].menu" class="mb-2 hoverpointer" :key="sub" @click="this.itemcallback(ddopen + '-' + sub)"><i class="lnr lnr-chevron-right fs-6"></i> {{sub}}</div>
+        </div>
+      </transition>
     </nav>
+
   </div>
 </template>
 
@@ -56,14 +61,18 @@ export default {
     topmargin: Number,
     spacer: Number,
     logo: String,
-    logoh:{default: 50},
     cartcount: Number
   },
   data(){
     return {
       open: false,
       searchshow: false,
-      searchinput: ""
+      searchinput: "",
+      navlinks:["Shop", "Learn", "About Us", "FAQs"],
+      ddopen: false,
+      submenu:{
+        "Learn" :{pad:'223px', title: "Learn more about Mirko", menu : ["Flow Underwear", "Menstral Cups"], mopen: false}
+      }
     }
   },
   watch:{
@@ -74,26 +83,61 @@ export default {
     }
   },
   methods:{
+    mnavlinkcallback(link){
+      if(link in this.submenu){
+        this.submenu[link].mopen = !this.submenu[link].mopen
+      } else{
+        this.open = false
+        let subs = Object.values(this.submenu)
+        subs.forEach((item) => {item.mopen = false} );
+        this.itemcallback(link)
+      }
+    },
+    navlinkcallback(link){
+      if(this.ddopen == link){
+        this.ddopen = false
+      } else{
+        if(link in this.submenu){
+         this.ddopen = link
+        } else{
+         this.ddopen = false
+        }
+        this.itemcallback(link)
+      }
+    },
     opennav(){
       this.open = !this.open
     },
     close(){
       this.open = false
     },
-    page(page){
-      this.close()
-      this.$emit('page', page)
-    },
-    togglesearch(){
-      this.searchshow = !this.searchshow
-    },
-    linksearch(){
-      if(this.searchinput.length >3){
-        this.page({ path: '/shop', query: { search: this.searchinput } })
-        this.searchinput = ""
-        this.searchshow = false
-      } else{
-        this.$emit('alert', {show: true, class: 'warning', text: "Search word too short"});
+    itemcallback(item){
+      let subs = Object.values(this.submenu)
+      switch (item) {
+        case 'cart':
+          this.$emit('page', 'cart')
+          break;
+        case 'Shop':
+          this.$emit('page', {path:'/shop'})
+          break;
+        case 'About Us':
+          this.$emit('page', {path:'/about'})
+          break;
+        case 'Learn-Flow Underwear':
+          this.$emit('page', {path:'/learn/flow-underwear'})
+          this.ddopen = false
+          subs.forEach((item) => {item.mopen = false} );
+          break;
+        case 'Learn-Menstral Cups':
+          this.$emit('page', {path:'/learn/menstral-cup'})
+          this.ddopen = false
+          subs.forEach((item) => {item.mopen = false} );
+          break;
+        case 'FAQs':
+          this.$emit('page', {path:'/help'})
+          break;
+        default:
+          console.log(item)
       }
     }
   },
@@ -114,13 +158,10 @@ export default {
     },
     totalTopmargin(){
       if(this.docscroll < this.topmargin){
-        return this.topmargin
+        return Number(this.topmargin)
       } else{
         return 0
       }
-    },
-    navphoto(){
-      return 'height: '+ this.logoh +'px; width: auto; padding:10px'
     },
     onshoproute(){
       if(this.$route.path == '/shop'){
@@ -142,18 +183,6 @@ export default {
 
 
 <style scoped>
-  .navbar-collapse-vue{
-    position: fixed;
-    z-index: 5;
-    left: 0;
-    width: 100%;
-  }
-  .navbar{
-    position: fixed !important;
-    z-index: 5;
-    left: 0;
-    right: 0;
-  }
   .cover{
     position: fixed;
     left: 0;
@@ -162,13 +191,15 @@ export default {
   .cart-badge{
     padding: 5px !important;
     position: absolute;
-    top:5px;
+    top:0;
     right:10px;
-    //border-radius: 45%
+    margin-top: -25px;
+    background-color: white;
+    color: black;
   }
   .endicons{
-    max-height: 30px;
-    max-width: 30px;
+    max-height: 35px;
+    max-width: 35px;
   }
   .pt-lowered{
     padding-top: 30px !important;
@@ -177,4 +208,30 @@ export default {
     line-height: 5px;
     padding: none;
   }
+  .nav-item{
+    font-size: 1.25rem;
+    width: 120px;
+    display: none;
+  }
+
+  .navphoto{
+    height: 50px;
+    width: auto;
+  }
+
+  nav{
+    z-index: 10;
+  }
+
+
+@media (min-width: 768px) {
+  .nav-item{
+    display: block;
+    position: relative;
+  }
+
+  .dditem{
+    inline-size: max-content;
+  }
+}
 </style>

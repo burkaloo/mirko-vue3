@@ -122,7 +122,7 @@ export default {
       }
 
       axios.post(
-        this.backend,
+        this.backend + '/dbconn.php',
         dataobj
       ).then(function(res){
         if(res.data.status == "success"){

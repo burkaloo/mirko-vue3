@@ -9,12 +9,24 @@ import prod from '@/views/prodPage.vue'
 import cupsinfo from '@/views/cupsInfo.vue'
 import thankyou from '@/views/thankyou.vue'
 import signup from '@/views/signup.vue'
+import flowunderwear from '@/views/flowunderwear.vue'
+import menscup from '@/views/menscup.vue'
 
 const routes = [
   {
     path: '/',
     name: 'home',
     component: homePage
+  },
+  {
+    path: '/learn/menstral-cup',
+    name: 'menscup',
+    component: menscup
+  },
+  {
+    path: '/learn/flow-underwear',
+    name: 'flowunderwear',
+    component: flowunderwear
   },
   {
     path: '/about',
