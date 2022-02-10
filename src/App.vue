@@ -101,8 +101,7 @@ export default {
       shipfee: 0,
       discount:{amt: 1, title:"INVALID"},
       uid: 3,
-      //backend: "https://mirkophp.navitag.net/dbconn.php",
-      backend: "https://james.local/mirkobackend",
+      backend: "https://mirkophp.navitag.net",
       siteconf: {},
       load: false
     }
