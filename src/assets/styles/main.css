@@ -29,6 +29,18 @@ html{
   font-family: 'Lato', sans-serif;
 }
 
+
+a{
+  color: black;
+  text-decoration: none;
+}
+
+a:hover{
+  color: black;
+  cursor: pointer;
+}
+
+
 .font-didot{
 	font-family: 'Didot Italic', serif !important;
   font-weight: 600;

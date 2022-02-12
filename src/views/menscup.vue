@@ -10,7 +10,7 @@
             <div :style="{maxWidth:'600px'}" class="mx-auto px-3 py-5 my-5">
               <div class="text-center fst-italic fw-7 fs-5 pb-4">What's a Menstrual Cup?</div>
               <div class="text-center fw-5">
-                Menstrual cups are an alternative to using sanitary pads and tampons, but they collect instead of absorbing.
+                A menstrual cup is a sustainable alternative to using sanitary pads and tampons, it catches and collects instead of absorbing period fluid.
               </div>
               <br>
               <div class="text-center fw-5">
@@ -60,9 +60,9 @@
         <carousel :items-to-show="1" class="learn-flow" :breakpoints="breakpoints">
          <slide v-for="(card, ind) in cards" :key="ind" class="px-3" >
            <div class="px-3">
-             <div :style="{minHeight: '600px'}" class="bg-white py-4 d-flex">
+             <div :style="{minHeight: '500px'}" class="bg-white py-4 d-flex">
                <div class="align-self-center">
-                 <div v-if="card[0]" class="text-center fs-5 fw-6">
+                 <div v-if="card[0]" class="text-center fs-5 fw-6 fst-italix">
                    {{card[0]}}
                  </div>
                  <div v-if="card[1]" class="mb-4">
@@ -120,25 +120,16 @@ export default{
         snapAlign: 'start',
       },
       // 1024 and up
-      992: {
-        itemsToShow: 2.5,
-        snapAlign: 'start',
-      },
-      1120:{
+      1100:{
         itemsToShow: 3,
         snapAlign: 'start',
       },
-      1230:{
-        itemsToShow: 3.7,
+      1500:{
+        itemsToShow: 4,
         snapAlign: 'start',
         wrapAround: false
       },
-      1370:{
-        itemsToShow: 4.5,
-        snapAlign: 'start',
-        wrapAround: false
-      },
-      1600:{
+      2200:{
         itemsToShow: 5,
         snapAlign: 'start',
         wrapAround: false

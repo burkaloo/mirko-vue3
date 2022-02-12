@@ -21,7 +21,7 @@
     </div>
 
     <div class="px-2 pb-5">
-      <h1 class="header-font fw-normal text-center my-5 pt-5">With Mirko, we celebrate menstruation as a natural part of   being a woman - something to fully embrace without fear of judgement.</h1>
+      
       <h4 class="text-center fw-bold my-5">OUR COMMITMENT TO EVERY WOMAN</h4>
       <p class="">Mirko seeks to be an innovative leader for women’s essentials - targeting basic needs with thoughtful solutions to improve women’s overall quality of life - without all the fuss. We promise to champion this movement in our daily lives as a women-led team and ensure that our solutions remain beneficial even for the generations of ladies to come.</p>
     </div>

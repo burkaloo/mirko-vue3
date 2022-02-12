@@ -8,9 +8,9 @@
         <div class="col-12 col-md-5 col-xxl-4 d-flex bg-beige">
           <div class="align-self-center flex-grow-1">
             <div :style="{maxWidth:'400px'}" class="mx-auto px-3 py-5 my-5">
-              <div class="text-center fst-italic fw-7 fs-5 pb-4">Whats a Period Underwear?</div>
+              <div class="text-center fst-italic fw-7 fs-5 pb-4">What's a Period Underwear?</div>
               <div class="text-center fw-5">
-                It is a reusale underwear that can absorb menstration or leaks. Capacity depends on the thickness of the gusset
+                It is a reusable underwear that can absorb menstruation or leaks. Capacity depends on the thickness of the gusset.
               </div>
             </div>
           </div>
@@ -64,7 +64,7 @@
                   <img class="align-self-center icon" :src="backend + '/photos/learn-flow-section4-icon1.jpg'" alt="">
                   <div class="flex-grow-1 fs-6 fst-italic text-magenta lh-base ms-4 pe-3">
                     <div class="fw-7">Hand wash</div>
-                    <div class="">Your Flow Underwear is very easy to wash! Just use room temperature to cold water and wash as regular underwear</div>
+                    <div class="">Your Flow Underwear is very easy to wash! Just use room temperature to cold water and wash as regular underwear.</div>
                   </div>
                 </div>
               </div>
@@ -73,7 +73,7 @@
                   <img class="align-self-center icon" :src="backend + '/photos/learn-flow-section4-icon2.jpg'" alt="">
                   <div class="flex-grow-1 fs-6 fst-italic text-magenta lh-base  ms-4 pe-3">
                     <div class="fw-7">Machine Wash</div>
-                    <div class="">Conversely, load them up in the laundry machine on a delicate cycle. Do not use hot water, bleachm or fabric softener as these may damage the leak-proof film</div>
+                    <div class="">Conversely, load them up in the laundry machine on a delicate cycle. Do not use hot water, bleach or fabric softener as these may damage the leak-proof film.</div>
                   </div>
                 </div>
               </div>
@@ -91,7 +91,7 @@
                   <img class="align-self-center icon" :src="backend + '/photos/learn-flow-section4-icon4.jpg'" alt="">
                   <div class="flex-grow-1 fs-6 fst-italic text-magenta lh-base  ms-4 pe-3">
                     <div class="fw-7">Storage</div>
-                    <div class="">Your Flow Underwear is very easy to wash! Just use room temperature to cold water and wash as regular underwear</div>
+                    <div class="">Your Flow Underwear is very easy to wash! Just use room temperature to cold water and wash as regular underwear.</div>
                   </div>
                 </div>
               </div>

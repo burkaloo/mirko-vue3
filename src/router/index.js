@@ -19,7 +19,7 @@ const routes = [
     component: homePage
   },
   {
-    path: '/learn/menstral-cup',
+    path: '/learn/menstrual-cup',
     name: 'menscup',
     component: menscup
   },

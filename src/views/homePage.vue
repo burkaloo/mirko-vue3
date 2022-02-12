@@ -78,22 +78,22 @@
               <div class=""> <!-- word block -->
                 <div class="fs-6 d-lg-none">
                   <div class="px-3"><span class="fw-7">Mirko's Flow Underwear</span> is the perfect period <span class="d-sm-none">companion designed to be your last layer of protection against leaks</span></div>
-                  <div class="mx-auto px-2 d-none d-sm-block px-md-4 px-lg-2" :style="{maxWidth: '400px'}">companion designed to be your last layer of protection against leaks</div>
+                  <div class="mx-auto px-2 d-none d-sm-block px-md-4 px-lg-2" :style="{maxWidth: '400px'}">companion designed to be your last layer of protection against leaks.</div>
                 </div>
                 <div class="fs-5 d-none d-lg-block">
                   <div class="px-3"><span class="fw-7">Mirko's Flow Underwear</span> is the perfect period</div>
-                  <div class="mx-auto px-2 px-md-4 px-lg-2" :style="{maxWidth: '500px'}">companion designed to be your last layer of protection against leaks</div>
+                  <div class="mx-auto px-2 px-md-4 px-lg-2" :style="{maxWidth: '500px'}">companion designed to be your last layer of protection against leaks.</div>
                 </div>
               </div>
 
               <div class="row row-cols-1 row-cols-sm-2 row-cols-md-1 row-cols-xl-2 g-0"> <!-- button block -->
                 <div class="col text-center text-sm-end text-md-center text-xl-end mt-4 px-2">
-                  <button class="btn btn-lg bg-babyblue fs-6 fw-7 rounded-5 d-lg-none" :style="{padding: '.7rem 1.5rem'}">Shop Flow Underwear</button>
-                  <button class="btn btn-lg bg-babyblue fs-5 fw-7 rounded-5 d-none d-lg-inline-block" :style="{padding: '.7rem 1.5rem'}">Shop Flow Underwear</button>
+                  <button class="btn btn-lg bg-babyblue fs-6 fw-7 rounded-5 d-lg-none" :style="{padding: '.7rem 1.5rem'}" @click="$emit('page', {path: '/product/1'})">Shop Flow Underwear</button>
+                  <button class="btn btn-lg bg-babyblue fs-5 fw-7 rounded-5 d-none d-lg-inline-block" :style="{padding: '.7rem 1.5rem'}" @click="$emit('page', {path: '/product/1'})">Shop Flow Underwear</button>
                 </div>
                 <div class="col text-center text-sm-start text-md-center text-xl-start mt-4 px-2">
-                  <button class="btn btn-lg bg-white fs-6 fw-7 rounded-5 d-lg-none" :style="{padding: '.7rem 3.8rem'}">Learn More</button>
-                  <button class="btn btn-lg bg-white fs-5 fw-7 rounded-5 d-none d-lg-inline-block" :style="{padding: '.7rem 4.4rem'}">Learn More</button>
+                  <button class="btn btn-lg bg-white fs-6 fw-7 rounded-5 d-lg-none" :style="{padding: '.7rem 3.8rem'}" @click="$emit('page', {path: '/learn/flow-underwear'})">Learn More</button>
+                  <button class="btn btn-lg bg-white fs-5 fw-7 rounded-5 d-none d-lg-inline-block" :style="{padding: '.7rem 4.4rem'}" @click="$emit('page', {path: '/learn/flow-underwear'})">Learn More</button>
                 </div>
               </div>
 
@@ -102,7 +102,7 @@
         </div>
       </div>
 
-      <!-- mestral cups section -->
+      <!-- mestrual cups section -->
       <section class="position-relative" >
         <div class="bgpic-cover bgpic-center-bottom" :style="{backgroundImage: 'url('+ backend +'/photos/section4.jpg)'}">
           <div class="d-sm-none" :style="{paddingTop: '80%'}"></div>
@@ -115,16 +115,16 @@
         <div class=" bg-pink2 text-center text-lg-start py-5 d-md-none"> <!-- sml to med text block -->
           <div class="fst-italic text-center mt-sm-5"> <!-- word block -->
             <div>Revolutionary. Advance. Economical.</div>
-            <div>Make the switch to <span class="fw-7">Mirko Menstral Cup.</span></div>
+            <div>Make the switch to <span class="fw-7">Mirko Menstrual Cup.</span></div>
           </div>
           <div class="row g-0 row-cols-1 row-cols-sm-2 mb-sm-5"> <!-- button block -->
             <div class="col text-sm-end mt-4 px-2">
-              <button class="btn btn-lg bg-babyblue fs-6 fw-7 rounded-5 d-lg-none" :style="{padding: '.7rem 1.5rem'}">Shop Mirko Cup</button>
-              <button class="btn btn-lg bg-babyblue fs-5 fw-7 rounded-5 d-none d-lg-inline-block" :style="{padding: '.7rem 1.5rem'}">Shop Mirko Cup</button>
+              <button class="btn btn-lg bg-babyblue fs-6 fw-7 rounded-5 d-lg-none" :style="{padding: '.7rem 1.5rem'}" @click="$emit('page', {path: '/product/2'})">Shop Mirko Cup</button>
+              <button class="btn btn-lg bg-babyblue fs-5 fw-7 rounded-5 d-none d-lg-inline-block" :style="{padding: '.7rem 1.5rem'}" @click="$emit('page', {path: '/product/2'})">Shop Mirko Cup</button>
             </div>
             <div class="col text-sm-start mt-4 px-2">
-              <button class="btn btn-lg bg-white fs-6 fw-7 rounded-5 d-lg-none" :style="{padding: '.7rem 2.5rem'}">Learn More</button>
-              <button class="btn btn-lg bg-white fs-5 fw-7 rounded-5 d-none d-lg-inline-block" :style="{padding: '.7rem 2.5rem'}">Learn More</button>
+              <button class="btn btn-lg bg-white fs-6 fw-7 rounded-5 d-lg-none" :style="{padding: '.7rem 2.5rem'}" @click="$emit('page', {path: '/learn/menstrual-cup'})">Learn More</button>
+              <button class="btn btn-lg bg-white fs-5 fw-7 rounded-5 d-none d-lg-inline-block" :style="{padding: '.7rem 2.5rem'}" @click="$emit('page', {path: '/learn/menstrual-cup'})">Learn More</button>
             </div>
           </div>
         </div>
@@ -135,15 +135,15 @@
           <div class="d-lg-inline-block ps-xl-5 ms-xl-5">
             <div class="fst-italic mt-5 pt-sm-5 px-lg-5 text-center"> <!-- word block -->
               <div class="fs-4">Revolutionary. Advance. Economical.</div>
-              <div class="fs-4">Make the switch to <span class="fw-7">Mirko Menstral Cup.</span></div>
+              <div class="fs-4">Make the switch to <span class="fw-7">Mirko Menstrual Cup.</span></div>
             </div>
 
             <div class="row g-0 row-cols-2"> <!-- button block -->
               <div class="col mt-4 text-end">
-                <button class="btn bg-babyblue fs-5 fw-7 rounded-5" :style="{padding: '.7rem 2rem'}">Shop Mirko Cup</button>
+                <button class="btn bg-babyblue fs-5 fw-7 rounded-5" :style="{padding: '.7rem 2rem'}" @click="$emit('page', {path: '/product/2'})">Shop Mirko Cup</button>
               </div>
               <div class="col mt-4 px-3 text-start">
-                <button class="btn bg-white fs-5 fw-7 rounded-5" :style="{padding: '.7rem 3rem'}">Learn More</button>
+                <button class="btn bg-white fs-5 fw-7 rounded-5" :style="{padding: '.7rem 3rem'}" @click="$emit('page', {path: '/learn/menstrual-cup'})">Learn More</button>
               </div>
             </div>
           </div>
@@ -154,13 +154,13 @@
       <section>
         <div class="container my-5 py-5 d-none d-md-block">
           <div class="px-5 fs-3 text-center my-5 py-5">
-            With <span class="fw-7">Mirko</span>, we celebrate menstration as a natural part of being a woman - something to fully embrace without the fear of judgement
+            With <span class="fw-7">Mirko</span>, we celebrate menstruation as a natural part of being a woman - something to fully embrace without the fear of judgement.
           </div>
         </div>
       </section>
 
       <!-- bundle block -->
-      <section>
+      <!--section>
         <div class="row g-0">
           <div class="col-12 col-md-6 col-xxl-auto">
             <img class="img-fluid" :src="backend+ '/photos/section5.gif'">
@@ -174,7 +174,7 @@
                 Mirko Game Changer Bundle
               </div>
               <div class="">
-                For a worry-free leak-free period
+                for a worry-free leak-free period.
               </div>
               <button class="btn bg-babyblue rounded-3 fw-7 mt-5" :style="{padding: '.7rem 2rem'}">I Want to Create A Bundle</button>
             </div>
@@ -187,19 +187,19 @@
                 Mirko Game Changer Bundle
               </div>
               <div class="">
-                For a worry-free leak-free period
+                for a worry-free leak-free period.
               </div>
               <button class="btn bg-babyblue rounded-3 fw-7 mt-5 fs-5" :style="{padding: '.7rem 2rem'}">I Want to Create A Bundle</button>
             </div>
           </div>
         </div>
-      </section>
+      </section-->
 
       <!-- tag phrase block on smaller screens -->
       <section>
         <div class="container my-5 py-5 d-md-none">
           <div class="px-5 fs-5 text-center my-5 py-5">
-            With <span class="fw-7">Mirko</span>, we celebrate menstration as a natural part of being a woman - something to fully embrace without the fear of judgement
+            With <span class="fw-7">Mirko</span>, we celebrate menstruation as a natural part of being a woman - something to fully embrace without the fear of judgement
           </div>
         </div>
       </section>
