@@ -2,8 +2,8 @@
   <div :style="'height:'+ spacer+'px;'">
     <nav class="position-fixed top-0 vw-100 overflow-hidden">
       <div class="d-flex px-3 py-2 w-100 bg-white" :style="{marginTop: totalTopmargin+ 'px'}">
-        <router-link class="">
-          <img src="../assets/photos/mirko-logo.png" class="p-1 hoverpointer navphoto" to="./" @click="close()">
+        <router-link to="./" @click="close()">
+          <img src="../assets/photos/mirko-logo.png" class="p-1 hoverpointer navphoto" >
         </router-link>
 
         <div v-for="(link, Ind) in navlinks" class="nav-item align-self-center text-center" :key="'lg-' + link">
