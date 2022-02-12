@@ -2,9 +2,9 @@
   <div :style="'height:'+ spacer+'px;'">
     <nav class="position-fixed top-0 vw-100 overflow-hidden">
       <div class="d-flex px-3 py-2 w-100 bg-white" :style="{marginTop: totalTopmargin+ 'px'}">
-        <div class="">
+        <router-link class="">
           <img src="../assets/photos/mirko-logo.png" class="p-1 hoverpointer navphoto" @click="$emit('page',{name: 'home'})">
-        </div>
+        </router-link>
 
         <div v-for="(link, Ind) in navlinks" class="nav-item align-self-center text-center" :key="'lg-' + link">
           <div v-if="link in submenu" class="hover-bold hoverpointer" @click="navlinkcallback(link, Ind)">
