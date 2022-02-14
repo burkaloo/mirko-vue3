@@ -2,7 +2,7 @@
   <div :style="'height:'+ spacer+'px;'">
     <nav class="position-fixed top-0 vw-100 overflow-hidden">
       <div class="d-flex px-3 py-2 w-100 bg-white" :style="{marginTop: totalTopmargin+ 'px'}">
-        <router-link to="./" @click="close()">
+        <router-link to="./" @click="closemenu">
           <img src="../assets/photos/mirko-logo.png" class="p-1 hoverpointer navphoto" >
         </router-link>
 
@@ -10,7 +10,7 @@
           <div v-if="link in submenu" class="hover-bold hoverpointer" @click="navlinkcallback(link, Ind)">
             {{link}}
           </div>
-          <router-link v-else :to="hrefs[link]" class="hover-bold" @click="close()">{{link}}</router-link>
+          <router-link v-else :to="hrefs[link]" class="hover-bold" @click="closemenu">{{link}}</router-link>
         </div>
 
         <div class="flex-grow-1">
@@ -50,7 +50,7 @@
       <transition name="fromtop">
         <div v-if="ddopen" class="d-none d-md-block bg-white pe-3 pt-4 pb-3 border-bottom" :style="{paddingLeft: submenu[ddopen].pad}">
           <div class="fs-6 fw-7 mb-3">{{submenu[ddopen].title}}</div>
-          <router-link v-for="sub in submenu[ddopen].menu" class="mb-2 d-block" :key="sub[0]" :to="sub[1]" @click="close()"><i class="lnr lnr-chevron-right fs-6"></i> {{sub[0]}}</router-link>
+          <router-link v-for="sub in submenu[ddopen].menu" class="mb-2 d-block" :key="sub[0]" :to="sub[1]" @click="closemenu()"><i class="lnr lnr-chevron-right fs-6"></i> {{sub[0]}}</router-link>
         </div>
       </transition>
     </nav>
@@ -75,7 +75,7 @@ export default {
       searchshow: false,
       searchinput: "",
       navlinks:["Shop", "Learn", "About Us", "FAQs"],
-      hrefs:{"Shop": './shop', "About Us": './about', "FAQs": './help'},
+      hrefs:{"Shop": '../shop', "About Us": '../about', "FAQs": '../help'},
       ddopen: false,
       submenu:{
         "Learn" :{pad:'223px', title: "Learn more about Mirko", menu : [["Flow Underwear", '/learn/flow-underwear'], ["Menstrual Cups", '/learn/menstrual-cup']], mopen: false}
@@ -100,12 +100,12 @@ export default {
       if(link in this.submenu){
         this.submenu[link].mopen = !this.submenu[link].mopen
       } else{
-        this.close()
+        this.closemenu()
       }
     },
     navlinkcallback(link){
       if(this.ddopen == link){
-        this.close()
+        this.closemenu()
       } else{
         this.ddopen = link
       }
@@ -119,7 +119,7 @@ export default {
     itemcallback(item){
       switch (item) {
         case 'cart':
-          this.close()
+          this.closemenu()
           this.$emit('page', 'cart')
           break;
         default:

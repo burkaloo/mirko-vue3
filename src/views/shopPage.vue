@@ -1,5 +1,5 @@
 <template>
-  <div class="container mt-5">
+  <div class="container mt-5 min-vh-100">
     <!--srtoing UI -->
     <div class="row">
       <!--div class="col-12">
@@ -29,7 +29,7 @@
 
     </div>
     <h1 v-if="prods.length == 0" class="text-center my-5 py-5"> No products matched search</h1>
-    <div class=" mt-5">
+    <div class=" mt-5 d-none">
       <pagenav :lastresult="islastresult" :totalcount="prods.length" :displaycount="siteconf.catalogdisplaylimit" :curpage="curpage" @loadnext="loadnextpage"/>
     </div>
     <spinner :show="spinnershow"/>

@@ -62,7 +62,7 @@
            <div class="px-3">
              <div :style="{minHeight: '500px'}" class="bg-white py-4 d-flex">
                <div class="align-self-center">
-                 <div v-if="card[0]" class="text-center fs-5 fw-6 fst-italix">
+                 <div v-if="card[0]" class="text-center fs-5 fw-6 fst-italic">
                    {{card[0]}}
                  </div>
                  <div v-if="card[1]" class="mb-4">
