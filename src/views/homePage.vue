@@ -22,7 +22,7 @@
           <div class="fs-4 fw-6 fst-italic mb-3 mt-4 text-center">Women. Essentials. Lifestyle.</div>
           <div class="fs-6 fw-4 fst-italic text-center">Reaffirming boldness and elegance in the everyday</div>
           <div class=" text-center my-5">
-            <button class="btn btn-secondary">Shop Now</button>
+            <button class="btn btn-secondary" @click="$emit('page', {path: '/shop'})">Shop Now</button>
           </div>
 
           <div class="fs-3 mt-5 mb-3 text-center">Ease and elegance for women</div>
