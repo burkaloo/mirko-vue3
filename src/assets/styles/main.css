@@ -51,7 +51,7 @@ a:hover{
 }
 
 .text-pink{
-  color: #eec6c3;
+  color: #f3c0c0;
 }
 
 .text-magenta{
@@ -59,11 +59,11 @@ a:hover{
 }
 
 .bg-pink{
-  background-color: #eec6c3;
+  background-color: #f3c0c0;
 }
 
 .hover-bg-pink:hover{
-  background-color: #eec6c3
+  background-color: #f3c0c0
 }
 
 .hover-bold:hover{
@@ -71,7 +71,7 @@ a:hover{
 }
 
 .border-pink{
-  border-color: #eec6c3 !important;
+  border-color: #f3c0c0 !important;
 }
 
 .text-black{
@@ -99,7 +99,7 @@ a:hover{
 }
 
 .hoverbg-pink:hover{
-  background-color: #eec6c3
+  background-color: #f3c0c0
 }
 
 s, .pesosign::before{
