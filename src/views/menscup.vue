@@ -86,6 +86,35 @@
       </div>
     </section>
 
+    <section>
+      <div class="row g-0 bg-beige">
+        <div class="col-12 col-lg-6">
+          <img class="img-fluid" :src="backend + '/photos/learn-mcups-section6.jpg'" alt="">
+        </div>
+        <div class="col-12 col-lg-6 d-flex">
+          <div class="align-self-center text-center px-3 py-5 w-100">
+            <div class="fst-italic fs-4 fw-6 mb-5">
+              Cleaning Your Menstrual Cup
+            </div>
+            <div class="mx-auto" :style="{maxWidth: '600px'}">
+              <div class="mb-3">
+                After removal, use only mild, unscented, oil-free soap to clean your cup. We recommend giving it a quick wash every time you remove and before reinsertion.
+              </div>
+              <div class="mb-3">
+                Before each cycle, sterilize your cup in boiling water for 3-5 minutes in a pot or microwave for 1-2 minutes using the Mirko Sterilizer Cup.
+              </div>
+              <div class="mb-3">
+                Tip: to use the sterilizer cup, put the MCup inside the Sterilizer cup and place the lid lightly on top. Microwave for 1-2 minutes to sanitize.
+              </div>
+            </div>
+            <div class="mt-5">
+              <button class="btn btn-lg rounded-5 bg-babyblue fs-5 fw-7 px-5 py-3" name="button">Shop Menstrual Cup</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </div>
 </template>
 

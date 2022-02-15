@@ -169,6 +169,9 @@
                 </tr>
               </tbody>
             </table>
+            <div class=" text-center mt-5 pt-5">
+              <button class="btn bg-babyblue btn-lg fw-7 fs-5 rounded-5 py-3 px-4" @click="$emit('page', {path: '/product/1'})">Shop Flow Underwear</button>
+            </div>
           </div>
         </div>
       </div>
