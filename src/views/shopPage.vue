@@ -2,6 +2,23 @@
   <div class="container mt-5 min-vh-100">
     <!--srtoing UI -->
     <div class="row">
+      <div class="fs-5 fw-5 text-center mb-3">
+        Revolutionize Your Period
+      </div>
+      <div class="d-sm-none text-center px-3">
+        Built for every woman, Mirko essentials are high-function, affordable, easy to maintain, and lasting. Adapt to any lifestyle you lead.
+      </div>
+      <div class="text-center d-none d-sm-block">
+        <div class="">
+          Built for every woman, Mirko essentials are high-function,
+        </div>
+        <div class="">
+          affordable, easy to maintain, and lasting.
+        </div>
+        <div class="">
+          Adapt to any lifestyle you lead.
+        </div>
+      </div>
       <!--div class="col-12">
         <select class="form-select form-select-sm" v-model="sortpick">
           <option v-for="(opt, ind) in sortopts" :value="opt.value" :key="ind">{{opt.display}}</option>
@@ -18,7 +35,7 @@
           <input type="text" class="form-control" v-model.trim="searchinput" @keyup.enter="search">
       </div-->
     </div>
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 ">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 mt-5">
       <div v-for="(feat, fInd) in prodstoshow" class="col p-3" :key="fInd">
         <div class=" p-2 h-100 hoverpointer" @click="$emit('page',{path: '/product/'+feat.pid})">
           <img :src="feat.thumb" class="img-fluid" alt="">
