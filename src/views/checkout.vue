@@ -508,7 +508,7 @@ export default {
     },
     pay(newval){
       this.removefile()
-      if(newval == 'BDO' || newval == 'BPI'){
+      if(newval == 'BDO' || newval == 'BPI' || newval == "GCASH"){
         this.paymsg = true
       } else{
         this.paymsg= false
