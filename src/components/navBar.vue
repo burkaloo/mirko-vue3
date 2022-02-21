@@ -172,7 +172,7 @@ export default {
   .cover{
     position: fixed;
     left: 0;
-    z-index: 4;
+    z-index: 109;
   }
   .cart-badge{
     padding: 5px !important;
@@ -206,7 +206,7 @@ export default {
   }
 
   nav{
-    z-index: 10;
+    z-index: 110;
   }
 
 

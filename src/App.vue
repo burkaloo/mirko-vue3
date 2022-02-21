@@ -48,14 +48,6 @@
 
     <vFooter/>
 
-    <!--div v-if="loading" class="bg-pink z-top position-fixed top-0 vh-100 vw-100">
-      <div class="text-center" style="margin-top:40vh">
-        <div class="spinner-border m-5" role="status">
-          <span class="visually-hidden">Loading...</span>
-        </div>
-      </div>
-    </div-->
-
     <spinner :show="spinnershow"/>
   </div>
 </template>
@@ -102,6 +94,7 @@ export default {
       discount:{amt: 1, title:"INVALID"},
       uid: 3,
       backend: "https://mirkophp.navitag.net",
+      //backend: "https://james.local/mirkobackend",
       siteconf: {},
       load: false
     }
@@ -286,26 +279,26 @@ export default {
       }
 
       console.log(postdata);
-      let comp = this
       axios({
         method: 'post',
         url: 'https://mailer.navitag.net',
         data: postdata
-      }).then(function(r){
-        comp.lastpage = {name:'home'}
+      }).then( (r) => {
+        this.lastpage = {name:'home'}
         if("MessageID" in r.data && "TransactionID" in r.data){
-          comp.cart = []
-          comp.togglealert({show: true, class: 'success', text: "Order Placed"});
-          comp.nextpage({name:'thankyou'})
+          this.cart = []
+          this.togglealert({show: true, class: 'success', text: "Order Placed"});
+          this.nextpage({name:'thankyou'})
         } else{
-          comp.togglealert({show: true, class: 'danger', text: "Somthing went wrong... Order not placed."});
-          comp.nextpage({name:'home'})
+          this.togglealert({show: true, class: 'danger', text: "Somthing went wrong... Order not placed."});
+          this.nextpage({name:'home'})
         }
-      }).catch(function(){
-        comp.togglealert({show: true, class: 'danger', text: "Somthing went wrong... Order not submitted."});
-        comp.nextpage({name:'home'})
-      }).finally(function(){
-        comp.spinnertoggle(false)
+        this.shipfee = 0
+      }).catch(() => {
+        this.togglealert({show: true, class: 'danger', text: "Somthing went wrong... Order not submitted."});
+        this.nextpage({name:'home'})
+      }).finally( () => {
+        this.spinnertoggle(false)
       })
     },
     discountupdate(data){
@@ -372,7 +365,7 @@ export default {
   top:20px;
   padding-left: 10px;
   padding-right: 10px;
-  z-index: 20;
+  z-index: 200;
 }
 
 #app{

@@ -1,5 +1,5 @@
 <template>
-  <div class="container py-5">
+  <div class="container py-5" :style="{minHeight:'calc(100vh - 220px)'}">
     <div class="row">
       <div :class="showsummary ? 'col-12 col-md-7 pe-5 pb-5' : 'col-12'">
 
@@ -8,7 +8,7 @@
             <p v-for="(tabitem, ind) in tabopts" :key="ind" :class="tab == tabitem ? 'mx-3 text-black' : 'mx-3 text-muted'">{{tabitem}}</p>
           </div>
           <div class="col-12 col-sm-3 order-1 order-sm-2 d-flex mb-4 mb-sm-0">
-            <h3 v-if="!showsummary" class="ms-auto mb-0 hoverpointer" @click="summarytoggle">
+            <h3 v-if="!showsummary && tab != 'Paypal'" class="ms-auto mb-0 hoverpointer" @click="summarytoggle">
               <i class="lnr lnr-arrow-left"></i> Cart
             </h3>
           </div>
@@ -106,7 +106,7 @@
             </div>
           </div>
           <div class="col-12">
-              <button class="btn btn-dark fw-bold px-5 mt-5" @click="gotopayment">Continue to Payment</button>
+              <button class="btn btn-dark fw-bold px-5 mt-5" @click="gotopayment">Select Payment Method</button>
           </div>
         </div>
 
@@ -154,10 +154,19 @@
                   </label>
                 </div>
               </div>
+              <hr>
+              <div class="form-check">
+                <div class="d-flex">
+                  <input value="PP" class="form-check-input" type="radio" name="pp" id="pp" v-model="pay">
+                  <label class="form-check-label ms-4" for="pp">
+                    <p class="mb-0">PayPal/Credit Card</p>
+                  </label>
+                </div>
+              </div>
             </div>
           </div>
           <div class="col-12 mb-4">
-            <label v-if="pay != 'COD' && pay != ''" class="form-label">Proof of Payment</label>
+            <label v-if="pay != 'COD' && pay != 'PP' && pay != ''" class="form-label">Proof of Payment</label>
             <div v-if="file.url != null" class="file-prev" :style="'background-image:url('+file.url+')'">
               <button class="btn-close position-absolute end-0 mt-1 bg-light" @click="removefile"></button>
             </div>
@@ -183,9 +192,24 @@
           </div>
           <div class="col-12">
             <button class="btn btn-dark fw-bold px-5 mt-5" @click="gotocheckout">
-              <span v-if="showsummary">Complete Checkout</span>
-              <span v-else>Complete Checkout</span>
+              <span>Confirm Payment</span>
             </button>
+          </div>
+        </div>
+
+        <div v-show="tab == 'Paypal'" class="row pe-5">
+          <div class="col-12 min-vh-100">
+            <div class=" mb-3">
+              <span class="hoverpointer" @click="changetab('Payment')">
+                <i class="lnr lnr-chevron-left align-middle me-2"></i> Choose another payment method
+              </span>
+            </div>
+            <div class="text-center fs-3 fw-6">
+              Total: <s class="pesosign"></s>{{withshipping}}
+            </div>
+            <div class="text-center pt-5">
+              <div id="paypal-btn-con" class="mx-auto" :style="{maxWidth:'410px'}"></div>
+            </div>
           </div>
         </div>
       </div>
@@ -220,7 +244,10 @@
             </div>
           </div>
           <div v-show="oktocheckout" class="col-12">
-            <button class="btn btn-dark fw-bold px-5 mt-5" @click="checkout">Complete Checkout</button>
+            <button class="btn btn-dark fw-bold px-5 mt-5" @click="checkout">
+              <span v-if="pay == 'PP'">Pay Now</span>
+              <span v-else>Checkout Now</span>
+            </button>
           </div>
         </div>
 
@@ -231,10 +258,12 @@
 
 </template>
 
+
 <script>
 import axios from 'axios'
 import spinnerMix from '@/mixin/spinnerMix.js'
 import stringMix from '@/mixin/stringMix.js'
+import { loadScript } from "@paypal/paypal-js"
 
 const toBase64 = file => new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -275,7 +304,8 @@ export default {
         "Same Day":["-","-","-"],
         "Standard":["PHP 100","PHP 150","PHP 200"]
       },
-      cityloading: false
+      cityloading: false,
+      paypal: false,
     }
   },
   mixins:[spinnerMix, stringMix],
@@ -310,8 +340,49 @@ export default {
     }).finally(function(){
       comp.spinnertoggle(false)
     })
+
+    //paypal js sdk
+    loadScript({ "client-id": "AaKrCtNG229gg6bhLTdW67hd0WhrOhCT7NHsO3R399mKVkU7laYofP8Hj9kc1gBNmPOLXAMKP8B9V9ar", currency: "PHP", locale: "en_PH" })
+    .then((paypal) => {this.paypal = paypal})
   },
   methods:{
+    paypalbtn(localorderdata){
+      let orderset = {
+        purchase_units:[{
+          amount:{
+            value: this.withshipping
+          },
+          shipping:{
+            name: {full_name: this.name},
+            address:{address_line_1: this.address, address_line_2: this.brgy, admin_area_2: this.city.name, admin_area_1: this.province.name, postal_code: this.zip, country_code: "PH"}}
+        }],
+        payer:{
+          address: {address_line_1: this.address, address_line_2: this.brgy, admin_area_2: this.city.name, admin_area_1: this.province.name, postal_code: this.zip, country_code: "PH"},
+          email_address: this.email,
+          phone: {phone_number :{national_number: this.phone}}
+        }
+      }
+      let paypalcomplete = this.$emit
+      this.paypal.Buttons({
+        createOrder: function(data, actions) {
+          return actions.order.create(orderset) // Set up the transaction
+        },
+        onApprove: function(data, actions) {
+          // This function captures the funds from the transaction.
+          return actions.order.capture().then(function(details) {
+            // This function shows a transaction success message to your buyer.
+            paypalcomplete('order', localorderdata)
+            alert('Transaction completed by ' + details.payer.name.given_name);
+          });
+        }
+      })
+      .render('#paypal-btn-con').then( () => {
+        this.spinnertoggle(false)
+      })
+      .catch((error) => {
+        console.error("failed to render the PayPal Buttons", error);
+      });
+    },
     summarytoggle(){
       this.showsummary = !this.showsummary
     },
@@ -346,6 +417,7 @@ export default {
     gotopayment(){
       if(this.shippingerr === false){
         this.changetab('Payment')
+
       } else{
         this.$emit('alert', this.shippingerr)
       }
@@ -373,7 +445,12 @@ export default {
       }
 
       let data = {name: titlename, email: this.email, shipinfo: addArr.join('<br>'), payment: this.pay}
-      if(this.pay != 'COD'){ // for non-COD orders
+      if(this.pay == "PP"){
+        this.changetab('Paypal')
+        this.showsummary= false
+        data.payment = "Paypal / Credit Card"
+        this.paypalbtn(data)
+      } else if(this.pay != 'COD'){ // for non-COD orders
         //convert img to base64
         let result = await toBase64(this.file.rawfile).catch(e => Error(e));
         if(result instanceof Error) {
@@ -389,10 +466,12 @@ export default {
           let fileArr = result.split(",")
           data.files = {base64: fileArr[1], name: this.file.name}
         }
+        this.spinnertoggle(false)
+        this.$emit('order', data);
+      } else{
+        this.spinnertoggle(false)
+        this.$emit('order', data);
       }
-      //parse address
-      this.spinnertoggle(false)
-      this.$emit('order', data);
     },
   },
   watch:{
@@ -429,10 +508,16 @@ export default {
     },
     pay(newval){
       this.removefile()
-      if(newval == ""){
-        this.paymsg = false;
-      } else if(newval != 'COD'){
+      if(newval == 'BDO' || newval == 'BPI'){
         this.paymsg = true
+      } else{
+        this.paymsg= false
+      }
+    },
+    tab(newval, oldval){
+      if(oldval == 'Paypal' && newval != 'Paypal'){
+        let myNode = document.getElementById("paypal-btn-con");
+        myNode.innerHTML = '';
       }
     }
   },
@@ -512,7 +597,7 @@ export default {
       }
     },
     oktocheckout(){
-      if(this.infoerr === false && this.shippingerr == false && this.payerr == false){
+      if(this.infoerr === false && this.shippingerr == false && this.payerr == false && this.tab != "Paypal"){
         return true
       } else{
         return false
@@ -567,7 +652,7 @@ export default {
 }
 
 .file-overlay{
-  z-index: 5;
+  z-index: 110;
 }
 
 small{
