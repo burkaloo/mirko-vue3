@@ -11,12 +11,12 @@
       :disabled="varignored.includes(vTitle)"
       @change="selectclick(vTitle)"
       >
-        <option disabled>{{vTitle}}</option>
+        <option v-show="false" disabled>{{vTitle}}</option>
         <option v-for="(opt, optInd) in vObj.options"
           :value="optInd"
           :class="vObj.selected == optInd && !varignored.includes(vTitle) ? ' ' : ' '"
           :key="optInd"
-          :disabled="varignored.includes(vTitle) || optdisabled[vTitle].includes(optInd)"
+          :disabled="varignored.includes(vTitle) || optdisabled[vTitle].includes(optInd) || vObj.oos[optInd]"
         >{{opt}}</option>
       </select>
     </div>
@@ -259,9 +259,7 @@ button[disabled]{
   color: #666666;
 }
 
-select{
+select {
   width: auto;
 }
-
-
 </style>
