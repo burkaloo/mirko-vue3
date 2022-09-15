@@ -38,9 +38,10 @@
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 mt-5">
       <div v-for="(feat, fInd) in prodstoshow" class="col p-3" :key="fInd">
         <div class=" p-2 h-100 hoverpointer" @click="$emit('page',{path: '/product/'+feat.pid})">
-          <img :src="feat.thumb" class="img-fluid" alt="">
-          <p class="text-center mt-3 mb-1">{{feat.name}}</p>
-          <h5 class="text-center">PHP {{feat.price}}</h5>
+          <img :src="feat.thumb" class="img-fluid mb-3" alt="">
+          <h5 class="text-center mb-1" v-if="feat.catname">{{feat.catname}}</h5>
+          <p class="text-center mb-1">{{feat.name}}</p>
+          <p class="text-center">PHP {{feat.price}}</p>
         </div>
       </div>
 
@@ -163,7 +164,13 @@ export default {
               });
               //console.log(item)
             } else{
-              comp.prods.push({name: item.title, price: item.baseprice, thumb: item.thumb === null ? pics[0] : item.thumb, pid: item.id})
+              let proditem = {name: item.title, price: item.baseprice, thumb: item.thumb === null ? pics[0] : item.thumb, pid: item.id}
+              if( parseInt(item.show_catname)  == 1) {
+                proditem.catname = item.catname
+              } else{
+                proditem.catname = false
+              }
+              comp.prods.push(proditem)
             }
           });
         }

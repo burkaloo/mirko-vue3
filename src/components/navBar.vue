@@ -78,7 +78,7 @@ export default {
       hrefs:{"Shop": '../shop', "About Us": '../about', "FAQs": '../help'},
       ddopen: false,
       submenu:{
-        "Learn" :{pad:'223px', title: "Learn more about Mirko", menu : [["Flow Underwear", '/learn/flow-underwear'], ["Menstrual Cups", '/learn/menstrual-cup']], mopen: false}
+        "Learn" :{pad:'223px', title: "Learn more about Mirko", menu : [["Mirko Classic Period Underwear", '/learn/flow-underwear'], ["Menstrual Cups", '/learn/menstrual-cup']], mopen: false}
       }
     }
   },
