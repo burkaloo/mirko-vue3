@@ -27,7 +27,7 @@ html{
 
 *{
   
-  font-family: 'Avenir Medium Oblique', serif !important;
+  font-family: 'Avenir Medium Oblique', serif;
 }
 
 
@@ -43,8 +43,8 @@ a:hover{
 
 
 .font-didot{
-	font-family: 'Didot Italic', serif !important;
-  font-weight: 600 !important;;
+	font-family: 'Didot Italic', serif;
+  font-weight: 600;
 }
 
 .font-mono{

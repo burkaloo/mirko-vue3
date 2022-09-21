@@ -67,6 +67,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 require('./assets/styles/main.css')
 
+
 const sleep = (milliseconds) => {
   return new Promise(resolve => setTimeout(resolve, milliseconds))
 }
