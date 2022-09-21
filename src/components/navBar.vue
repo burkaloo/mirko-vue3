@@ -2,15 +2,15 @@
   <div :style="'height:'+ spacer+'px;'">
     <nav class="position-fixed top-0 vw-100 overflow-hidden">
       <div class="d-flex px-3 py-2 w-100 bg-white" :style="{marginTop: totalTopmargin+ 'px'}">
-        <router-link to="./" @click="closemenu">
+        <router-link to="./" @click="closemenu" :style="{paddingRight: '25px'}">
           <img src="../assets/photos/mirko-logo.png" class="p-1 hoverpointer navphoto" >
         </router-link>
 
         <div v-for="(link, Ind) in navlinks" class="nav-item align-self-center text-center" :key="'lg-' + link">
-          <div v-if="link in submenu" class="hover-bold hoverpointer" @click="navlinkcallback(link, Ind)">
+          <div v-if="link in submenu" class="hoverpointer" @click="navlinkcallback(link, Ind)">
             {{link}}
           </div>
-          <router-link v-else :to="hrefs[link]" class="hover-bold" @click="closemenu">{{link}}</router-link>
+          <router-link v-else :to="hrefs[link]" class="" @click="closemenu">{{link}}</router-link>
         </div>
 
         <div class="flex-grow-1">
@@ -21,7 +21,7 @@
         <div v-if="!oncheckoutroute" class=" align-self-center text-end pe-2" :style="{width: '120px'}">
           <i class="lnr lnr-menu fs-1 d-md-none align-middle me-4 hoverpointer hover-bold" @click="open = !open"></i>
           <div class="d-inline align-bottom position-relative" @click="itemcallback('cart')">
-            <i class="lnr lnr-cart fs-1 hoverpointer hover-bold"></i>
+            <i class="lnr lnr-cart fs-1 hoverpointer"></i>
             <span v-show="cartcount > 0" class="badge cart-badge">{{cartcount}}</span>
           </div>
         </div>
@@ -32,11 +32,12 @@
         <div class="bg-white px-4 border-top py-2">
           <div v-for="link in navlinks" :key="link" class="py-2 fs-5">
 
-            <div v-if="link in submenu" @click="mnavlinkcallback(link)" class="hoverpointer hover-bold">{{link}}</div>
-            <router-link v-else :to="hrefs[link]" class="hover-bold" @click="close">{{link}}</router-link>
+            <div v-if="link in submenu" @click="mnavlinkcallback(link)" class="hoverpointer">{{link}}</div>
+            
+            <router-link v-else :to="hrefs[link]" class="" @click="close">{{link}}</router-link>
 
             <div v-if="link in submenu && submenu[link].mopen" class="pt-3">
-              <router-link v-for="sub in submenu[link].menu" class="fs-6 px-2 mb-3 hover-bold d-block" :key="sub[0]" :to="sub[1]" @click="close">
+              <router-link v-for="sub in submenu[link].menu" class="fs-6 px-2 mb-3 d-block" :key="sub[0]" :to="sub[1]" @click="close">
                 <i class="lnr lnr-chevron-right fs-6"></i> {{sub[0]}}
               </router-link>
             </div>
@@ -78,7 +79,7 @@ export default {
       hrefs:{"Shop": '../shop', "About Us": '../about', "FAQs": '../help'},
       ddopen: false,
       submenu:{
-        "Learn" :{pad:'223px', title: "Learn more about Mirko", menu : [["Mirko Classic Period Underwear", '/learn/flow-underwear'], ["Menstrual Cups", '/learn/menstrual-cup']], mopen: false}
+        "Learn" :{pad:'223px', title: "Learn more about Mirko", menu : [["Mirko Classic", '/learn/mirko-classic'], ["Mirko Flow", '/learn/mirko-flow'], ["Menstrual Cups", '/learn/menstrual-cup']], mopen: false}
       }
     }
   },
@@ -196,7 +197,8 @@ export default {
   }
   .nav-item{
     font-size: 1.25rem;
-    width: 120px;
+    padding-left: 25px;
+    padding-right: 25px;
     display: none;
   }
 

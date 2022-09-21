@@ -34,9 +34,9 @@
     </section>
 
     <section>
-      <div class="d-flex px-5 justify-content-center mx-auto py-5" :style="{minHeight: '750px', maxWidth: '1600px'}">
+      <div class="d-flex px-5 justify-content-center mx-auto py-5" :style="{ maxWidth: '1600px'}">
         <div class="mt-5">
-          <div class="fw-6 fs-5 text-center">
+          <div class="fw-6 fs-5 text-center font-didot">
             How to use a menstrual cup?
           </div>
           <div class="row g-0 row-cols-2 row-cols-md-3 row-cols-lg-5 align-self-center">
@@ -53,14 +53,33 @@
       </div>
     </section>
 
+    <section>
+      <div class="d-flex px-5 justify-content-center mx-auto py-5" :style="{maxWidth: '1600px'}">
+        <div class="">
+          <div class="fw-6 fs-5 text-center font-didot">
+            Now it's time to remove!
+          </div>
+          <div class="row g-0 row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 align-self-center">
+            <div v-for="(card, ind) in section4" class="col text-center position-relative pt-5 px-4 px-lg-5 px-sm-5 my-5 mx-auto" :key="ind">
+              <div class="fst-italic position-absolute top-0 start-0 end-0">
+                Step {{ind +1 }}
+              </div>
+                <img :src="backend + '/photos/learn-cups-remove-'+ (ind + 1) +'.png'" :style="{maxWidth: '300px'}" alt="" class="w-100 mx-auto">
+              <p v-for="(str, strI) in card" :key="strI" class="mt-3">{{str}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
 
 
     <section>
-      <div class="bg-bbblue py-5">
+      <div class="bg-pink2 py-5">
         <carousel :items-to-show="1" class="learn-flow" :breakpoints="breakpoints">
          <slide v-for="(card, ind) in cards" :key="ind" class="px-3" >
            <div class="px-3">
-             <div :style="{minHeight: '500px'}" class="bg-white py-4 d-flex">
+             <div :style="{minHeight: '500px'}" class="bg-white py-4 d-flex rounded-20">
                <div class="align-self-center">
                  <div v-if="card[0]" class="text-center fs-5 fw-6 fst-italic">
                    {{card[0]}}
@@ -107,8 +126,13 @@
                 Tip: to use the sterilizer cup, put the MCup inside the Sterilizer cup and place the lid lightly on top. Microwave for 1-2 minutes to sanitize.
               </div>
             </div>
-            <div class="mt-5">
-              <button class="btn btn-lg rounded-5 bg-babyblue fs-5 fw-7 px-5 py-3" name="button">Shop Menstrual Cup</button>
+            <div class="mt-5 row px-4">
+              <div class="col-6 text-end" >
+                <button class="btn w-100 h-100 rounded-5 bg-babyblue fs-6 fw-7  py-2" :style="{maxWidth: '233px'}">Shop Menstrual Cup</button>
+              </div>
+              <div class="col-6 text-start">
+                <button class="btn w-100 h-100 rounded-5 bg-white fs-6 fw-7 py-2" :style="{maxWidth: '233px'}">Shop Period Underwear</button>
+              </div>
             </div>
           </div>
         </div>
@@ -138,6 +162,12 @@ export default{
         [false, true, ["When you reach your cervix, check which knuckle is at the end of your vaginal canal and use the guide above."]],
       ],
       section3:["Fold", "Insert", "Collect", "Remove", "Clean"],
+      section4:[
+        ["Reach for the base - and *pinch!*","Quick tip: Use the stem as a guide and climb up to where the cup ridges are (aka base)"],
+        ["Once pinched, the cup's suction seal should break inside your vaginal canal"],
+        ["Fold the cup to a smaller size to make sure it's easy to pass through the vaginal entrance", "Try folding it the way you placed the cup in"],
+        ["Make sure to tilt up as you pull it out to prevent spillage.", "Success!"],
+      ],
       breakpoints: {
       // 700px and up
       576: {

@@ -1,54 +1,58 @@
 <template>
   <div>
     <section>
-      <div class="row g-0">
-        <div class="col-12 col-md-7 col-xxl-8">
-          <img class="img-fluid" :src="backend + '/photos/learn-flow-section1.jpg'" alt="">
+      <div class="position-relative" >
+        <div class="" :style="{height: 'calc(100vh - 66px)', minHeight: '600px'}">
+        
+
         </div>
-        <div class="col-12 col-md-5 col-xxl-4 d-flex bg-beige">
-          <div class="align-self-center flex-grow-1">
-            <div :style="{maxWidth:'400px'}" class="mx-auto px-3 py-5 my-5">
-              <div class="text-center fst-italic fw-7 fs-5 pb-4">What's a Period Underwear?</div>
-              <div class="text-center fw-5">
-                It is a reusable underwear that can absorb menstruation or leaks. Capacity depends on the thickness of the gusset.
-              </div>
+        <div class="position-absolute top-0 bottom-0 w-100" :style="{zIndex:1}">
+          <div class="bg-pink h-50"></div>
+          <div class="bg-pink2 h-50"></div>
+        </div>
+        <div class="position-absolute top-0 bottom-0 w-100 row g-0" :style="{zIndex:2}">
+          <div class="col-6 col-sm-5 col-md-6 h-100 text-start text-md-end">
+            <img :src="backend + '/photos/learn-classic-header-mobile.png'" alt="" class="d-md-none h-100"/>
+            <img :src="backend + '/photos/learn-classic-header.png'" alt="" class="d-none d-md-inline-block h-100"/>
+
+          </div>
+          <div class="col-6 col-sm-7 col-md-6 h-100 text-end text-md-center pe-3" :style="{maxWidth: '400px'}">
+            <div class="d-flex h-50">
+              <h3 class="font-didot align-self-end pb-2 w-100">Let's Talk Period Underwear</h3>
+            </div>
+            <div class="h-50">
+              
+              <p class="pt-3 ps-1">It is a reusable underwear that can absorb  menstruation or leaks. Capacity depends on the thickness of the gusset.</p>
             </div>
           </div>
+          
         </div>
       </div>
     </section>
 
     <section>
       <div>
-        <img class="w-100 d-md-none" :src="backend + '/photos/learn-flow-section2-mobile.jpg'">
-        <img class="w-100 d-none d-md-block" :src="backend + '/photos/learn-flow-section2.jpg'">
+        <div class="text-center px-4 mx-auto my-5 py-5" :style="{maxWidth: '870px'}">
+          <h5 class="font-didot mb-5">Mirko's Classic Period Underwear</h5>
+          <p class="pb-4">Introducing our pioneer ultra-thin period underwear designed to be worn comfortably even in warm, tropical places like the Philippines!</p>
+          <p class="pb-4">Locally manufactured, our underwear is constructed with 2 layers of fabric with a capacity to absorb up to 10ml of liquid. It has a sleek bikini cut with full back coverage of leak-proof lining. The smooth polyester spandex material is resistant to stains, thus ensuring stress-free washing and cleaning of the underwear.</p>
+          <p>Designed to be worn for extra protection during heavy days (with your menstrual cup for example), and can be worn on its own during light days or when spotting.</p>
+        </div>
       </div>
     </section>
 
     <section>
-      <div class="row g-0">
-        <div class="col-12 col-md-7 col-xxl d-flex bg-pink2">
-          <div class="align-self-center flex-grow-1">
-            <div :style="{maxWidth:'650px'}" class="mx-auto px-4 py-5 my-5">
-              <div class="text-center fst-italic fw-7 fs-5 pb-4">Mirko's Flow Underwear</div>
-              <div class="text-center fw-5 mb-4">
-                Introducing our pioneer ultra-thin period underwear designed to be worn comfortably even in warm, tropical places like the Philippines!
-              </div>
-              <div class="text-center fw-5 mb-4">
-                Locally manufactured, our underwear is constructed with 2 layers of fabric but with a capacity to absorb up to 10ml of liquid. It has a sleek bikini cut with full back coverage of leak-proof lining. The smooth polyester spandex material is resistant to stains, thus ensuring stress-free washing and cleaning of the underwear.
-              </div>
-              <div class="text-center fw-5">
-                Designed to be worn for extra protection during heavy days (with your menstrual cup for example), and can be worn on its own during light days or when spotting.
-              </div>
-            </div>
+      <div class="mx-auto" :style="{maxWidth:'1230px'}">
+        <div class="row g-0 row-cols-1 row-cols-md-2">
+          <div class="col">
+            <img class="img-fluid" :src="backend + '/photos/learn-classic-panty.png'" alt=""/>
+          </div>
+          <div class="col">
+            <img class="img-fluid" :src="backend + '/photos/learn-flow-section3.jpg'" alt=""/>
           </div>
         </div>
-        <div class="col-12 col-md-5 col-xxl-auto bg-pink2 text-center">
-          <img class="d-md-none img-fluid" :src="backend + '/photos/learn-flow-section3-mobile.jpg'" alt="">
-          <img class="d-none d-md-block d-lg-none img-fluid" :src="backend + '/photos/learn-flow-section3-long.jpg'" alt="">
-          <img class="d-none d-lg-block img-fluid" :src="backend + '/photos/learn-flow-section3.jpg'" alt="">
-        </div>
       </div>
+      
     </section>
 
     <section>
@@ -103,10 +107,11 @@
 
     <section>
       <div class="bg-pink2 py-5">
+        <h4 class="text-center font-didot pb-5 text-decoration-underline"> Frequenty Asked Questions</h4>
         <carousel :items-to-show="1" wrapAround :breakpoints="breakpoints" snapAlign="center" class="d-xxl-none learn-flow">
           <slide v-for="(card, ind) in cards" :key="'card'+ ind">
             <div class="bg-pink2 px-4">
-              <div class="bg-beige px-3" :style="{height: '500px', paddingTop: '100px'}">
+              <div class="bg-white px-3 rounded-20" :style="{height: '500px', paddingTop: '100px'}">
                 <div class="text-center mx-auto px-2">
                   <div class="fw-7 fs-5" :style="{marginBottom: '4rem'}">{{card[0]}}</div>
                   <div v-for="(text, tind) in card[1]" class="fs-6 mb-3" :key="tind">
@@ -123,7 +128,7 @@
         <div class="d-none d-xxl-flex justify-content-center my-5">
           <div v-for="(card, ind) in cards.slice(0,3)" :key="'card'+ ind">
             <div class="bg-pink2 px-4">
-              <div class="bg-beige px-3" :style="{height: '650px', width: '400px', paddingTop: '200px'}">
+              <div class="bg-white px-3" :style="{height: '650px', width: '400px', paddingTop: '200px'}">
                 <div class="text-center mx-auto px-3">
                   <div class="fw-7 fs-5" :style="{marginBottom: '4rem'}">{{card[0]}}</div>
                   <div v-for="(text, tind) in card[1]" class="fs-6 mb-3" :key="tind">
@@ -139,16 +144,19 @@
 
     <section>
       <div class="row g-0 bg-pink">
-        <div class="col-12 col-sm-6 col-md-5">
-          <img class="img-fluid" :src="backend + '/photos/learn-flow-section5-mobile.jpg'" alt="">
+        <div class="col-12 bg-white d-sm-none">
+          <img class="img-fluid"  :src="backend + '/photos/learn-classic-chartimg-mobile.png'" alt="">
         </div>
-        <div class="col-12 col-sm px-3 d-flex justify-content-center">
-          <div class="align-self-center py-5 py-sm-0">
+        <div class="col-12 col-sm-5 col-md-6 d-none d-sm-inline-block text-center">
+          <img class="img-fluid"  :src="backend + '/photos/learn-classic-chartimg.png'" :style="{maxHeight: '700px'}">
+        </div>
+        <div class="col-12 col-sm px-3 px-sm-5 d-flex justify-content-center">
+          <div class="align-self-center flex-grow-1 py-5 py-sm-0">
             <div class="text-center fs-1 fw-5 fst-italic pb-3 border-bottom border-dark">
               Size Chart
             </div>
             <table class="table table-borderless">
-              <tbody class="d-md-none">
+              <tbody class=" text-center">
                 <tr class="text-magenta fw-4">
                   <td>Size</td>
                   <td>Waist</td>
@@ -158,19 +166,11 @@
                   <td v-for="(cell, cind) in row" :key="cind">{{cell}}</td>
                 </tr>
               </tbody>
-              <tbody class="d-none d-md-block fs-4">
-                <tr class="fw-5 text-magenta">
-                  <td>Size</td>
-                  <td>Waist</td>
-                  <td>Hip</td>
-                </tr>
-                <tr v-for="(row, rind) in sizechart" :key="rind" class="fw-3">
-                  <td v-for="(cell, cind) in row" :key="cind">{{cell}}</td>
-                </tr>
-              </tbody>
             </table>
-            <div class=" text-center mt-5 pt-5">
-              <button class="btn bg-babyblue btn-lg fw-7 fs-5 rounded-5 py-3 px-4" @click="$emit('page', {path: '/product/1'})">Shop Flow Underwear</button>
+            <div class=" text-center mt-5">
+              <router-link class="btn bg-babyblue btn-lg fw-6 fs-7 rounded-5 py-2 px-3" to="/product/1">
+                Shop Period Underwear
+              </router-link>
             </div>
           </div>
         </div>
@@ -186,7 +186,7 @@ import 'vue3-carousel/dist/carousel.css';
 import { Carousel, Slide, Navigation} from 'vue3-carousel';
 
 export default{
-  name: "Learn-Flow-Underwear",
+  name: "leanr-classic",
   props:{
     backend:{}
   },
@@ -209,7 +209,8 @@ export default{
         ["S", "22-25 in.", "33-35 in."],
         ["M", "25-28 in.", "35-37 in."],
         ["L", "28-31 in.", "37-39 in"],
-        ["XL", "31-34 in.", "39-41 in."]
+        ["XL", "31-34 in.", "39-41 in."],
+        ["XXL", "34-37 in.", "41-43 in."],
       ],
       breakpoints: {
       // 700px and up

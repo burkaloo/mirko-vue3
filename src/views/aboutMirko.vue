@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <section class="bg-pink py-5 text-center">
+    <section class="bg-white py-5 text-center">
       <img class="img-fluid px-5" :src="backend +'/photos/aboutus-section1.jpg'" alt="">
       <div class="text-center mx-auto p-5" :style="{maxWidth: '1000px'}">
         <div class="fw-6 fs-4 fst-italic mb-5">

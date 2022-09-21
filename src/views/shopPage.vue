@@ -2,7 +2,7 @@
   <div class="container mt-5 min-vh-100">
     <!--srtoing UI -->
     <div class="row">
-      <div class="fs-5 fw-5 text-center mb-3">
+      <div class="fs-5 fw-5 text-center mb-3 font-didot">
         Revolutionize Your Period
       </div>
       <div class="d-sm-none text-center px-3">
@@ -39,7 +39,7 @@
       <div v-for="(feat, fInd) in prodstoshow" class="col p-3" :key="fInd">
         <div class=" p-2 h-100 hoverpointer" @click="$emit('page',{path: '/product/'+feat.pid})">
           <img :src="feat.thumb" class="img-fluid mb-3" alt="">
-          <h5 class="text-center mb-1" v-if="feat.catname">{{feat.catname}}</h5>
+          <h5 class="text-center mb-1 font-didot" v-if="feat.catname">{{feat.catname}}</h5>
           <p class="text-center mb-1">{{feat.name}}</p>
           <p class="text-center">PHP {{feat.price}}</p>
         </div>

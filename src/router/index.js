@@ -9,7 +9,8 @@ import prod from '@/views/prodPage.vue'
 import cupsinfo from '@/views/cupsInfo.vue'
 import thankyou from '@/views/thankyou.vue'
 import signup from '@/views/signup.vue'
-import flowunderwear from '@/views/flowunderwear.vue'
+import mirkoClassic from '@/views/mirkoClassic.vue'
+import mirkoFlow from '@/views/mirkoFlow.vue'
 import menscup from '@/views/menscup.vue'
 
 const routes = [
@@ -24,9 +25,13 @@ const routes = [
     component: menscup
   },
   {
-    path: '/learn/flow-underwear',
-    name: 'flowunderwear',
-    component: flowunderwear
+    path: '/learn/mirko-flow',
+    name: 'mirkoflow',
+    component: mirkoFlow
+  },
+  {
+    path: '/learn/mirko-classic',
+    component: mirkoClassic
   },
   {
     path: '/about',

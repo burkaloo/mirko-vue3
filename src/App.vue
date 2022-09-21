@@ -355,6 +355,18 @@ export default {
   background-color: rgba(128,128,128,.7);
 }
 
+.bg-lpeach{
+  background-color: #f6e6dd;
+}
+
+.bg-dpeach{
+  background-color: #f7c0a8;
+}
+
+.bg-viogrey{
+  background-color: #f1ecec;
+}
+
 .z-top{
   z-index: 9999999999;
 }
@@ -405,7 +417,7 @@ export default {
 .learn-flow > .carousel__prev{
   left: 25px;
   background-color: transparent !important;
-  color: lightgrey;
+  color: black;
   height: 100%;
   width: 50px;
   border-radius: 0 !important;
@@ -414,18 +426,22 @@ export default {
 .learn-flow > .carousel__next{
   right: 25px;
   background-color: transparent !important;
-  color: lightgrey;
+  color: black;
   height: 100%;
   width: 50px;
   border-radius: 0 !important;
 }
 
 .carousel__next:hover, .carousel__prev:hover{
-  background-color: rgba(200, 200, 200, 0.5) !important;
+  background-color: rgba(200, 200, 200, .8) !important;
   color: black;
 }
 
-
+.carousel__icon{
+  font-size: 30px;
+  background-color: rgba(200, 200, 200, 0.5);
+  border-radius: 50%;
+}
 
 
 </style>
