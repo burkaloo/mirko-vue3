@@ -29,7 +29,7 @@
 
       <!-- mobile menu -->
       <div v-if="open" class="d-md-none" :style="{height: 'calc( 100vh - ' + (totalTopmargin + spacer)  + 'px)'}" >
-        <div class="bg-white px-4 border-top py-2">
+        <div class="bg-white px-4 border-top border-bottom py-2">
           <div v-for="link in navlinks" :key="link" class="py-2 fs-5">
 
             <div v-if="link in submenu" @click="mnavlinkcallback(link)" class="hoverpointer">{{link}}</div>

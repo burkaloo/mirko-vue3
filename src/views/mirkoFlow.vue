@@ -219,11 +219,11 @@
     <section>
       <div class="bg-lpeach">
         <div class="row g-0">
-          <div class="col-5 col-lg-4">
+          <div class="col-6 col-lg-4">
             <img class="d-md-none" :src="backend + '/photos/learn-briefs-girl-front.png'" alt="" :style="{height: '100%', width: '100%', objectFit: 'cover', objectPosition:'right'}"/>
             <img class="d-none d-md-block" :src="backend + '/photos/learn-briefs-girl-front.png'" alt="" :style="{height: auto, width: '100%', objectFit: 'cover', objectPosition:'right'}"/>
           </div>
-          <div class="col-7 col-lg-4">
+          <div class="col-6 col-lg-4">
             <div class="d-flex h-100">
               <div class="py-5 pe-3 pe-sm-4 ps-md-4 align-self-center">
                 <h4 class="font-didot text-end text-md-center">Stay dry and comfortable all day and night!</h4>
