@@ -236,7 +236,7 @@
                   </div>
                   <div class="col mt-4 text-xxl-start">
                     <router-link class="btn bg-white fw-7 py-2 px-3 rounded-5" to="/product/11">
-                      Shop Period Briefs
+                      Shop Flow Briefs
                     </router-link>  
                   </div>
                 </div>

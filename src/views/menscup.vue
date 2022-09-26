@@ -128,10 +128,10 @@
             </div>
             <div class="mt-5 row px-4">
               <div class="col-6 text-end" >
-                <button class="btn w-100 h-100 rounded-5 bg-babyblue fs-6 fw-7  py-2" :style="{maxWidth: '233px'}">Shop Menstrual Cup</button>
+                <router-link class="btn w-100 h-100 rounded-5 bg-babyblue fs-6 fw-7 py-2" to="/product/2" :style="{maxWidth: '233px'}">Shop Menstral Cup</router-link>
               </div>
               <div class="col-6 text-start">
-                <button class="btn w-100 h-100 rounded-5 bg-white fs-6 fw-7 py-2" :style="{maxWidth: '233px'}">Shop Period Underwear</button>
+                <router-link class="btn w-100 h-100 rounded-5 bg-white fs-6 fw-7 py-2 " to="/product/1" :style="{maxWidth: '233px'}">Shop Classic Underwear</router-link>
               </div>
             </div>
           </div>

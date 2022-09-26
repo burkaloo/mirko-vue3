@@ -169,7 +169,7 @@
             </table>
             <div class=" text-center mt-5">
               <router-link class="btn bg-babyblue btn-lg fw-6 fs-7 rounded-5 py-2 px-3" to="/product/1">
-                Shop Period Underwear
+                Shop Classic Underwear
               </router-link>
             </div>
           </div>
