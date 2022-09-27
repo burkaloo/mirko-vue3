@@ -1,12 +1,16 @@
 <template>
     <div>
       <section>
-        <carousel :items-to-show="1" wrapAround>
+        <carousel :items-to-show="1" wrapAround :autoplay="5000" :pauseAutoplayOnHover="false" class="home-carousel">
           <slide v-for="slide in 2" :key="slide" >
             <div>
               <landingSlides :slide="slide"  :backend="backend"/>
             </div>
           </slide>
+          <template #addons>
+            <Pagination />
+            <Navigation />
+          </template>
         </carousel>
       </section>
 
@@ -41,7 +45,7 @@
           <div class="text-center align-self-center flex-grow-1 py-5">
             <div class="mx-auto" :style="{maxWidth:'500px'}">
               <div> <!-- word block -->
-                <div class="fs-5 px-2">
+                <div class="fs-6 px-2">
                   Mirko’s Classic Period Underwear is the perfect period companion designed to be your last layer of protection against leaks.
                 </div>
               </div>
@@ -112,7 +116,7 @@
           <div class="text-center align-self-center flex-grow-1 py-5">
             <div class="mx-auto" :style="{maxWidth:'500px'}">
               <div> <!-- word block -->
-                <div class="fs-5 px-2">
+                <div class="fs-6 px-2">
                   Need more coverage? Mirko's Period Briefs are perfect for your light to medium flow days and can absorb up to 20ml (equivalent to 3-4 tampons).
                 </div>
               </div>
@@ -141,7 +145,7 @@
       <!-- tag phrase block on smaller screens -->
       <section>
         <div class="container my-5 py-5 d-md-none">
-          <div class="px-5 fs-5 text-center my-5 py-5">
+          <div class="px-5 fs-6 text-center my-5 py-5">
             With <span class="fw-7">Mirko</span>, we celebrate menstruation as a natural part of being a woman - something to fully embrace without the fear of judgement
           </div>
         </div>
@@ -183,7 +187,7 @@
 
 <script>
 import urlMix from '@/mixin/urlMix.js'
-import { Carousel, Slide} from 'vue3-carousel';
+import { Carousel, Slide, Pagination} from 'vue3-carousel';
 import landingSlides from '@/components/landingSlides.vue';
 
 export default {
@@ -195,6 +199,7 @@ export default {
   components:{
     Carousel,
     Slide,
+    Pagination,
     landingSlides,
 },
   data(){
@@ -227,6 +232,15 @@ export default {
   height: auto;
 }
 
+
+.home-carousel > .carousel__pagination{
+  position: relative;
+  top: -50px;
+}
+
+
+
+
 @media (min-width: 576px) {
 
 }
@@ -252,6 +266,7 @@ export default {
 
 
 @media (min-width: 1400px) {}
+
 
 
 

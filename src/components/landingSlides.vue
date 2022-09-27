@@ -16,7 +16,7 @@
       <div v-if="slide == 2" class="bg-beige h-100 w-100" >
         <div class="d-flex" :style="{height: '40%'}">
           <div class="align-self-center text-center flex-grow-1">
-            <h5 class="px-3">Mix and match your period essentials for maximum comfort and confidence.</h5>
+            <p class="px-3">Mix and match your period essentials for maximum comfort and confidence.</p>
             <router-link to="/product/1" class="btn bg-babyblue mx-2 fw-6 px-4 py-2 rounded-5 mt-3">Shop Period Underwear</router-link>
             <router-link to="/product/2" class="btn bg-babyblue mx-2 fw-6 px-4 py-2 rounded-5 mt-3">Shop Menstral Cups</router-link>
           </div>

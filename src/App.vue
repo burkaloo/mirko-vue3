@@ -445,4 +445,13 @@ export default {
 }
 
 
+.carousel__pagination-button{
+  background-color: lightgray !important;
+}
+
+.carousel__pagination-button--active{
+  background-color: lightslategray !important;
+}
+
+
 </style>
