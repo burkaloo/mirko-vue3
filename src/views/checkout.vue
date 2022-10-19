@@ -276,7 +276,7 @@ export default {
       city: "Province Required",
       shipmeth: "Standard",
       pay:"",
-      paydetails:{"BDO":['Mirko Vetnures Inc.', '012838002091'], "BPI": ['Camille Deezhialyn And Tan', '1579276963'], "GCash": ['Camille Deezhialyn And Tan', '0920 566 3896'] },
+      paydetails:{"BDO":['Mirko Ventures Inc.', '012838002091'], "BPI": ['Camille Deezhialyn And Tan', '1579276963'], "GCash": ['Camille Deezhialyn And Tan', '0920 566 3896'] },
       provinceOptions: [],
       cityOptions:[],
       address: "",
