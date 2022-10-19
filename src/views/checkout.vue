@@ -117,21 +117,11 @@
           <div class="col-12 mb-3">
             <div class="bg-grey p-4 rounded">
               <div class="form-check">
-                <div class="d-flex ">
-                  <input value="Gcash" class="form-check-input" type="radio" name="gcash" id="gcash" v-model="pay">
-                  <label class="form-check-label ms-4" for="gcash">
-                    <p class="mb-0">Gcash</p>
-                    <small>0920 566 3896</small>
-                  </label>
-                </div>
-              </div>
-              <hr>
-              <div class="form-check">
                 <div class="d-flex">
                   <input value="BDO" class="form-check-input" type="radio" name="bdo" id="bdo" v-model="pay">
                   <label class="form-check-label ms-4" for="bdo">
                     <p class="mb-0">BDO Online</p>
-                    <small>0017 0031 5240</small>
+                    <small>0128 3800 2091</small>
                   </label>
                 </div>
               </div>
@@ -148,25 +138,25 @@
               <hr>
               <div class="form-check">
                 <div class="d-flex">
-                  <input value="COD" class="form-check-input" type="radio" name="cod" id="cod" v-model="pay">
-                  <label class="form-check-label ms-4" for="cod">
-                    <p class="mb-0">COD</p>
+                  <input value="PP" class="form-check-input" type="radio" name="pp" id="pp" v-model="pay">
+                  <label class="form-check-label ms-4" for="pp">
+                    <img src="https://mirkophp.navitag.net/photos/PayPal.png" :style="{height: '100%', maxHeight: '24px', width: 'auto'}" alt="">
                   </label>
                 </div>
               </div>
               <hr>
               <div class="form-check">
                 <div class="d-flex">
-                  <input value="PP" class="form-check-input" type="radio" name="pp" id="pp" v-model="pay">
-                  <label class="form-check-label ms-4" for="pp">
-                    <p class="mb-0">PayPal/Credit Card</p>
+                  <input value="BEASE" class="form-check-input" type="radio" name="BEASE" id="BEASE" v-model="pay">
+                  <label class="form-check-label ms-4" for="BEASE">
+                    <img src="https://mirkophp.navitag.net/photos/billease-checkout-logo.png" :style="{height: '100%', maxHeight: '24px', width: 'auto'}" alt="">
                   </label>
                 </div>
               </div>
             </div>
           </div>
           <div class="col-12 mb-4">
-            <label v-if="pay != 'COD' && pay != 'PP' && pay != ''" class="form-label">Proof of Payment</label>
+            <label v-if="pay != 'COD' && pay != 'PP' && pay != '' && pay != 'BEASE'" class="form-label">Proof of Payment</label>
             <div v-if="file.url != null" class="file-prev" :style="'background-image:url('+file.url+')'">
               <button class="btn-close position-absolute end-0 mt-1 bg-light" @click="removefile"></button>
             </div>
@@ -279,7 +269,6 @@ export default {
       showsummary: false,
       tab: "Information",
       tabopts: ["Information", "Shipping", "Payment"],
-      baseurl: 'https://mirkophp.navitag.net/',
       name: "",
       phone: null,
       email:"",
@@ -287,7 +276,7 @@ export default {
       city: "Province Required",
       shipmeth: "Standard",
       pay:"",
-      paydetails:{"BDO":['Camille Deezhialyn And Tan', '001700315240'], "BPI": ['Camille Deezhialyn And Tan', '1579276963'], "GCash": ['Camille Deezhialyn And Tan', '0920 566 3896'] },
+      paydetails:{"BDO":['Mirko Vetnures Inc.', '012838002091'], "BPI": ['Camille Deezhialyn And Tan', '1579276963'], "GCash": ['Camille Deezhialyn And Tan', '0920 566 3896'] },
       provinceOptions: [],
       cityOptions:[],
       address: "",
@@ -313,6 +302,7 @@ export default {
   props:{
     carttotal: {default: 0, type: Number},
     carttable: {type: String, default: ""},
+    cartdata:{},
     backend:{}
   },
   mounted(){
@@ -445,11 +435,75 @@ export default {
       }
 
       let data = {name: titlename, email: this.email, shipinfo: addArr.join('<br>'), payment: this.pay}
+      
       if(this.pay == "PP"){
         this.changetab('Paypal')
         this.showsummary= false
         data.payment = "Paypal / Credit Card"
         this.paypalbtn(data)
+      } else if(this.pay == "BEASE"){
+        data.payment = "Billease"
+        let uid = Date.now().toString()
+        let items = []
+
+        this.cartitems.forEach(item => {
+          items.push(
+            {
+            "code": item.sku,
+            "item": item.title + " " + item.variations,
+            "price": item.price,
+            "quantity": item.qty
+            }
+          )
+        });
+        if(!isNaN(this.shipcost) && this.shipcost > 0){
+          items.push({"code": "SHIPPING", "item": "Shipping Fee", "price": this.shipcost, "quantity": 1})
+        }
+        let postdata = {
+          statement: "checkout",
+          data: {
+            shop_code: "046ab009-2a88-48bb-8fc6-fd730b843844",
+            amount: this.withshipping,
+            currency: "PHP",
+            checkout_type: "standard",
+            is_async: false,
+            url_redirect: "https://www.mirkoessentials.com/thankyou",
+            order_id: uid,
+            customer: {
+              full_name: this.name,
+              email: this.email,
+              internal_user_id: uid,
+              phone: "+63" + this.phone,
+              adr_shipping: {
+                addr_type: "shipping",
+                country: "PH",
+                province: this.province.name,
+                city: this.city.name,
+                barangay: this.brgy,
+                street: this.address,
+                address: [this.address, this.brgy, this.city.name, this.province.name, this.zip].join(" ")
+              }
+            },
+            "items": items 
+          }
+        }
+        console.log(postdata)
+        axios.post(this.backend + "/billease.php", postdata).then((res) => {
+          if(res.data.code > 199 && res.data.code < 300 && "redirect_url" in res.data.response){
+            // redirect user to billease checkout and  send order info via email
+            data.redirect = res.data.response.redirect_url
+            data.name += " #" + res.data.response.trxid
+            this.$emit('order', data);
+            //window.location.replace(res.data.response.redirect_url)
+          } else if(res.data.code > 499 && res.data.code < 600){
+            this.spinnertoggle(false)
+            this.$emit('alert', {show: true, class: 'warning', text: "Billease Server Busy... Please try again"})
+          } else {
+            // billease checkout error
+            this.spinnertoggle(false)
+            this.$emit('alert', {show: true, class: 'danger', text: "Billease Checkout Error"})
+          }
+        })
       } else if(this.pay != 'COD'){ // for non-COD orders
         //convert img to base64
         let result = await toBase64(this.file.rawfile).catch(e => Error(e));
@@ -508,7 +562,7 @@ export default {
     },
     pay(newval){
       this.removefile()
-      if(newval == 'BDO' || newval == 'BPI' || newval == "GCASH"){
+      if(newval == 'BDO' || newval == 'BPI'){
         this.paymsg = true
       } else{
         this.paymsg= false
@@ -560,6 +614,9 @@ export default {
     },
     cartprods(){
       return '<table class="table">' + this.carttable + '</table>'
+    },
+    cartitems(){
+      return JSON.parse(this.cartdata)
     },
     infoerr(){
       if(this.name == ""){

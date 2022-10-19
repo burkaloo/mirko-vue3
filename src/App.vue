@@ -217,7 +217,7 @@ export default {
     checkout(){
       this.lastpage = this.page
       this.page = "checkout"
-      this.$router.push({name:"checkout", params: {carttotal: this.carttotal, carttable: this.carttable}})
+      this.$router.push({name:"checkout", params: {carttotal: this.carttotal, carttable: this.carttable, cartdata: JSON.stringify(this.cart)}})
       setTimeout(
         function(){
           document.body.scrollTop = 0; // For Safari
@@ -278,8 +278,7 @@ export default {
       if('files' in data){
         postdata.files = [{BinaryContent: data.files.base64, Name: data.files.name}]
       }
-
-      console.log(postdata);
+      
       axios({
         method: 'post',
         url: 'https://mailer.navitag.net',
@@ -289,7 +288,11 @@ export default {
         if("MessageID" in r.data && "TransactionID" in r.data){
           this.cart = []
           this.togglealert({show: true, class: 'success', text: "Order Placed"});
-          this.nextpage({name:'thankyou'})
+          if("redirect" in data){
+            window.location.replace(data.redirect)
+          } else{
+            this.nextpage({name:'thankyou'})  
+          }
         } else{
           this.togglealert({show: true, class: 'danger', text: "Somthing went wrong... Order not placed."});
           this.nextpage({name:'home'})
