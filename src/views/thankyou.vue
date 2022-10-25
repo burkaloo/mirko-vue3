@@ -7,7 +7,7 @@
           Thank you for supporting Mirko! We will ship out your order once we have verified your shipping and payment details. We have sent you an a copy of your order via email.
         </p>
         <p>
-          For Metro Manila orders with same day delivery, we will contact you for further instructions on booking via Grab/lalamove. Our Cut-off time for same day deliveries is at 2:00pm. If you have placed an order with same daya delivery after 2:00pm, we will ship it out the next business day.
+          For Metro Manila orders with same day delivery, we will contact you for further instructions on booking via Grab/lalamove. Our Cut-off time for same day deliveries is at 2:00pm. If you have placed an order with same day delivery after 2:00pm, we will ship it out the next business day.
         </p>
       </h4>
 

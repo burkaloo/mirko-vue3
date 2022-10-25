@@ -99,7 +99,7 @@
               <div class="form-check">
                 <div class="d-flex">
                   <input value="Same Day" class="form-check-input" type="radio" id="sameday" name="sameday" v-model="shipmeth" :disabled="province.id != 53">
-                  <label class="form-check-label ms-4" for="sameday">Same Day (Grab/Lalamove for Metro Manila only)</label>
+                  <label class="form-check-label ms-4" for="sameday">Same Day. 2pm cut-off (Grab/Lalamove for Metro Manila only)</label>
                   <label :class="province.id != 53 ? 'ms-auto text-muted' : 'ms-auto'"> {{(typeof city == 'string' ? '-' : shipcosttable["Same Day"][city.score - 1])}} </label>
                 </div>
               </div>
@@ -147,6 +147,15 @@
               <hr>
               <div class="form-check">
                 <div class="d-flex">
+                  <input value="GCASH" class="form-check-input" type="radio" name="GCASH" id="GCASH" v-model="pay">
+                  <label class="form-check-label ms-4" for="GCASH">
+                    <img src="https://mirkophp.navitag.net/photos/GCash-Logo.png" :style="{height: '100%', maxHeight: '24px', width: 'auto'}" alt="">
+                  </label>
+                </div>
+              </div>
+              <hr>
+              <div class="form-check">
+                <div class="d-flex">
                   <input value="BEASE" class="form-check-input" type="radio" name="BEASE" id="BEASE" v-model="pay">
                   <label class="form-check-label ms-4" for="BEASE">
                     <img src="https://mirkophp.navitag.net/photos/billease-checkout-logo.png" :style="{height: '100%', maxHeight: '24px', width: 'auto'}" alt="">
@@ -156,7 +165,7 @@
             </div>
           </div>
           <div class="col-12 mb-4">
-            <label v-if="pay != 'COD' && pay != 'PP' && pay != '' && pay != 'BEASE'" class="form-label">Proof of Payment</label>
+            <label v-if="pay == 'BDO' && pay == 'BPI'" class="form-label">Proof of Payment</label>
             <div v-if="file.url != null" class="file-prev" :style="'background-image:url('+file.url+')'">
               <button class="btn-close position-absolute end-0 mt-1 bg-light" @click="removefile"></button>
             </div>
@@ -276,7 +285,7 @@ export default {
       city: "Province Required",
       shipmeth: "Standard",
       pay:"",
-      paydetails:{"BDO":['Mirko Ventures Inc.', '012838002091'], "BPI": ['Camille Deezhialyn And Tan', '1579276963'], "GCash": ['Camille Deezhialyn And Tan', '0920 566 3896'] },
+      paydetails:{"BDO":['Mirko Ventures Inc.', '012838002091'], "BPI": ['Camille Deezhialyn And Tan', '1579276963']},
       provinceOptions: [],
       cityOptions:[],
       address: "",
@@ -306,11 +315,7 @@ export default {
     backend:{}
   },
   mounted(){
-    if(document.documentElement.clientWidth < 768){
-      this.showsummary = true
-    } else{
-      this.showsummary = false
-    }
+    this.showsummary = false
     if(this.carttotal == 0){
       this.$router.push({name:"home"})
     }
@@ -412,6 +417,46 @@ export default {
         this.$emit('alert', this.shippingerr)
       }
     },
+    pmMakeSource(type, ordernumber,){
+      let postdata = {
+        data:{
+          attributes: {
+            amount: this.withshipping * 100,
+            redirect: {
+              success: "https://www.mirkoessentials.com/thankyou",
+              failed: "https://www.mirkoessentials.com"
+            },
+            billing: {
+              address: {
+                  "line1": this.address,
+                  "line2": this.brgy,
+                  "state": this.province.name,
+                  "postal_code": this.zip,
+                  "city": this.city.name
+                },
+              name: this.name,
+              phone: "+63" + this.phone,
+              email: this.email
+            },
+            currency: "PHP",
+            type: type,
+            metadata: {
+              ordernumber: ordernumber,
+              notes: this.notes,
+              shipmeth: this.shipmeth,
+              carttable: this.carttable,
+            }
+          }
+        },
+        statement: "makesource"
+      }
+
+      if(!isNaN(this.shipcost) && this.shipcost > 0){
+        postdata.data.attributes.metadata.shipcost = this.shipcost.toString()
+      }
+
+      return postdata
+    },
     gotocheckout(){
       if(this.payerr === false){
         if(this.showsummary === false){
@@ -427,8 +472,10 @@ export default {
       this.pay = ""
     },
     async checkout(){
+      let uid = Date.now().toString()
       this.spinnertoggle(true)
       let titlename = this.titleCase(this.name)
+
       let addArr = [this.shipmeth + "<br>", titlename, this.email, this.phone + "<br>", this.address + ",",this.brgy +", "+ this.city.name + ", ", this.province.name + " " + this.zip]
       if(this.notes != ""){
         addArr.push('<br>Note: ' + this.notes)
@@ -441,11 +488,27 @@ export default {
         this.showsummary= false
         data.payment = "Paypal / Credit Card"
         this.paypalbtn(data)
+
+      } else if(this.pay == "GCASH"){
+        data.payment = "GCash"
+        let postdata = this.pmMakeSource('gcash', uid)
+
+        console.log(postdata)
+        axios.post(this.backend + "/paymongo.php", postdata).then((res) => {
+          if(res.data.code > 199 && res.data.code < 300 && "checkout_url" in res.data.response.data.attributes.redirect){
+            console.log(res.data.response)
+            window.location.replace(res.data.response.data.attributes.redirect.checkout_url)
+          } else if(res.data.code > 499 && res.data.code < 600){
+            this.spinnertoggle(false)
+            this.$emit('alert', {show: true, class: 'warning', text: "Gcash Server Busy... Please try again"})
+          } else {
+            this.spinnertoggle(false)
+            this.$emit('alert', {show: true, class: 'danger', text: "Gcash Checkout Error"})
+          }
+        })
       } else if(this.pay == "BEASE"){
         data.payment = "Billease"
-        let uid = Date.now().toString()
         let items = []
-
         this.cartitems.forEach(item => {
           items.push(
             {
