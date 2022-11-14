@@ -79,7 +79,7 @@ export default {
       hrefs:{"Shop": '../shop', "About Us": '../about', "FAQs": '../help'},
       ddopen: false,
       submenu:{
-        "Learn" :{pad:'223px', title: "Learn more about Mirko", menu : [["Mirko Classic", '/learn/mirko-classic'], ["Mirko Flow", '/learn/mirko-flow'], ["Menstrual Cups", '/learn/menstrual-cup']], mopen: false}
+        "Learn" :{pad:'223px', title: "Learn more about Mirko", menu : [["Mirko Classic", '/learn/mirko-classic'], ["Mirko Flow", '/learn/mirko-flow'], ["Menstrual Cups", '/learn/menstrual-cup'], ["Organic & Eco-Friendly Pads", '/learn/organic-pads']], mopen: false}
       }
     }
   },

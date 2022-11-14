@@ -359,14 +359,6 @@ export default {
   background-color: rgba(128,128,128,.7);
 }
 
-.bg-lpeach{
-  background-color: #f6e6dd;
-}
-
-.bg-dpeach{
-  background-color: #f7c0a8;
-}
-
 .bg-viogrey{
   background-color: #f1ecec;
 }

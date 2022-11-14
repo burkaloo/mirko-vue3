@@ -175,6 +175,26 @@ s, .pesosign::before{
   background-color: #d0e7f6;
 }
 
+.bg-lpeach{
+  background-color: #f6e6dd;
+}
+
+.bg-dpeach{
+  background-color: #f7c0a8;
+}
+
+.bg-dpeach2{
+  background-color: #f6d6c3;
+}
+
+.bg-dpeach3{
+  background-color: #eeb095;
+}
+
+.bg-green{
+  background-color: #97c7aa;
+}
+
 .bgpic-cover{
   background-size: cover;
   background-repeat: no-repeat;

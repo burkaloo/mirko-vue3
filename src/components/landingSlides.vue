@@ -35,9 +35,9 @@
           </div>
           <div class="w-50 h-100 d-flex">
             <div class="align-self-center text-center flex-grow-1">
-              <h4 class="font-didot">Women. Essentials. Lifestyle.</h4>
-              <p class="px-5 pb-0">Reaffirming boldness and</p>
-              <p class="px-5">elegance in the everyday.</p>
+              <h4 class="font-didot pb-3">Women. Essentials. Lifestyle.</h4>
+              <div class="px-5 pb-0">Reaffirming boldness and</div>
+              <div class="px-5 pb-0">elegance in the everyday.</div>
             </div>
           </div>
         </div>

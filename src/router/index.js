@@ -12,6 +12,7 @@ import signup from '@/views/signup.vue'
 import mirkoClassic from '@/views/mirkoClassic.vue'
 import mirkoFlow from '@/views/mirkoFlow.vue'
 import menscup from '@/views/menscup.vue'
+import mirkoPads from '@/views/mirkoPads.vue'
 
 const routes = [
   {
@@ -28,6 +29,11 @@ const routes = [
     path: '/learn/mirko-flow',
     name: 'mirkoflow',
     component: mirkoFlow
+  },
+  {
+    path: '/learn/organic-pads',
+    name: 'mirkopads',
+    component: mirkoPads
   },
   {
     path: '/learn/mirko-classic',
