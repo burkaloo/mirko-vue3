@@ -224,7 +224,9 @@ export default {
       axios.post(this.backend + '/dbconn.php', {statement: "getprodbyid", pid : this.pid})
       .then(function(res){
         if(res.data.status == "success"){
+          
           let newprod = res.data.response[0]
+          document.title = 'Mirko PH | ' +  newprod.title
           newprod.baseprice = parseInt(newprod.baseprice)
           newprod.imgs = JSON.parse(newprod.imgs)
           newprod.variations = JSON.parse(newprod.variations)

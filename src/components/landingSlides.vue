@@ -23,7 +23,44 @@
         </div>
         <img :src="backend + '/photos/landingpage-header2.png'" alt="" :style="{height:'60%', width: '100%', objectFit: 'contain', objectPosition: 'bottom'}">
       </div>
+    
+      <!-- slide 3-->
+      <div v-if="slide == 3" class="h-100 w-100 slide3-narrow" >
+        <div class="row g-0">
+          <div class="col-12 col-md-6">
+
+          </div>
+          <div class="col-12 col-md-6 ps-4 pt-5 ps-sm-5">
+            <div class="d-none d-md-block d-lg-none" :style="{paddingTop: '75px'}">
+            </div>
+            <div class="font-didot fs-4 text-start mb-3 pt-5 pt-sm-3">Mirko Organic Day Pads</div>
+            <div class="d-flex">
+              <img src="https://mirkophp.navitag.net/photos/flower-icon.png" class="pe-4" :style="{height: '25px', width: 'auto'}"/>
+              <div class="align-self-center" >100% Organic Cotton</div>
+            </div>
+            <div class="d-flex mt-1">
+              <img src="https://mirkophp.navitag.net/photos/flower-icon.png" class="pe-4" :style="{height: '25px', width: 'auto'}"/>
+              <div class="align-self-center" >Made with biodegradable materials</div>
+            </div>
+            <div class="d-flex mt-1">
+              <img src="https://mirkophp.navitag.net/photos/flower-icon.png" class="pe-4" :style="{height: '25px', width: 'auto'}"/>
+              <div class="align-self-center text-start" >Hypoallergenic, breathable, and Eco-friendly</div>
+            </div>
+            <div class="d-flex mt-4">
+              <img src="https://mirkophp.navitag.net/photos/flower-icon.png" class="pe-4" :style="{height: '25px', width: 'auto', visibility: 'hidden'}"/>
+              <router-link to="/product/13" class="btn bg-babyblue mx-2 fw-6 px-4 py-2 rounded-5">Shop Now</router-link>
+            </div>
+
+
+          </div>
+        </div>
+        
+        
+      </div>
+    
+    
     </div>
+
 
     <div class="d-none d-lg-block" :style="{width: '100vw', height: '50vw', maxHeight: '600px'}">
       <!-- Slide 1-->
@@ -61,6 +98,36 @@
           </div>
         </div>
       </div>
+
+      <!-- slide 3-->
+      <div v-if="slide == 3" class="h-100 w-100 slide3-wide" >
+        <div class="row g-0">
+          <div class="col-7">
+          </div>
+          <div class="col pt-5">
+            <div class="font-didot fs-4 text-start mb-3 pt-xxl-3">Mirko Organic Day Pads</div>
+            <div class="d-flex">
+              <img src="https://mirkophp.navitag.net/photos/flower-icon.png" class="pe-4" :style="{height: '25px', width: 'auto'}"/>
+              <div class="align-self-center" >100% Organic Cotton</div>
+            </div>
+            <div class="d-flex mt-1">
+              <img src="https://mirkophp.navitag.net/photos/flower-icon.png" class="pe-4" :style="{height: '25px', width: 'auto'}"/>
+              <div class="align-self-center" >Made with biodegradable materials</div>
+            </div>
+            <div class="d-flex mt-1">
+              <img src="https://mirkophp.navitag.net/photos/flower-icon.png" class="pe-4" :style="{height: '25px', width: 'auto'}"/>
+              <div class="align-self-center text-start" >Hypoallergenic, breathable, and Eco-friendly</div>
+            </div>
+            <div class="d-flex mt-4">
+              <img src="https://mirkophp.navitag.net/photos/flower-icon.png" class="pe-4" :style="{height: '25px', width: 'auto', visibility: 'hidden'}"/>
+              <router-link to="/product/13" class="btn bg-babyblue mx-2 fw-6 px-4 py-2 rounded-5">Shop Now</router-link>
+            </div>
+            
+          </div>
+
+        </div>
+      </div>
+
     </div>
   </div>
   
@@ -68,17 +135,36 @@
 
 
 <script>
+import { RouterLink } from 'vue-router';
+
 
 export default {
-  name: "landingSlides",
-  props:{
-    backend:{},
-    slide:{default: 1}
-  },
-  data(){
-    return {
-
-    }
-  }
+    name: "landingSlides",
+    props: {
+        backend: {},
+        slide: { default: 1 }
+    },
+    data() {
+        return {};
+    },
+    components: { RouterLink }
 }
 </script>
+
+
+
+<style>
+.slide3-wide{
+  background-image: url('https://mirkophp.navitag.net/photos/coverphoto3-wide.jpg');
+  background-position: center bottom;
+  background-size: cover;
+
+}
+
+.slide3-narrow{
+  background-image: url('https://mirkophp.navitag.net/photos/coverphoto3-narrow.jpg');
+  background-position: bottom left;
+  background-size: cover;
+}
+
+</style>

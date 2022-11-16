@@ -90,7 +90,7 @@ const routes = [
     path: '/help',
     component: help,
     meta:{
-      title: "Mirko PH | Customer Help" 
+      title: "Mirko PH | FAQs" 
     }
   },
   {
