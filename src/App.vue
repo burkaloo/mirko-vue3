@@ -67,6 +67,25 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 require('./assets/styles/main.css')
 
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+
+
+// Your web app's Firebase configuration
+
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAVY08td58QXmZwj1Is7cpKYP5YgbXZa48",
+  authDomain: "mirko-accounts.firebaseapp.com",
+  projectId: "mirko-accounts",
+  storageBucket: "mirko-accounts.appspot.com",
+  messagingSenderId: "271859160489",
+  appId: "1:271859160489:web:a8196bfa684310bddb60b8",
+  measurementId: "G-KWD5Z1YBF5"
+};
+// Initialize Firebase
+const firebaseApp = initializeApp(firebaseConfig);
 
 const sleep = (milliseconds) => {
   return new Promise(resolve => setTimeout(resolve, milliseconds))
@@ -79,6 +98,7 @@ export default {
   mixins:[spinnerMix],
   data(){
     return{
+      analytics : getAnalytics(firebaseApp),
       docscroll:0,
       cart:[],
       lastpage: {name: "home"},
