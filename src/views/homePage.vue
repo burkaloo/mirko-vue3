@@ -2,7 +2,7 @@
     <div>
       <section>
         <carousel :items-to-show="1" wrapAround :autoplay="3500" :pauseAutoplayOnHover="false" class="home-carousel">
-          <slide v-for="slide in 2" :key="slide" >
+          <slide v-for="slide in 3" :key="slide" >
             <div>
               <landingSlides :slide="slide"  :backend="backend"/>
             </div>
