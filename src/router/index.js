@@ -13,6 +13,8 @@ import mirkoClassic from '@/views/mirkoClassic.vue'
 import mirkoFlow from '@/views/mirkoFlow.vue'
 import menscup from '@/views/menscup.vue'
 import mirkoPads from '@/views/mirkoPads.vue'
+import blogHome from '@/views/blogHome.vue'
+import blogPage from '@/views/blogPage.vue'
 
 const routes = [
   {
@@ -128,6 +130,23 @@ const routes = [
     component: signup,
     meta:{
       title: "Mirko PH | Signup" 
+    }
+  },
+  {
+    path: '/blog',
+    name: 'blogHome',
+    component: blogHome,
+    meta:{
+      title: "Mirko PH | Blog Home" 
+    }
+  },
+  {
+    path: '/blog/:slug',
+    name: 'blogPage',
+    component: blogPage,
+    props: true,
+    meta:{
+      title: "Mirko PH | Blog" 
     }
   },
   {
