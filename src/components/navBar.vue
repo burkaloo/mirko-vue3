@@ -75,8 +75,8 @@ export default {
       open: false,
       searchshow: false,
       searchinput: "",
-      navlinks:["Shop", "Learn", "About Us", "FAQs"],
-      hrefs:{"Shop": '../shop', "About Us": '../about', "FAQs": '../help'},
+      navlinks:["Shop", "Learn", "About Us", "FAQs", "Blog"],
+      hrefs:{"Shop": '../shop', "About Us": '../about', "FAQs": '../help', "Blog" : '/blog'},
       ddopen: false,
       submenu:{
         "Learn" :{pad:'223px', title: "Learn more about Mirko", menu : [["Mirko Classic", '/learn/mirko-classic'], ["Mirko Flow", '/learn/mirko-flow'], ["Menstrual Cups", '/learn/menstrual-cup'], ["Organic & Eco-Friendly Pads", '/learn/organic-pads']], mopen: false}
