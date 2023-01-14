@@ -7,10 +7,10 @@
         <div v-for="post in posts" class="col px-5" :key="post.slug">
           <div :style="{backgroundImage: 'url('+ post.banner +')', width: '100%', paddingTop: '60%', backgroundPosition: 'center', backgroundSize: 'cover', backgroundRepeat: 'no-repeat'}">
           </div>
-          <div class="mt-3">
-            <router-link :to="'/blog/' + post.slug" class="text-decoration-underline fs-5">{{post.title}}</router-link>
+          <div class="mt-4">
+            <router-link :to="{name: 'blogPage', params: {title: post.title, slug: post.slug}}" class="text-decoration-underline fs-5">{{post.title}}</router-link>
           </div>
-          <p class="fw-1">{{post.teaser}}</p>
+          <p class="fw-1 mt-4">{{post.teaser}}</p>
           
         </div>
 

@@ -13,7 +13,7 @@
         <h2 class="fw-7">{{title}}</h2>
         <br>
         <br>
-        <div v-html="body">
+        <div v-html="body" class="pb-5">
 
         </div>
       </div>
@@ -28,7 +28,8 @@ export default {
   name: 'blogPage',
   props:{
     backend:{},
-    slug:{}
+    slug:{},
+    paramtitle: {default: false}
   },
   data(){
     return {
@@ -38,13 +39,17 @@ export default {
       banner: ""
     }
   },
+  created(){    
+  },
   mounted(){
     let months = ["", "Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"]
     axios.post(this.backend + '/dbconn.php', {statement: "getblog", slug: this.slug})
     .then( (res) => {
       //console.log(res)
       if(res.data.status == "success"){
-        document.title = res.data.response[0].title
+        if(!this.paramtitle){
+          document.title = res.data.response[0].title
+        }
         this.body = res.data.response[0].body
         this.title = res.data.response[0].title
         this.banner = res.data.response[0].banner

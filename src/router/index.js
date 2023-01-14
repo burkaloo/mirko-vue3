@@ -142,12 +142,10 @@ const routes = [
   },
   {
     path: '/blog/:slug',
-    name: 'blogPage',
     component: blogPage,
+    name: 'blogPage',
     props: true,
-    meta:{
-      title: "Mirko PH | Blog" 
-    }
+    meta: (route) => ({ title: route.params.paramtitle})
   },
   {
      path: '/:pathMatch(.*)*',
