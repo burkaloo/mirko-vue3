@@ -123,7 +123,7 @@ export default {
       this.loading.discount = true
       let comp = this
       axios.post(this.backend +"/dbconn.php", {statement: "checkvoucher", uid: this.uid == null ? "guest" : this.uid, code: this.dcode})
-      .then(function(res){
+      .then((res) => {
         if(res.data.status == "success"){
           let data =  res.data.response[0]
 
@@ -131,6 +131,8 @@ export default {
           data.reserved = data.reserved == null ? 0 : parseInt(data.reserved)
           data.accountclaimed = data.accountclaimed == null ? 0 : parseInt(data.accountclaimed)
           data.accountreserved = data.accountreserved == null ? 0 : parseInt(data.accountreserved)
+          data.min_cart_value = data.min_cart_value == null ? 0 : parseInt(data.accountreserved)
+
 
           console.log(data)
           let acctreq = JSON.parse(data.account_required)
@@ -139,38 +141,42 @@ export default {
           let totalclaim = data.claimed + data.reserved
           if(data.id == null && data.code == null){
             // invalide code
-            comp.$emit('alert', {show: true, class: 'warning', text: "Invalid code."})
+            this.$emit('alert', {show: true, class: 'warning', text: "Invalid code."})
           }
           else if(data.expired == 1){
             //expired code
-            comp.$emit('alert', {show: true, class: 'warning', text: "Code has expired"})
+            this.$emit('alert', {show: true, class: 'warning', text: "Code has expired"})
           }
           else if(data.count != null && totalclaim >= parseInt(data.count) ){
             //limit reached
-            comp.$emit('alert', {show: true, class: 'warning', text: "The maximum number of claims for this code has been reached"})
+            this.$emit('alert', {show: true, class: 'warning', text: "The maximum number of claims for this code has been reached"})
           }
-          else if(reqlogin && comp.uid == null){
+          else if(reqlogin && this.uid == null){
             //must be signed in to use code
-            comp.$emit('alert', {show: true, class: 'warning', text: "You must be signed in to use this code"})
+            this.$emit('alert', {show: true, class: 'warning', text: "You must be signed in to use this code"})
           }
-          else if(acctreq.length > 0 && !acctreq.includes(comp.uid)){
+          else if(acctreq.length > 0 && !acctreq.includes(this.uid)){
             //loged in and not part of required accounts
-            comp.$emit('alert', {show: true, class: 'warning', text: "Your Account is not qualified to claim this code"})
+            this.$emit('alert', {show: true, class: 'warning', text: "Your Account is not qualified to claim this code"})
           }
           else if(data.use_once == 1 && data.accountclaimed > 0){
             //logged in code can only be used once
-            comp.$emit('alert', {show: true, class: 'warning', text: "Code has been claimed and can only be used once per account."})
+            this.$emit('alert', {show: true, class: 'warning', text: "Code has been claimed and can only be used once per account."})
+          }
+          else if(data.min_cart_value > this.carttotal){
+            this.$emit('alert', {show: true, class: 'warning', text: "You did not reach the minimun spent amount to claim this code"})
           }
           else {
             //code valid. do reservation on account if login and no reservation
-            if(comp.uid !== null && data.accountreserved == 0){
+            if(this.uid !== null && data.accountreserved == 0){
               //make reservation
-              axios.post(comp.backend, {statement: "reservevoucher", uid: comp.uid, vid: data.id})
+              axios.post(this.backend, {statement: "reservevoucher", uid: this.uid, vid: data.id})
             }
             //update component data to reflect new reservation??
-            comp.discountparams = data
-            comp.dcode = ""
+            this.discountparams = data
+            this.dcode = ""
           }
+          
         } else {
           console.log('network error')
         }
