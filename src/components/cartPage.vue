@@ -131,7 +131,6 @@ export default {
           data.reserved = data.reserved == null ? 0 : parseInt(data.reserved)
           data.accountclaimed = data.accountclaimed == null ? 0 : parseInt(data.accountclaimed)
           data.accountreserved = data.accountreserved == null ? 0 : parseInt(data.accountreserved)
-          data.min_cart_value = data.min_cart_value == null ? 0 : parseInt(data.accountreserved)
 
 
           console.log(data)
@@ -163,7 +162,7 @@ export default {
             //logged in code can only be used once
             this.$emit('alert', {show: true, class: 'warning', text: "Code has been claimed and can only be used once per account."})
           }
-          else if(data.min_cart_value > this.carttotal){
+          else if(parseInt(data.min_cart_value) > this.carttotal){
             this.$emit('alert', {show: true, class: 'warning', text: "You did not reach the minimun spent amount to claim this code"})
           }
           else {
