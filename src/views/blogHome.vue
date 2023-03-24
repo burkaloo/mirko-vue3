@@ -4,7 +4,7 @@
       <h2 class="text-center py-5 font-didot">Mirko Essentials Blog</h2>
       
       <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3">
-        <div v-for="post in posts" class="col px-5" :key="post.slug">
+        <div v-for="post in posts" class="col px-5 mb-5" :key="post.slug">
           <div :style="{backgroundImage: 'url('+ post.banner +')', width: '100%', paddingTop: '60%', backgroundPosition: 'center', backgroundSize: 'cover', backgroundRepeat: 'no-repeat'}">
           </div>
           <div class="mt-4">
